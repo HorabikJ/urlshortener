@@ -113,8 +113,8 @@
                 <artifactId>liquibase-maven-plugin</artifactId>
                 <version>4.27.0</version>
                 <configuration>
-                    <url>jdbc:mysql://127.0.0.1:3306/bookdb?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
-                    <username>bookadmin</username>
+                    <url>jdbc:mysql://127.0.0.1:3306/urlshortener?useUnicode=true&amp;characterEncoding=UTF-8&amp;serverTimezone=UTC</url>
+                    <username>urlshortener-admin</username>
                     <password>password</password>
                     <outputChangeLogFile>changelog.xml</outputChangeLogFile>
                     <changeSetAuthor>JH</changeSetAuthor>
