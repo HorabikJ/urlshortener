@@ -118,7 +118,7 @@
                     <password>password</password>
                     <outputChangeLogFile>changelog.xml</outputChangeLogFile>
                     <changeSetAuthor>JH</changeSetAuthor>
-                    <changelogSchemaName>bookdb</changelogSchemaName>
+                    <changelogSchemaName>urlshortener</changelogSchemaName>
                 </configuration>
             </plugin>
         </plugins>
