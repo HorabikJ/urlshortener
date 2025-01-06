@@ -1,8 +1,8 @@
 package pl.jacekhorabik.urlshortener.mainpage;
 
-record LinkDTO(String url) {
+record UrlDTO(String url) {
 
-    public LinkDTO() {
+    public UrlDTO() {
         this(null);
     }
     

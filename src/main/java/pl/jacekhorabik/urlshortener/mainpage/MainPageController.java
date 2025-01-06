@@ -12,13 +12,13 @@ class MainPageController {
     
     @GetMapping("/")
     public String mainPage(Model model) {
-        LinkDTO linkDTO = new LinkDTO();
-        model.addAttribute("linkDTO", linkDTO);
+        UrlDTO urlDTO = new UrlDTO();
+        model.addAttribute("urlDTO", urlDTO);
         return "mainpage";
     }
     
-    @PostMapping("/links")
-    public String shortenLink(LinkDTO linkDTO) {
+    @PostMapping("/urls")
+    public String shortenUrl(UrlDTO urlDTO) {
         return "mainpage";
     }
 
