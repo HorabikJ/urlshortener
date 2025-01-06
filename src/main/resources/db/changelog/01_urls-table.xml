@@ -2,7 +2,7 @@
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet author="JH" id="1736107660768-1">
         <createTable tableName="urls">
-            <column name="hash" type="VARCHAR(20)">
+            <column name="hash" type="VARCHAR(27)">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
             </column>
             <column name="url" type="VARCHAR(10000)">

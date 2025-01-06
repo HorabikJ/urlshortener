@@ -20,7 +20,8 @@ class UrlShorteningService {
         String urlSha1Hash = DigestUtils.sha1Hex(url);
         byte[] urlHexadecimalBytes = Hex.decodeHex(urlSha1Hash);
         String urlBase62Shortage = new String(base62.encode(urlHexadecimalBytes));
-        UrlEntity savedUrl = urlRepository.save(new UrlEntity(urlBase62Shortage, urlBase62Shortage));
+        //todo save() saves and updates, implement update option
+        UrlEntity savedUrl = urlRepository.save(new UrlEntity(urlBase62Shortage, url));
         return savedUrl.getHash();
     }
 

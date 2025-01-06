@@ -17,16 +17,17 @@ class MainPageController {
 
     @GetMapping("/")
     public String mainPage(Model model) {
-        UrlDTO urlDTO = new UrlDTO();
-        model.addAttribute("urlDTO", urlDTO);
+        UrlDTO requestUrlDTO = new UrlDTO();
+        model.addAttribute("requestUrlDTO", requestUrlDTO);
         return "mainpage";
     }
 
-    @PostMapping("/urls")
+    @PostMapping("/")
     public String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
         String hash = urlShorteningService.shortenUrl(urlDTO.url());
         UrlDTO responseUrlDTO = new UrlDTO("localhost:8080/s/" + hash);
         model.addAttribute("responseUrlDTO", responseUrlDTO);
+        model.addAttribute("requestUrlDTO", new UrlDTO());
         return "mainpage";
     }
 
