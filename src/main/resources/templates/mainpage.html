@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
     <title>url shortener</title>
@@ -7,6 +7,12 @@
 <body>
 
 <h1>Welcome to the url shortener!</h1>
+<form action="#" th:action="@{/v1/links}" th:object="${linkDTO}" method="POST">
+    <fieldset>
+        <input type="text" th:field="*{url}" placeholder="paste your url here">
+        <input type="submit" name="Shorten!">
+    </fieldset>
+</form>
 
 </body>
 </html>
