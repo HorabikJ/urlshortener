@@ -14,5 +14,9 @@
     </fieldset>
 </form>
 
+<div th:if="${urlResponseDTO}">
+   <p>your link is:<span th:text="${urlResponseDTO.url}"></span></p>
+</div>
+
 </body>
 </html>
