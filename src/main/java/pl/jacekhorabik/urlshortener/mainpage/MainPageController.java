@@ -16,16 +16,16 @@ class MainPageController {
     private final UrlShorteningService urlShorteningService;
 
     @GetMapping("/")
-    public String mainPage(Model model) {
+    String mainPage(Model model) {
         UrlDTO requestUrlDTO = new UrlDTO();
         model.addAttribute("requestUrlDTO", requestUrlDTO);
         return "mainpage";
     }
 
     @PostMapping("/")
-    public String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
+    String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
         String hash = urlShorteningService.shortenUrl(urlDTO.url());
-        UrlDTO responseUrlDTO = new UrlDTO("localhost:8080/s/" + hash);
+        UrlDTO responseUrlDTO = new UrlDTO("localhost:8080/v1/r/" + hash);
         model.addAttribute("responseUrlDTO", responseUrlDTO);
         model.addAttribute("requestUrlDTO", new UrlDTO());
         return "mainpage";

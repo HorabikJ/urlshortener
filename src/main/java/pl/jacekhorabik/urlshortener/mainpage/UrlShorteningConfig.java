@@ -8,7 +8,7 @@ import org.springframework.context.annotation.Configuration;
 class UrlShorteningConfig {
 
     @Bean
-    public Base62 base62() {
+    Base62 base62() {
         return Base62.createInstance();
     }
 

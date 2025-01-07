@@ -8,13 +8,15 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @RequiredArgsConstructor
 @Service
 class UrlShorteningService {
 
     private final Base62 base62;
     private final UrlRepository urlRepository;
-    
+
     @Transactional
     String shortenUrl(String url) throws DecoderException {
         String urlSha1Hash = DigestUtils.sha1Hex(url);
@@ -25,4 +27,7 @@ class UrlShorteningService {
         return savedUrl.getHash();
     }
 
+    Optional<String> findUrlByHash(String hash) {
+        return urlRepository.findUrlEntityByHash(hash).map(UrlEntity::getUrl);
+    }
 }
