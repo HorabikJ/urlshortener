@@ -14,20 +14,20 @@ import java.util.Optional;
 @Service
 class UrlShorteningService {
 
-    private final Base62 base62;
-    private final UrlRepository urlRepository;
+  private final Base62 base62;
+  private final UrlRepository urlRepository;
 
-    @Transactional
-    String shortenUrl(String url) throws DecoderException {
-        String urlSha1Hash = DigestUtils.sha1Hex(url);
-        byte[] urlHexadecimalBytes = Hex.decodeHex(urlSha1Hash);
-        String urlBase62Shortage = new String(base62.encode(urlHexadecimalBytes));
-        //todo save() saves and updates, implement update option
-        UrlEntity savedUrl = urlRepository.save(new UrlEntity(urlBase62Shortage, url));
-        return savedUrl.getHash();
-    }
+  @Transactional
+  String shortenUrl(String url) throws DecoderException {
+    String urlSha1Hash = DigestUtils.sha1Hex(url);
+    byte[] urlHexadecimalBytes = Hex.decodeHex(urlSha1Hash);
+    String urlBase62Shortage = new String(base62.encode(urlHexadecimalBytes));
+    // todo save() saves and updates, implement update option
+    UrlEntity savedUrl = urlRepository.save(new UrlEntity(urlBase62Shortage, url));
+    return savedUrl.getHash();
+  }
 
-    Optional<String> findUrlByHash(String hash) {
-        return urlRepository.findUrlEntityByHash(hash).map(UrlEntity::getUrl);
-    }
+  Optional<String> findUrlByHash(String hash) {
+    return urlRepository.findUrlEntityByHash(hash).map(UrlEntity::getUrl);
+  }
 }

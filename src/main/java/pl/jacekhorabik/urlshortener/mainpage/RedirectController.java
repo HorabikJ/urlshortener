@@ -13,17 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequiredArgsConstructor
 class RedirectController {
 
-    private final UrlShorteningService urlShorteningService;
+  private final UrlShorteningService urlShorteningService;
 
-    @GetMapping("/r/{hash}")
-    ResponseEntity<?> redirect(@PathVariable String hash) {
-        //todo: implement handling the not found case, some custom not found page?
-        return urlShorteningService.findUrlByHash(hash)
-                .map(url -> ResponseEntity
-                        .status(HttpStatus.FOUND.value())
-                        .header("Location", url)
-                        .build())
-                .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND.value()).build());
-    }
-
+  @GetMapping("/r/{hash}")
+  ResponseEntity<?> redirect(@PathVariable String hash) {
+    // todo: implement handling the not found case, some custom not found page?
+    return urlShorteningService
+        .findUrlByHash(hash)
+        .map(url -> ResponseEntity.status(HttpStatus.FOUND.value()).header("Location", url).build())
+        .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND.value()).build());
+  }
 }

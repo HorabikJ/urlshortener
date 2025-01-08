@@ -15,10 +15,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class UrlEntity {
 
-    @Id
-    //todo add hibernate validation
-    private String hash;
+  @Id
+  // todo add hibernate validation
+  private String hash;
 
-    private String url;
-
+  private String url;
 }

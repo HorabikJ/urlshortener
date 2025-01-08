@@ -14,26 +14,25 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequiredArgsConstructor
 class MainPageController {
 
-    private final UrlShorteningService urlShorteningService;
+  private final UrlShorteningService urlShorteningService;
 
-    @Value("${nodeport:8080}")
-    private String nodePort;
+  @Value("${nodeport:8080}")
+  private String nodePort;
 
-    @GetMapping("/")
-    String mainPage(Model model) {
-        UrlDTO requestUrlDTO = new UrlDTO();
-        model.addAttribute("requestUrlDTO", requestUrlDTO);
-        return "mainpage";
-    }
+  @GetMapping("/")
+  String mainPage(Model model) {
+    UrlDTO requestUrlDTO = new UrlDTO();
+    model.addAttribute("requestUrlDTO", requestUrlDTO);
+    return "mainpage";
+  }
 
-    @PostMapping("/")
-    //todo add exception handler
-    String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
-        String hash = urlShorteningService.shortenUrl(urlDTO.url());
-        UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
-        model.addAttribute("responseUrlDTO", responseUrlDTO);
-        model.addAttribute("requestUrlDTO", new UrlDTO());
-        return "mainpage";
-    }
-
+  @PostMapping("/")
+  // todo add exception handler
+  String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
+    String hash = urlShorteningService.shortenUrl(urlDTO.url());
+    UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
+    model.addAttribute("responseUrlDTO", responseUrlDTO);
+    model.addAttribute("requestUrlDTO", new UrlDTO());
+    return "mainpage";
+  }
 }
