@@ -16,6 +16,7 @@ import lombok.NoArgsConstructor;
 class UrlEntity {
 
     @Id
+    //todo add hibernate validation
     private String hash;
 
     private String url;

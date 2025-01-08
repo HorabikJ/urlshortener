@@ -27,6 +27,7 @@ class MainPageController {
     }
 
     @PostMapping("/")
+    //todo add exception handler
     String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
         String hash = urlShorteningService.shortenUrl(urlDTO.url());
         UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
