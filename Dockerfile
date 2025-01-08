@@ -8,5 +8,5 @@ RUN ["mvn", "dependency:resolve"]
 
 EXPOSE 8080/tcp
 
-CMD ["mvn", "spring-boot:run"]
+CMD ["mvn", "spring-boot:run", "-Dspring-boot.run.profiles=k8s"]
 

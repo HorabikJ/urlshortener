@@ -17,7 +17,7 @@ class UrlEntity {
 
     @Id
     private String hash;
-    
+
     private String url;
 
 }

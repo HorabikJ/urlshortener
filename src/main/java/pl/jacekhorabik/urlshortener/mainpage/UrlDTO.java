@@ -5,5 +5,5 @@ record UrlDTO(String url) {
     public UrlDTO() {
         this(null);
     }
-    
+
 }

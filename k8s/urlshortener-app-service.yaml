@@ -8,6 +8,7 @@ metadata:
   namespace: urlshortener-dev
 spec:
   ports:
+# todo parameterize ports and namespaces in the below link, maybe by helm and env vars?
   - port: 8080
     protocol: TCP
     targetPort: 8080

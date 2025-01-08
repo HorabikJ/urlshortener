@@ -7,5 +7,5 @@ import java.util.Optional;
 interface UrlRepository extends JpaRepository<UrlEntity, String> {
 
     Optional<UrlEntity> findUrlEntityByHash(String hash);
-    
+
 }
