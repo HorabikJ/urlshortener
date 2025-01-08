@@ -5,6 +5,7 @@ metadata:
     app: urlshortener
     layer: backend
   name: urlshortener-app-pod
+  namespace: urlshortener-dev 
 spec:
   containers:
   - image: urlshortener-app:latest

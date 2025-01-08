@@ -5,6 +5,7 @@ metadata:
     app: urlshortener
     layer: backend
   name: urlshortener-app-service
+  namespace: urlshortener-dev
 spec:
   ports:
   - port: 8080

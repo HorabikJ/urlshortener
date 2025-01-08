@@ -5,6 +5,7 @@ metadata:
     app: urlshortener
     layer: db
   name: urlshortener-db-service
+  namespace: urlshortener-dev
 spec:
   ports:
   - port: 3306

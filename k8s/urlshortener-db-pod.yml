@@ -5,6 +5,7 @@ metadata:
   labels:
     app: urlshortener
     layer: db
+  namespace: urlshortener-dev
 spec:
   containers:
   - image: urlshortener-db:latest
