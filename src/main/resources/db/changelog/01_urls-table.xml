@@ -8,6 +8,9 @@
             <column name="url" type="VARCHAR(10000)">
                 <constraints nullable="false"/>
             </column>
+            <column name="created_at" type="datetime">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
