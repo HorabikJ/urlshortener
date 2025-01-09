@@ -20,17 +20,17 @@ class MainPageController {
   private String nodePort;
 
   @GetMapping("/")
-  String mainPage(Model model) {
-    UrlDTO requestUrlDTO = new UrlDTO();
+  String mainPage(final Model model) {
+    final UrlDTO requestUrlDTO = new UrlDTO();
     model.addAttribute("requestUrlDTO", requestUrlDTO);
     return "mainpage";
   }
 
   @PostMapping("/")
   // todo add exception handler
-  String shortenUrl(UrlDTO urlDTO, Model model) throws DecoderException {
-    String hash = urlShorteningService.shortenUrl(urlDTO.url());
-    UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
+  String shortenUrl(final UrlDTO urlDTO, final Model model) throws DecoderException {
+    final String hash = urlShorteningService.shortenUrl(urlDTO.url());
+    final UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
     model.addAttribute("responseUrlDTO", responseUrlDTO);
     model.addAttribute("requestUrlDTO", new UrlDTO());
     return "mainpage";

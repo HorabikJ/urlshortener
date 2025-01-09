@@ -17,7 +17,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class UrlEntity {
 
-  public UrlEntity(String hash, String url) {
+  public UrlEntity(final String hash, final String url) {
     this.hash = hash;
     this.url = url;
   }
