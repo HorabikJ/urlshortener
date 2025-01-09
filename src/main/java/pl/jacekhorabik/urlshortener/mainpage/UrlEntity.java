@@ -26,11 +26,11 @@ class UrlEntity {
   // todo add hibernate validation
   private String hash;
 
-  @Column(updatable = false, nullable = false)
+  @Column(nullable = false)
   private String url;
-  
+
   @CreationTimestamp
-  @Column(updatable = false, nullable = false)
+  @Column(nullable = false)
   private Instant createdAt;
 
   @UpdateTimestamp
