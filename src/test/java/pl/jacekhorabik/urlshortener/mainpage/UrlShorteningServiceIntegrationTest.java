@@ -2,7 +2,6 @@ package pl.jacekhorabik.urlshortener.mainpage;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
-import java.util.Optional;
 import org.apache.commons.codec.DecoderException;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,8 @@ public class UrlShorteningServiceIntegrationTest {
   void shouldSuccessfullySaveShortenedUrl() throws DecoderException {
     String hash = urlShorteningService.shortenUrl("https://www.google.pl/");
 
-    Optional<String> urlByHash = urlShorteningService.findUrlByHash(hash);
+    String urlByHash = urlShorteningService.findUrlByHash(hash).get();
 
-    assertThat(urlByHash.isPresent()).isTrue();
-    String url = urlByHash.get();
-    assertThat(url).isEqualTo("https://www.google.pl/");
+    assertThat(urlByHash).isEqualTo("https://www.google.pl/");
   }
 }
