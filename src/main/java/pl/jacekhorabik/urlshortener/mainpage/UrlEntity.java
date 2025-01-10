@@ -5,6 +5,7 @@ import java.time.Instant;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import org.hibernate.annotations.Generated;
 
 @Entity
 @Table(name = "urls")
@@ -21,24 +22,9 @@ class UrlEntity {
   // todo add hibernate validation
   private String hash;
 
-  @Column(nullable = false)
   private String url;
 
-  @Column(nullable = false, updatable = false)
-  private Instant createdAt;
+  @Generated private Instant createdAt;
 
-  @Column(nullable = false)
-  private Instant updatedAt;
-
-  @PrePersist
-  private void prePersist() {
-    Instant now = Instant.now();
-    createdAt = now;
-    updatedAt = now;
-  }
-
-  @PreUpdate
-  private void preUpdate() {
-    updatedAt = Instant.now();
-  }
+  @Generated private Instant updatedAt;
 }

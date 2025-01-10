@@ -10,10 +10,11 @@
             <column name="url" type="varchar(10000)">
                 <constraints nullable="false"/>
             </column>
-            <column name="created_at" type="timestamp(3)">
+            <column name="created_at" type="timestamp(3)" defaultValueComputed="CURRENT_TIMESTAMP(3)">
                 <constraints nullable="false"/>
             </column>
-            <column name="updated_at" type="timestamp(3)">
+            <column name="updated_at" type="timestamp(3)"
+                    defaultValueComputed="CURRENT_TIMESTAMP(3) on update CURRENT_TIMESTAMP(3)">
                 <constraints nullable="false"/>
             </column>
         </createTable>
