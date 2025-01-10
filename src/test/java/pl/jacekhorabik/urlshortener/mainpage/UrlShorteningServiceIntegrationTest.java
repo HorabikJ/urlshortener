@@ -19,11 +19,32 @@ class UrlShorteningServiceIntegrationTest {
 
   @Test
   @Transactional
-  void shouldSuccessfullySaveShortenedUrl() throws DecoderException {
-    String hash = urlShorteningService.shortenUrl("https://www.google.pl/");
+  void shouldSuccessfullySaveAndFindShortenedUrl() throws DecoderException {
+    // primary hash for https://www.google.pl is Gai1aEc
+    UrlEntity saved = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
+    UrlEntity fetched = urlShorteningService.findUrlByHash(saved.getHash()).get();
 
-    String urlByHash = urlShorteningService.findUrlByHash(hash).get();
+    assertThat(fetched).isNotNull();
+    assertThat(fetched.getUrl()).isEqualTo("https://www.google.pl/");
+    assertThat(fetched.getHash()).isEqualTo("Gai1aEc");
+    assertThat(fetched.getCreatedAt()).isNotNull();
+    assertThat(fetched.getUpdatedAt()).isNotNull();
+    assertThat(fetched.getCreatedAt()).isEqualTo(fetched.getUpdatedAt());
+  }
 
-    assertThat(urlByHash).isEqualTo("https://www.google.pl/");
+  @Test
+  @Transactional
+  void shouldGenerateTwoDifferentHashesForTheSameUrlSavedTwice()
+      throws DecoderException, InterruptedException {
+    // primary hash for https://www.google.pl is Gai1aEc
+    UrlEntity savedFirst = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
+    UrlEntity savedSecond = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
+
+    UrlEntity urlEntityFirst = urlShorteningService.findUrlByHash(savedFirst.getHash()).get();
+    UrlEntity urlEntitySecond = urlShorteningService.findUrlByHash(savedSecond.getHash()).get();
+
+    assertThat(urlEntityFirst.getHash()).isEqualTo("Gai1aEc");
+    assertThat(urlEntitySecond.getHash()).isNotNull();
+    assertThat(urlEntitySecond.getHash()).isNotEqualTo("Gai1aEc");
   }
 }
