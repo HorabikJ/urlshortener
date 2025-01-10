@@ -34,7 +34,7 @@ class UrlShorteningService {
     if (urlEntity.isPresent()) {
         return shortenUrl(url, UUID.randomUUID().toString());
     } else {
-      return urlRepository.save(new UrlEntity(urlBase62Substring, url));
+      return urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url));
     }
   }
 
