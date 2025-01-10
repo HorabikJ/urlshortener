@@ -3,11 +3,12 @@ package pl.jacekhorabik.urlshortener.mainpage;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.DecoderException;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
 
 @RequestMapping("/v1")
 @Controller
@@ -20,19 +21,23 @@ class MainPageController {
   private String nodePort;
 
   @GetMapping("/")
-  String mainPage(final Model model) {
+  ModelAndView mainPage(final ModelAndView modelAndView) {
     final UrlDTO requestUrlDTO = new UrlDTO();
-    model.addAttribute("requestUrlDTO", requestUrlDTO);
-    return "mainpage";
+    modelAndView.setViewName(ViewName.MAIN_PAGE.viewname());
+    modelAndView.addObject("requestUrlDTO", requestUrlDTO);
+    return modelAndView;
   }
 
   @PostMapping("/")
   // todo add exception handler
-  String shortenUrl(final UrlDTO urlDTO, final Model model) throws DecoderException {
+  ModelAndView shortenUrl(final UrlDTO urlDTO, final ModelAndView modelAndView)
+      throws DecoderException {
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
     final UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
-    model.addAttribute("responseUrlDTO", responseUrlDTO);
-    model.addAttribute("requestUrlDTO", new UrlDTO());
-    return "mainpage";
+    modelAndView.addObject("responseUrlDTO", responseUrlDTO);
+    modelAndView.addObject("requestUrlDTO", new UrlDTO());
+    modelAndView.setViewName(ViewName.MAIN_PAGE.viewname());
+    modelAndView.setStatus(HttpStatus.CREATED);
+    return modelAndView;
   }
 }
