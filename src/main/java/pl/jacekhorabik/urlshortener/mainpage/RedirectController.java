@@ -1,15 +1,14 @@
 package pl.jacekhorabik.urlshortener.mainpage;
 
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
 
-@RestController
+@Controller
 @RequestMapping("/v1")
 @RequiredArgsConstructor
 class RedirectController {
@@ -17,16 +16,20 @@ class RedirectController {
   private final UrlShorteningService urlShorteningService;
 
   @GetMapping("/r/{hash}")
-  ResponseEntity<?> redirect(final @PathVariable String hash) {
-    // todo: implement handling the not found case, some custom not found page?
+  ModelAndView redirect(final @PathVariable String hash, final ModelAndView modelAndView) {
     return urlShorteningService
         .findUrlByHash(hash)
         .map(UrlEntity::getUrl)
         .map(
-            url ->
-                ResponseEntity.status(HttpStatus.FOUND.value())
-                    .header(HttpHeaders.LOCATION, url)
-                    .build())
-        .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND.value()).build());
+            url -> {
+              modelAndView.setStatus(HttpStatus.FOUND);
+              modelAndView.setViewName("redirect:" + url);
+              return modelAndView;
+            })
+        .orElseGet(
+            () -> {
+              modelAndView.setViewName("not-found");
+              return modelAndView;
+            });
   }
 }
