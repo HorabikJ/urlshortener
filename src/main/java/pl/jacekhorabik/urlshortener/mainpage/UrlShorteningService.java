@@ -19,11 +19,11 @@ class UrlShorteningService {
   private final UrlRepository urlRepository;
 
   @Transactional
-  String shortenUrl(final UrlDTO url) throws DecoderException {
+  UrlEntity shortenUrl(final UrlDTO url) throws DecoderException {
     return shortenUrl(url.url(), StringUtils.EMPTY);
   }
 
-  private String shortenUrl(final String url, final String hashCollisionProtector)
+  private UrlEntity shortenUrl(final String url, final String hashCollisionProtector)
       throws DecoderException {
     final String urlForHashing = url.concat(hashCollisionProtector);
     final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);
@@ -33,12 +33,12 @@ class UrlShorteningService {
     final Optional<UrlEntity> urlEntity = urlRepository.findUrlEntityByHash(urlBase62Substring);
     if (urlEntity.isPresent()) {
       if (urlEntity.get().getUrl().equals(url)) {
-        return urlRepository.save(new UrlEntity(urlBase62Substring, url)).getHash();
+        return urlRepository.save(new UrlEntity(urlBase62Substring, url));
       } else {
         return shortenUrl(url, UUID.randomUUID().toString());
       }
     } else {
-      return urlRepository.save(new UrlEntity(urlBase62Substring, url)).getHash();
+      return urlRepository.save(new UrlEntity(urlBase62Substring, url));
     }
   }
 

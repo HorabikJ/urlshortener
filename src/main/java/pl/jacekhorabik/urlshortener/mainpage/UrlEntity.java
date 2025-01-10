@@ -1,15 +1,10 @@
 package pl.jacekhorabik.urlshortener.mainpage;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import java.time.Instant;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.CreationTimestamp;
-import org.hibernate.annotations.UpdateTimestamp;
 
 @Entity
 @Table(name = "urls")
@@ -29,11 +24,21 @@ class UrlEntity {
   @Column(nullable = false)
   private String url;
 
-  @CreationTimestamp
-  @Column(nullable = false)
+  @Column(nullable = false, updatable = false)
   private Instant createdAt;
 
-  @UpdateTimestamp
   @Column(nullable = false)
   private Instant updatedAt;
+
+  @PrePersist
+  private void prePersist() {
+    Instant now = Instant.now();
+    createdAt = now;
+    updatedAt = now;
+  }
+
+  @PreUpdate
+  private void preUpdate() {
+    updatedAt = Instant.now();
+  }
 }
