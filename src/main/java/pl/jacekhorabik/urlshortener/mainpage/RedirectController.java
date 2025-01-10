@@ -29,6 +29,7 @@ class RedirectController {
         .orElseGet(
             () -> {
               modelAndView.setViewName(ViewName.NOT_FOUND.viewname());
+              modelAndView.setStatus(HttpStatus.NOT_FOUND);
               return modelAndView;
             });
   }
