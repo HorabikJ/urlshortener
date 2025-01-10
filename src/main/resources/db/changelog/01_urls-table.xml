@@ -3,6 +3,8 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
     <changeSet author="JH" id="1736107660768-1">
+        <!--        todo maybe add a unique key on hash and url as rows in this table can not be modified according to business -->
+        <!--        logic-->
         <createTable tableName="urls">
             <column name="hash" type="varchar(7)">
                 <constraints nullable="false" primaryKey="true" unique="true"/>
