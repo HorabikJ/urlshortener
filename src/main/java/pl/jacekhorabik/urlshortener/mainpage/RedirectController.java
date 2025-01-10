@@ -21,6 +21,7 @@ class RedirectController {
     // todo: implement handling the not found case, some custom not found page?
     return urlShorteningService
         .findUrlByHash(hash)
+        .map(UrlEntity::getHash)
         .map(
             url ->
                 ResponseEntity.status(HttpStatus.FOUND.value())

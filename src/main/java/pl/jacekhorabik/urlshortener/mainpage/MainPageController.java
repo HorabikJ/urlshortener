@@ -29,7 +29,7 @@ class MainPageController {
   @PostMapping("/")
   // todo add exception handler
   String shortenUrl(final UrlDTO urlDTO, final Model model) throws DecoderException {
-    final String hash = urlShorteningService.shortenUrl(urlDTO.url());
+    final String hash = urlShorteningService.shortenUrl(urlDTO);
     final UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
     model.addAttribute("responseUrlDTO", responseUrlDTO);
     model.addAttribute("requestUrlDTO", new UrlDTO());

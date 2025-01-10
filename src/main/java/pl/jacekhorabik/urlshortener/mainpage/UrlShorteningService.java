@@ -19,32 +19,31 @@ class UrlShorteningService {
   private final UrlRepository urlRepository;
 
   @Transactional
-  String shortenUrl(final String url) throws DecoderException {
-    return shortenUrl(url, StringUtils.EMPTY);
+  String shortenUrl(final UrlDTO url) throws DecoderException {
+    return shortenUrl(url.url(), StringUtils.EMPTY);
   }
 
-  private String shortenUrl(String url, final String hashCollisionProtector)
+  private String shortenUrl(final String url, final String hashCollisionProtector)
       throws DecoderException {
-    url = url.concat(hashCollisionProtector);
-    final String urlSha1Hash = DigestUtils.sha1Hex(url);
+    final String urlForHashing = url.concat(hashCollisionProtector);
+    final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);
     final byte[] urlHexadecimalBytes = Hex.decodeHex(urlSha1Hash);
     final String urlBase62Encoded = new String(base62.encode(urlHexadecimalBytes));
     final String urlBase62Substring = urlBase62Encoded.substring(0, 7);
     final Optional<UrlEntity> urlEntity = urlRepository.findUrlEntityByHash(urlBase62Substring);
     if (urlEntity.isPresent()) {
-      if (urlEntity.get().getUrl().equals(url)) {
+      if (!urlEntity.get().getUrl().equals(url)) {
         return urlRepository.save(new UrlEntity(urlBase62Substring, url)).getHash();
       } else {
-        final String randomUUID = UUID.randomUUID().toString().replace("-", "");
-        return shortenUrl(url, randomUUID);
+        return shortenUrl(url, UUID.randomUUID().toString());
       }
     } else {
       return urlRepository.save(new UrlEntity(urlBase62Substring, url)).getHash();
     }
   }
 
-  Optional<String> findUrlByHash(final String hash) {
-    return urlRepository.findUrlEntityByHash(hash).map(UrlEntity::getUrl);
+  Optional<UrlEntity> findUrlByHash(final String hash) {
+    return urlRepository.findUrlEntityByHash(hash);
   }
   
 }
