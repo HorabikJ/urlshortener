@@ -13,7 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @SpringBootTest
 @ActiveProfiles("local")
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
-public class UrlShorteningServiceIntegrationTest {
+class UrlShorteningServiceIntegrationTest {
 
   @Autowired private UrlShorteningService urlShorteningService;
 
