@@ -44,7 +44,10 @@ class UrlShorteningServiceIntegrationTest {
     UrlEntity urlEntitySecond = urlShorteningService.findUrlByHash(savedSecond.getHash()).get();
 
     assertThat(urlEntityFirst.getHash()).isEqualTo("Gai1aEc");
+    assertThat(urlEntityFirst.getUrl()).isEqualTo("https://www.google.pl/");
+
     assertThat(urlEntitySecond.getHash()).isNotNull();
     assertThat(urlEntitySecond.getHash()).isNotEqualTo("Gai1aEc");
+    assertThat(urlEntitySecond.getUrl()).isEqualTo("https://www.google.pl/");
   }
 }
