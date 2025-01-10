@@ -32,7 +32,7 @@ class UrlShorteningService {
     final String urlBase62Substring = urlBase62Encoded.substring(0, 7);
     final Optional<UrlEntity> urlEntity = urlRepository.findUrlEntityByHash(urlBase62Substring);
     if (urlEntity.isPresent()) {
-      if (!urlEntity.get().getUrl().equals(url)) {
+      if (urlEntity.get().getUrl().equals(url)) {
         return urlRepository.save(new UrlEntity(urlBase62Substring, url)).getHash();
       } else {
         return shortenUrl(url, UUID.randomUUID().toString());
