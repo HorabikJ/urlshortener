@@ -6,7 +6,8 @@ ADD pom.xml /code/pom.xml
 ADD src /code/src
 RUN ["mvn", "dependency:resolve"]
 
-EXPOSE 8080/tcp
+#todo below line is not needed
+#EXPOSE 8080/tcp
 
 CMD ["mvn", "spring-boot:run", "-Dspring-boot.run.profiles=k8s"]
 
