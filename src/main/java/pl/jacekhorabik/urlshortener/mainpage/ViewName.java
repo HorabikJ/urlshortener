@@ -10,7 +10,7 @@ enum ViewName {
     this.viewName = viewName;
   }
 
-  String viewname() {
+  String viewName() {
     return viewName;
   }
 }

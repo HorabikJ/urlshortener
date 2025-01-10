@@ -11,6 +11,8 @@ class GlobalExceptionHandler {
 
   @ExceptionHandler(value = NoResourceFoundException.class)
   public ModelAndView handleNoStaticResourceFound(HttpServletRequest req, Exception e) {
-    return new ModelAndView(ViewName.NOT_FOUND.viewname());
+    return new ModelAndView(ViewName.NOT_FOUND.viewName());
   }
+  // todo implement handling different types of exceptions
+
 }

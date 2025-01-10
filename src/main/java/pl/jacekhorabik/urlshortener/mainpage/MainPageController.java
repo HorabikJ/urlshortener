@@ -23,7 +23,7 @@ class MainPageController {
   @GetMapping("/")
   ModelAndView mainPage(final ModelAndView modelAndView) {
     final UrlDTO requestUrlDTO = new UrlDTO();
-    modelAndView.setViewName(ViewName.MAIN_PAGE.viewname());
+    modelAndView.setViewName(ViewName.MAIN_PAGE.viewName());
     modelAndView.addObject("requestUrlDTO", requestUrlDTO);
     return modelAndView;
   }
@@ -36,7 +36,7 @@ class MainPageController {
     final UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
     modelAndView.addObject("responseUrlDTO", responseUrlDTO);
     modelAndView.addObject("requestUrlDTO", new UrlDTO());
-    modelAndView.setViewName(ViewName.MAIN_PAGE.viewname());
+    modelAndView.setViewName(ViewName.MAIN_PAGE.viewName());
     modelAndView.setStatus(HttpStatus.CREATED);
     return modelAndView;
   }
