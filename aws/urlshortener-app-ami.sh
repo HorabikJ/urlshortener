@@ -7,4 +7,4 @@ sdk install maven 3.9.9
 git clone https://github.com/HorabikJ/urlshortener.git ~/code/urlshortener
 cd ~/code/urlshortener/ || exit
 mvn dependency:resolve
-mvn spring-boot:run -Dspring-boot.run.profiles=local
+mvn spring-boot:run -Dspring-boot.run.profiles=aws
