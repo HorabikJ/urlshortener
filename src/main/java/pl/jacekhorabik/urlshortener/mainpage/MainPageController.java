@@ -19,6 +19,9 @@ class MainPageController {
 
   @Value("${nodeport:8080}")
   private String nodePort;
+  
+  @Value("${app.host.ip:localhost}")
+  private String hostIP;
 
   @GetMapping("/")
   ModelAndView mainPage(final ModelAndView modelAndView) {
@@ -33,7 +36,7 @@ class MainPageController {
   ModelAndView shortenUrl(final UrlDTO urlDTO, final ModelAndView modelAndView)
       throws DecoderException {
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
-    final UrlDTO responseUrlDTO = new UrlDTO(String.format("localhost:%s/v1/r/%s", nodePort, hash));
+    final UrlDTO responseUrlDTO = new UrlDTO(String.format("http://%s:%s/v1/r/%s", hostIP, nodePort, hash));
     modelAndView.addObject("responseUrlDTO", responseUrlDTO);
     modelAndView.addObject("requestUrlDTO", new UrlDTO());
     modelAndView.setViewName(ViewName.MAIN_PAGE.viewName());
