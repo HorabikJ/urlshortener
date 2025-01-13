@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urlshortener-app-deployment
+  labels:
+    app: urlshortener
+    layer: backend
+  namespace: urlshortener-dev
+spec:
+  template:
+    metadata:
+      name: urlshortener-app-pod
+      labels:
+        app: urlshortener
+        layer: backend
+    spec:
+      containers:
+        - image: urlshortener-app:latest
+          name: urlshortener-app-container
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+  replicas: 2
+  selector:
+    matchLabels:
+      app: urlshortener
+      layer: backend
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1

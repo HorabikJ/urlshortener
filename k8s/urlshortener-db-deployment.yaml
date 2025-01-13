@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urlshortener-db-deployment
+  labels:
+    app: urlshortener
+    layer: db
+  namespace: urlshortener-dev
+spec:
+  template:
+    metadata:
+      name: urlshortener-db-pod
+      labels:
+        app: urlshortener
+        layer: db
+    spec:
+      containers:
+        - image: urlshortener-db:latest
+          name: urlshortener-db-container
+          resources: { }
+          ports:
+            - containerPort: 3306
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: root
+          imagePullPolicy: IfNotPresent
+  replicas: 1
+  selector:
+    matchLabels:
+      app: urlshortener
+      layer: db
