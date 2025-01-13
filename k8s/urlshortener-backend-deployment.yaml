@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: urlshortener-app-deployment
+  name: urlshortener-backend-deployment
   labels:
     app: urlshortener
     layer: backend
@@ -9,14 +9,14 @@ metadata:
 spec:
   template:
     metadata:
-      name: urlshortener-app-pod
+      name: urlshortener-backend-pod
       labels:
         app: urlshortener
         layer: backend
     spec:
       containers:
-        - image: urlshortener-app:latest
-          name: urlshortener-app-container
+        - image: urlshortener-backend:latest
+          name: urlshortener-backend-container
           ports:
             - containerPort: 8080
           imagePullPolicy: IfNotPresent
