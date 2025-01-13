@@ -12,4 +12,7 @@ class UrlshortenerApplicationTests {
     void contextLoads() {
     }
 
+  //    todo use testcontainers library for tests
+  //    todo initialize test db with some data from script to have a good full db for testing
+
 }

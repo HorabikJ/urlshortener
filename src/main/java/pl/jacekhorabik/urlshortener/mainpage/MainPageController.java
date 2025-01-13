@@ -35,6 +35,7 @@ class MainPageController {
   // todo add exception handler
   ModelAndView shortenUrl(final UrlDTO urlDTO, final ModelAndView modelAndView)
       throws DecoderException {
+//    todo implement URL validation, url string has to be a valid url and can not be a domain name of the app
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
     final UrlDTO responseUrlDTO =
         new UrlDTO(String.format("http://%s:%s/v1/r/%s", hostIP, nodePort, hash));
