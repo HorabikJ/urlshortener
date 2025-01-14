@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.health;
 
 import javax.sql.DataSource;
 import lombok.RequiredArgsConstructor;

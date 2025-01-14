@@ -1,6 +1,6 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.view;
 
-enum ViewName {
+public enum ViewName {
   MAIN_PAGE("main-page"),
   NOT_FOUND("not-found");
 
@@ -10,7 +10,7 @@ enum ViewName {
     this.viewName = viewName;
   }
 
-  String viewName() {
+  public String viewName() {
     return viewName;
   }
 }
