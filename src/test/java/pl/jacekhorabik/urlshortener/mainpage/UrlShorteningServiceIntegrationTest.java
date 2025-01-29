@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
 
 @SpringBootTest
@@ -21,8 +22,8 @@ class UrlShorteningServiceIntegrationTest {
   @Transactional
   void shouldSuccessfullySaveAndFindShortenedUrl() throws DecoderException {
     // primary hash for https://www.google.pl is Gai1aEc
-    UrlEntity saved = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
-    UrlEntity fetched = urlShorteningService.findUrlByHash(saved.getHash()).get();
+    final UrlEntity saved = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
+    final UrlEntity fetched = urlShorteningService.findUrlByHash(saved.getHash()).get();
 
     assertThat(fetched).isNotNull();
     assertThat(fetched.getUrl()).isEqualTo("https://www.google.pl/");
@@ -34,14 +35,16 @@ class UrlShorteningServiceIntegrationTest {
 
   @Test
   @Transactional
-  void shouldGenerateTwoDifferentHashesForTheSameUrlSavedTwice()
-      throws DecoderException, InterruptedException {
+  void shouldGenerateTwoDifferentHashesForTheSameUrlSavedTwice() throws DecoderException {
     // primary hash for https://www.google.pl is Gai1aEc
-    UrlEntity savedFirst = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
-    UrlEntity savedSecond = urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
+    final UrlEntity savedFirst =
+        urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
+    final UrlEntity savedSecond =
+        urlShorteningService.shortenUrl(new UrlDTO("https://www.google.pl/"));
 
-    UrlEntity urlEntityFirst = urlShorteningService.findUrlByHash(savedFirst.getHash()).get();
-    UrlEntity urlEntitySecond = urlShorteningService.findUrlByHash(savedSecond.getHash()).get();
+    final UrlEntity urlEntityFirst = urlShorteningService.findUrlByHash(savedFirst.getHash()).get();
+    final UrlEntity urlEntitySecond =
+        urlShorteningService.findUrlByHash(savedSecond.getHash()).get();
 
     assertThat(urlEntityFirst.getHash()).isEqualTo("Gai1aEc");
     assertThat(urlEntityFirst.getUrl()).isEqualTo("https://www.google.pl/");
@@ -49,5 +52,23 @@ class UrlShorteningServiceIntegrationTest {
     assertThat(urlEntitySecond.getHash()).isNotNull();
     assertThat(urlEntitySecond.getHash()).isNotEqualTo("Gai1aEc");
     assertThat(urlEntitySecond.getUrl()).isEqualTo("https://www.google.pl/");
+  }
+
+  @Test
+  @Sql(
+      statements =
+          "INSERT INTO urls (hash, url, created_at, updated_at) "
+              + "VALUES ('2sV5hKo', 'https://example.com', '2025-01-01 01:01:01.000', '2025-01-01 01:01:01.000')",
+      executionPhase = Sql.ExecutionPhase.BEFORE_TEST_METHOD)
+  @Sql(
+      statements = "DELETE FROM urls WHERE hash = '2sV5hKo'",
+      executionPhase = Sql.ExecutionPhase.AFTER_TEST_METHOD)
+  void shouldFetchUrlThatIsAlreadyInDB() {
+    final UrlEntity urlByHash = urlShorteningService.findUrlByHash("2sV5hKo").get();
+
+    assertThat(urlByHash.getUrl()).isEqualTo("https://example.com");
+    assertThat(urlByHash.getHash()).isEqualTo("2sV5hKo");
+    assertThat(urlByHash.getCreatedAt()).isEqualTo("2025-01-01T01:01:01Z");
+    assertThat(urlByHash.getUpdatedAt()).isEqualTo("2025-01-01T01:01:01Z");
   }
 }
