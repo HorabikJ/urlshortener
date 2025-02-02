@@ -13,11 +13,6 @@ import org.hibernate.annotations.Generated;
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 class UrlEntity {
 
-  public UrlEntity(final String hash, final String url) {
-    this.hash = hash;
-    this.url = url;
-  }
-
   @Id
   // todo add hibernate validation
   private String hash;
@@ -27,4 +22,9 @@ class UrlEntity {
   @Generated private Instant createdAt;
 
   @Generated private Instant updatedAt;
+
+  UrlEntity(final String hash, final String url) {
+    this.hash = hash;
+    this.url = url;
+  }
 }
