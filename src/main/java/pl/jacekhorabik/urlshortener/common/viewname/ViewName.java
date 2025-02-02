@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.viewname;
+package pl.jacekhorabik.urlshortener.common.viewname;
 
 public enum ViewName {
   MAIN_PAGE("main-page"),

@@ -5,7 +5,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-import pl.jacekhorabik.urlshortener.viewname.ViewName;
+import pl.jacekhorabik.urlshortener.common.viewname.ViewName;
 
 @ControllerAdvice
 class GlobalExceptionHandler {

@@ -12,6 +12,7 @@ class UserRegisterLoginService {
 
   @Transactional
   void registerUser(final UserCredentialsDTO userCredentialsDTO) {
-    userRepository.save(new UserEntity(userCredentialsDTO.email(), userCredentialsDTO.password()));
+    userRepository.saveAndFlush(
+        new UserEntity(userCredentialsDTO.email(), userCredentialsDTO.password()));
   }
 }

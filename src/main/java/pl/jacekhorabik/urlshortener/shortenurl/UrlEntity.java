@@ -1,27 +1,19 @@
 package pl.jacekhorabik.urlshortener.shortenurl;
 
 import jakarta.persistence.*;
-import java.time.Instant;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import org.hibernate.annotations.Generated;
+import pl.jacekhorabik.urlshortener.common.entity.BaseEntity;
 
 @Entity
 @Table(name = "urls")
 @Getter
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
-class UrlEntity {
+class UrlEntity extends BaseEntity {
 
-  @Id
-  // todo add hibernate validation
-  private String hash;
-
+  @Id private String hash; // todo add hibernate validation
   private String url;
-
-  @Generated private Instant createdAt;
-
-  @Generated private Instant updatedAt;
 
   UrlEntity(final String hash, final String url) {
     this.hash = hash;
