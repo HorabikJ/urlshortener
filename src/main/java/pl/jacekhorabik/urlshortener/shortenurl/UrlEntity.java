@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.shortenurl;
 
 import jakarta.persistence.*;
 import java.time.Instant;

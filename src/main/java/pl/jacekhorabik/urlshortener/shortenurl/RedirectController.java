@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.shortenurl;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

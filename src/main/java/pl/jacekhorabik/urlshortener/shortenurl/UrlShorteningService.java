@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.shortenurl;
 
 import io.seruco.encoding.base62.Base62;
 import java.util.Optional;

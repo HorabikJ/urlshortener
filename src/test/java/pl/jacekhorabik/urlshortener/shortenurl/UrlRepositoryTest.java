@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.shortenurl;
 
 import static org.assertj.core.api.Assertions.assertThat;
 

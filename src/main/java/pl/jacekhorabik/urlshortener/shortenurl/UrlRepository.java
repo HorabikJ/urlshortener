@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.mainpage;
+package pl.jacekhorabik.urlshortener.shortenurl;
 
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
