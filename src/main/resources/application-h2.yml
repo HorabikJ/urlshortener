@@ -1,0 +1,15 @@
+spring:
+  datasource:
+    username: sa
+    password:
+  liquibase:
+    user: sa
+    password:
+  jpa:
+    properties:
+      hibernate:
+        show_sql: true
+        format_sql: true
+  h2:
+    console:
+      enabled: true

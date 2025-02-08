@@ -1,0 +1,23 @@
+spring:
+  application:
+    name: urlshortener
+  datasource:
+    username: urlshortener-user
+    password: password
+  jpa:
+    database: mysql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQLDialect
+    hibernate:
+      ddl-auto: validate
+  liquibase:
+    change-log: db/changelog/00_changelog-master.xml
+    user: urlshortener-admin
+    password: password
+management:
+  endpoint:
+    health:
+      show-details: always
+      # disable default DataSourceHealthIndicator and use custom CustomDataSourceHealthIndicator implementation
+      enabled: false
