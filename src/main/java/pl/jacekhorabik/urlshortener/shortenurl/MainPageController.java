@@ -18,7 +18,7 @@ class MainPageController {
 
   private final UrlShorteningService urlShorteningService;
 
-  @Value("${nodeport:8080}")
+  @Value("${nodeport:8081}")
   private String nodePort;
 
   @Value("${app.host.ip:localhost}")

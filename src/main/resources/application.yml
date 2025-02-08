@@ -1,3 +1,6 @@
+server:
+  port: 8081
+
 spring:
   application:
     name: urlshortener
@@ -15,6 +18,19 @@ spring:
     change-log: db/changelog/00_changelog-master.xml
     user: urlshortener-admin
     password: password
+  security:
+    oauth2:
+      client:
+        provider:
+          baeldung-keycloak:
+            issuer-uri: http://localhost:8080/realms/baeldung-keycloak
+        registration:
+          keycloak:
+            provider: baeldung-keycloak
+            authorization-grant-type: authorization_code
+            client-id: baeldung-keycloak-confidential
+            client-secret: secret
+            scope: openid
 management:
   endpoint:
     health:
