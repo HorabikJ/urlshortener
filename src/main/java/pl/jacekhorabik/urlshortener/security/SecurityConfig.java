@@ -13,6 +13,7 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 class SecurityConfig {
 
+  //todo add csrf if it is not enabled by default
   @Bean
   SecurityFilterChain clientSecurityFilterChain(
       HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository)
