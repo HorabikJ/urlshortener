@@ -3,6 +3,7 @@ package pl.jacekhorabik.urlshortener.security;
 import java.util.Collection;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
 import org.springframework.security.oauth2.core.oidc.OidcIdToken;
@@ -17,7 +18,7 @@ class AuthoritiesMapper implements GrantedAuthoritiesMapper {
 
   @Override
   public Collection<? extends GrantedAuthority> mapAuthorities(
-      final Collection<? extends GrantedAuthority> authorities) {
+      @NotNull final Collection<? extends GrantedAuthority> authorities) {
     return authorities.stream()
         .filter(authority -> authority instanceof OidcUserAuthority)
         .map(OidcUserAuthority.class::cast)

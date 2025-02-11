@@ -1,5 +1,6 @@
 package pl.jacekhorabik.urlshortener.security;
 
+import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.Customizer;
@@ -13,10 +14,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 class SecurityConfig {
 
-  //todo add csrf if it is not enabled by default
+  // todo add csrf if it is not enabled by default
   @Bean
   SecurityFilterChain clientSecurityFilterChain(
-      HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository)
+      @NotNull HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository)
       throws Exception {
     http.oauth2Login(Customizer.withDefaults());
     http.logout(

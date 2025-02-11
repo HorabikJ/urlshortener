@@ -2,6 +2,7 @@ package pl.jacekhorabik.urlshortener.shortenurl;
 
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.codec.DecoderException;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -25,7 +26,7 @@ class MainPageController {
   private String hostIP;
 
   @GetMapping("/")
-  ModelAndView mainPage(final ModelAndView modelAndView) {
+  ModelAndView mainPage(@NotNull final ModelAndView modelAndView) {
     final UrlDTO requestUrlDTO = new UrlDTO();
     modelAndView.setViewName(ViewName.MAIN_PAGE.viewName());
     modelAndView.addObject("requestUrlDTO", requestUrlDTO);
@@ -34,7 +35,7 @@ class MainPageController {
 
   @PostMapping("/")
   // todo add exception handler
-  ModelAndView shortenUrl(final UrlDTO urlDTO, final ModelAndView modelAndView)
+  ModelAndView shortenUrl(final UrlDTO urlDTO, @NotNull final ModelAndView modelAndView)
       throws DecoderException {
 //    todo implement URL validation, url string has to be a valid url and can not be a domain name of the app
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();

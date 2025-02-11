@@ -8,6 +8,7 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -19,11 +20,11 @@ class UrlShorteningService {
   private final UrlRepository urlRepository;
 
   @Transactional
-  UrlEntity shortenUrl(final UrlDTO url) throws DecoderException {
+  UrlEntity shortenUrl(@NotNull final UrlDTO url) throws DecoderException {
     return shortenUrl(url.url(), StringUtils.EMPTY);
   }
 
-  private UrlEntity shortenUrl(final String url, final String hashCollisionProtector)
+  private UrlEntity shortenUrl(@NotNull final String url, final String hashCollisionProtector)
       throws DecoderException {
     final String urlForHashing = url.concat(hashCollisionProtector);
     final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);
