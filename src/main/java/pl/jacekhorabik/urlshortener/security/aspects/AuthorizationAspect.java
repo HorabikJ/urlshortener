@@ -17,11 +17,10 @@ class AuthorizationAspect {
 
   @AfterReturning(
       value =
-          "execution(@pl.jacekhorabik.urlshortener.security.aspects.AddAuthorizationToModelAndView "
+          "execution(@pl.jacekhorabik.urlshortener.security.aspects.AddUserDataToModel "
               + "org.springframework.web.servlet.ModelAndView *(..))",
       returning = "modelAndView")
-  public void addAuthorizationToModelAndView(
-      @NotNull JoinPoint joinPoint, ModelAndView modelAndView) {
+  public void addUserDataToModel(@NotNull JoinPoint joinPoint, ModelAndView modelAndView) {
     final Object[] args = joinPoint.getArgs();
     Arrays.stream(args)
         .filter(o -> o instanceof OAuth2AuthenticationToken)
@@ -43,6 +42,5 @@ class AuthorizationAspect {
               modelAndView.addObject("isAuthenticated", false);
               modelAndView.addObject("isNice", false);
             });
-    System.out.println("lala");
   }
 }
