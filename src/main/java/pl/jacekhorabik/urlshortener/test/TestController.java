@@ -1,35 +1,24 @@
 package pl.jacekhorabik.urlshortener.test;
 
-import java.util.Objects;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
-import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.servlet.ModelAndView;
+import pl.jacekhorabik.urlshortener.security.aspects.AddAuthorizationToModelAndView;
 
 @Controller
 public class TestController {
 
   @GetMapping("/")
-  public String getIndex(Model model, Authentication auth) {
-    model.addAttribute(
-        "name",
-        auth instanceof OAuth2AuthenticationToken oauth
-                && oauth.getPrincipal() instanceof OidcUser oidc
-            ? oidc.getPreferredUsername()
-            : "");
-    model.addAttribute("isAuthenticated", auth != null && auth.isAuthenticated());
-    model.addAttribute(
-        "isNice",
-        auth != null
-            && auth.getAuthorities().stream()
-                .anyMatch(authority -> Objects.equals("NICE", authority.getAuthority())));
-    return "index.html";
+  @AddAuthorizationToModelAndView
+  public ModelAndView getIndex(ModelAndView modelAndView, Authentication auth) {
+    modelAndView.setViewName("index");
+    return modelAndView;
   }
 
   @GetMapping("/nice")
-  public String getNice(Model model, Authentication auth) {
-    return "nice.html";
+  public ModelAndView getNice(ModelAndView modelAndView, Authentication auth) {
+    modelAndView.setViewName("nice");
+    return modelAndView;
   }
 }
