@@ -1,9 +1,10 @@
-FROM keycloak/keycloak:26.1
+# using below version as in newer version exporting realm via docker exec command does not work
+FROM keycloak/keycloak:25.0.1
 
 EXPOSE 8080/tcp
 
-ENV KC_BOOTSTRAP_ADMIN_USERNAME="admin"
-ENV KC_BOOTSTRAP_ADMIN_PASSWORD="admin"
+ENV KEYCLOAK_ADMIN="admin"
+ENV KEYCLOAK_ADMIN_PASSWORD="admin"
 ENV KC_HTTP_PORT="8080"
 ENV KC_HOSTNAME_URL="http://localhost:8080"
 ENV KC_HOSTNAME_ADMIN_URL="http://localhost:8080"
