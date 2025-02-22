@@ -39,9 +39,11 @@ class MainPageController {
   @PostMapping("/")
   @AddUserDataToModel
   // todo add exception handler
-  ModelAndView shortenUrl(final UrlDTO urlDTO, @NotNull final ModelAndView modelAndView, final Authentication auth)
+  ModelAndView shortenUrl(
+      final UrlDTO urlDTO, @NotNull final ModelAndView modelAndView, final Authentication auth)
       throws DecoderException {
-//    todo implement URL validation, url string has to be a valid url and can not be a domain name of the app
+    //    todo implement URL validation, url string has to be a valid url and can not be a domain
+    // name of the app
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
     final UrlDTO responseUrlDTO =
         new UrlDTO(String.format("http://%s:%s/v1/r/%s", hostIP, nodePort, hash));

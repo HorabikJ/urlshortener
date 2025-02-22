@@ -1,5 +1,6 @@
 package pl.jacekhorabik.urlshortener.security.aspects;
 
+import java.util.Arrays;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -8,8 +9,6 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
-
-import java.util.Arrays;
 
 @Aspect
 @Component

@@ -8,9 +8,8 @@ import org.springframework.test.context.ActiveProfiles;
 @ActiveProfiles("h2")
 class UrlshortenerApplicationTests {
 
-    @Test
-    void contextLoads() {
-    }
+  @Test
+  void contextLoads() {}
 
   //    todo use testcontainers library for tests
   //    todo initialize test db with some data from script to have a good full db for testing

@@ -22,5 +22,4 @@ public class TestController {
     modelAndView.setViewName("_user");
     return modelAndView;
   }
-
 }
