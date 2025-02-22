@@ -16,7 +16,7 @@ ENV KC_HEALTH_ENABLED="true"
 ENV KC_METRICS_ENABLED="true"
 #ENV KC_LOG_LEVEL="DEBUG"
 
-ADD ./realm/baeldung-keycloak-realm.json /opt/keycloak/data/import/
+ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 
 #todo do not start keycloak dev in production
 CMD ["start-dev", "--import-realm"]

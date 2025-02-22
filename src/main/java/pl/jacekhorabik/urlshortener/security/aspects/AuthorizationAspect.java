@@ -1,7 +1,5 @@
 package pl.jacekhorabik.urlshortener.security.aspects;
 
-import java.util.Arrays;
-import java.util.Objects;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -10,6 +8,9 @@ import org.springframework.security.oauth2.client.authentication.OAuth2Authentic
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
+
+import java.util.Arrays;
+import java.util.Objects;
 
 @Aspect
 @Component
@@ -30,7 +31,7 @@ class AuthorizationAspect {
             t -> {
               modelAndView
                   .getModel()
-                  .put("name", ((OidcUser) t.getPrincipal()).getPreferredUsername());
+                      .put("username", ((OidcUser) t.getPrincipal()).getPreferredUsername());
               modelAndView.addObject("isAuthenticated", t.isAuthenticated());
               modelAndView.addObject(
                   "isNice",
@@ -38,7 +39,7 @@ class AuthorizationAspect {
                       .anyMatch(authority -> Objects.equals("NICE", authority.getAuthority())));
             },
             () -> {
-              modelAndView.getModel().put("name", null);
+                modelAndView.getModel().put("username", null);
               modelAndView.addObject("isAuthenticated", false);
               modelAndView.addObject("isNice", false);
             });

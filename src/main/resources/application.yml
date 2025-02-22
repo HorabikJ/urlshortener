@@ -22,13 +22,13 @@ spring:
     oauth2:
       client:
         provider:
-          baeldung-keycloak:
-            issuer-uri: http://localhost:8080/realms/baeldung-keycloak
+          urlshortener-keycloak-provider:
+            issuer-uri: http://localhost:8080/realms/urlshortener-keycloak-realm
         registration:
           keycloak:
-            provider: baeldung-keycloak
+            provider: urlshortener-keycloak-provider
             authorization-grant-type: authorization_code
-            client-id: baeldung-keycloak-confidential
+            client-id: urlshortener-keycloak-client
             client-secret: secret
             scope: openid
 management:
