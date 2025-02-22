@@ -21,4 +21,19 @@ public class TestController {
     modelAndView.setViewName("nice");
     return modelAndView;
   }
+
+  @GetMapping("/admin")
+  @AddUserDataToModel
+  public ModelAndView getAdminView(ModelAndView modelAndView, Authentication auth) {
+    modelAndView.setViewName("admin");
+    return modelAndView;
+  }
+
+  @GetMapping("/user")
+  @AddUserDataToModel
+  public ModelAndView getUserView(ModelAndView modelAndView, Authentication auth) {
+    modelAndView.setViewName("user");
+    return modelAndView;
+  }
+
 }

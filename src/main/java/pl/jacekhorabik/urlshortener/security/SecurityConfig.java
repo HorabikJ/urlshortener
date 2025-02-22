@@ -32,6 +32,8 @@ class SecurityConfig {
         requests -> {
           requests.requestMatchers("/", "/favicon.ico").permitAll();
           requests.requestMatchers("/nice").hasAuthority("NICE");
+            requests.requestMatchers("/admin").hasAuthority("ADMIN");
+            requests.requestMatchers("/user").hasAuthority("USER");
           requests.anyRequest().denyAll();
         });
     return http.build();
