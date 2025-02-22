@@ -9,19 +9,6 @@ import pl.jacekhorabik.urlshortener.security.aspects.AddUserDataToModel;
 @Controller
 public class TestController {
 
-  @GetMapping("/")
-  @AddUserDataToModel
-  public ModelAndView getIndex(ModelAndView modelAndView, Authentication auth) {
-    modelAndView.setViewName("_index");
-    return modelAndView;
-  }
-
-  @GetMapping("/nice")
-  public ModelAndView getNice(ModelAndView modelAndView, Authentication auth) {
-    modelAndView.setViewName("_nice");
-    return modelAndView;
-  }
-
   @GetMapping("/admin")
   @AddUserDataToModel
   public ModelAndView getAdminView(ModelAndView modelAndView, Authentication auth) {
