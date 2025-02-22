@@ -10,7 +10,6 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.util.Arrays;
-import java.util.Objects;
 
 @Aspect
 @Component
@@ -33,15 +32,10 @@ class AuthorizationAspect {
                   .getModel()
                       .put("username", ((OidcUser) t.getPrincipal()).getPreferredUsername());
               modelAndView.addObject("isAuthenticated", t.isAuthenticated());
-              modelAndView.addObject(
-                  "isNice",
-                  t.getAuthorities().stream()
-                      .anyMatch(authority -> Objects.equals("NICE", authority.getAuthority())));
             },
             () -> {
                 modelAndView.getModel().put("username", null);
               modelAndView.addObject("isAuthenticated", false);
-              modelAndView.addObject("isNice", false);
             });
   }
 }
