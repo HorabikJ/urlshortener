@@ -2,9 +2,7 @@ package pl.jacekhorabik.urlshortener.common.viewname;
 
 public enum ViewName {
   MAIN_PAGE("main-page"),
-  NOT_FOUND("not-found"),
-  REGISTER("register"),
-  LOGIN("login");
+  NOT_FOUND("not-found");
 
   private final String viewName;
 

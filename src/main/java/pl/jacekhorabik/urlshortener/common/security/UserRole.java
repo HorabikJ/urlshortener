@@ -1,16 +1,17 @@
 package pl.jacekhorabik.urlshortener.common.security;
 
-public enum UserRoles {
+public enum UserRole {
   ADMIN("ADMIN"),
   USER("USER");
 
   private final String role;
 
-  UserRoles(String role) {
+  UserRole(String role) {
     this.role = role;
   }
 
-  public String roleName() {
+  @Override
+  public String toString() {
     return role;
   }
 }

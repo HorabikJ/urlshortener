@@ -12,27 +12,27 @@ public class TestController {
   @GetMapping("/")
   @AddUserDataToModel
   public ModelAndView getIndex(ModelAndView modelAndView, Authentication auth) {
-    modelAndView.setViewName("index");
+    modelAndView.setViewName("_index");
     return modelAndView;
   }
 
   @GetMapping("/nice")
   public ModelAndView getNice(ModelAndView modelAndView, Authentication auth) {
-    modelAndView.setViewName("nice");
+    modelAndView.setViewName("_nice");
     return modelAndView;
   }
 
   @GetMapping("/admin")
   @AddUserDataToModel
   public ModelAndView getAdminView(ModelAndView modelAndView, Authentication auth) {
-    modelAndView.setViewName("admin");
+    modelAndView.setViewName("_admin");
     return modelAndView;
   }
 
   @GetMapping("/user")
   @AddUserDataToModel
   public ModelAndView getUserView(ModelAndView modelAndView, Authentication auth) {
-    modelAndView.setViewName("user");
+    modelAndView.setViewName("_user");
     return modelAndView;
   }
 
