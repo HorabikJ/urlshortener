@@ -1,4 +1,11 @@
-<nav>
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>navigation bar</title>
+</head>
+<body>
+<nav th:fragment="navigation">
   <div class="container text-center">
     <div th:if="${!isAuthenticated}">
       <a href="/oauth2/authorization/keycloak">
@@ -15,3 +22,5 @@
     </div>
   </div>
 </nav>
+</body>
+</html>
