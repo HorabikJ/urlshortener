@@ -3,7 +3,6 @@ package pl.jacekhorabik.urlshortener.security;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.oauth2.client.oidc.web.logout.OidcClientInitiatedLogoutSuccessHandler;
@@ -19,12 +18,15 @@ class SecurityConfig {
   SecurityFilterChain clientSecurityFilterChain(
       @NotNull HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository)
       throws Exception {
-    http.oauth2Login(Customizer.withDefaults());
+    http.oauth2Login(
+        login -> {
+          login.defaultSuccessUrl("/v1/");
+        });
     http.logout(
-        (logout) -> {
+        logout -> {
           final var logoutSuccessHandler =
               new OidcClientInitiatedLogoutSuccessHandler(clientRegistrationRepository);
-          logoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/");
+          logoutSuccessHandler.setPostLogoutRedirectUri("{baseUrl}/v1/");
           logout.logoutSuccessHandler(logoutSuccessHandler);
         });
 
