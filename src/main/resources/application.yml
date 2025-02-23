@@ -5,6 +5,7 @@ keycloak:
   realm: urlshortener-keycloak-realm
   clientId: urlshortener-keycloak-client
 keycloak-admin-client:
+  # todo configure keycloak-admin-client user so it is not allowed to login to urlshortener-keycloak-client app/client
   realm: ${keycloak.realm}
   clientId: admin-cli
   username: keycloak-admin-client
