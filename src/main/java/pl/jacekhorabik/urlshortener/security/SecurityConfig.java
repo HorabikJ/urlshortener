@@ -32,8 +32,7 @@ class SecurityConfig {
 
     http.authorizeHttpRequests(
         requests -> {
-          requests.requestMatchers("/", "/v1/**", "/favicon.ico").permitAll();
-          requests.requestMatchers("/nice").hasAuthority("NICE");
+          requests.requestMatchers("/v1/**", "/favicon.ico").permitAll();
           requests.requestMatchers("/admin").hasAuthority("ADMIN");
           requests.requestMatchers("/user").hasAuthority("USER");
           requests.anyRequest().denyAll();
