@@ -1,6 +1,16 @@
 server:
   port: 8081
 
+keycloak:
+  realm: urlshortener-keycloak-realm
+  clientId: urlshortener-keycloak-client
+keycloak-admin-client:
+  realm: ${keycloak.realm}
+  clientId: admin-cli
+  username: keycloak-admin-client
+  password: admin
+  url: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8080}
+
 spring:
   application:
     name: urlshortener
@@ -25,12 +35,12 @@ spring:
       client:
         provider:
           urlshortener-keycloak-provider:
-            issuer-uri: http://localhost:8080/realms/urlshortener-keycloak-realm
+            issuer-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8080}/realms/${keycloak.realm}
         registration:
           keycloak:
             provider: urlshortener-keycloak-provider
             authorization-grant-type: authorization_code
-            client-id: urlshortener-keycloak-client
+            client-id: ${keycloak.clientId}
             client-secret: secret
             scope: openid
 management:

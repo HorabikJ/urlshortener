@@ -68,7 +68,7 @@
       },
       {
         "id": "a49b22c4-1aa5-4621-a645-8bcfd5118dee",
-        "name": "default-roles-baeldung-keycloak",
+        "name": "default-roles-urlshortener-keycloak-realm",
         "description": "${role_default-roles}",
         "composite": true,
         "composites": {
@@ -436,7 +436,7 @@
   "groups": [],
   "defaultRole": {
     "id": "a49b22c4-1aa5-4621-a645-8bcfd5118dee",
-    "name": "default-roles-baeldung-keycloak",
+    "name": "default-roles-urlshortener-keycloak-realm",
     "description": "${role_default-roles}",
     "composite": true,
     "clientRole": false,
@@ -486,20 +486,20 @@
   "webAuthnPolicyPasswordlessExtraOrigins": [],
   "users": [
     {
-      "id": "886efb4c-5018-49a5-9855-91e320d1f1c4",
+      "id": "d021ac7e-f523-4ca2-a9d9-73ae229194b9",
       "username": "brice",
-      "email": "brice@baeldung.com",
+      "email": "brice@email.com",
       "emailVerified": true,
-      "createdTimestamp": 1721506081830,
+      "createdTimestamp": 1740337473945,
       "enabled": true,
       "totp": false,
       "credentials": [
         {
-          "id": "d0e60614-31ff-4cef-9f0d-8b6870af8f4b",
+          "id": "0ae89f86-93d8-4f05-9380-1f5aeb4d783e",
           "type": "password",
           "userLabel": "My password",
-          "createdDate": 1740251977922,
-          "secretData": "{\"value\":\"lEMDQMp6aqy+lSDmmsCtazFVGxxp7zdFnd5tiRJPd2I=\",\"salt\":\"wqnyDjy3dgJu84NhhEF54A==\",\"additionalParameters\":{}}",
+          "createdDate": 1740337620470,
+          "secretData": "{\"value\":\"FZW8XjtuRUykWVYBMwj7K0n+b/BQ5XUWtnOV8gLgK6I=\",\"salt\":\"/+rrZA2jnuz4I0tP6GqEtg==\",\"additionalParameters\":{}}",
           "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
         }
       ],
@@ -507,7 +507,7 @@
       "requiredActions": [],
       "realmRoles": [
         "ADMIN",
-        "default-roles-baeldung-keycloak",
+        "default-roles-urlshortener-keycloak-realm",
         "NICE",
         "USER"
       ],
@@ -515,29 +515,91 @@
       "groups": []
     },
     {
-      "id": "34d88f42-15c8-4f47-ae58-ec7f1d7c2342",
+      "id": "41a82dfb-2936-4e0f-b246-a88bdc95e31b",
       "username": "igor",
-      "email": "igor@baeldung.com",
+      "email": "igor@email.com",
       "emailVerified": true,
-      "createdTimestamp": 1721510598928,
+      "createdTimestamp": 1740337448512,
       "enabled": true,
       "totp": false,
       "credentials": [
         {
-          "id": "d8b9181a-e086-45b0-b246-59f52a37fd20",
+          "id": "8672a01a-2ee8-4b1d-8058-e9f9a73cd6b3",
           "type": "password",
           "userLabel": "My password",
-          "createdDate": 1740251992778,
-          "secretData": "{\"value\":\"YVRWbAq+/BExoY0oMCHmJlSAqUtUOOFFyunmQF0pGao=\",\"salt\":\"1xArf1AGwU4ppdwLkUEmWw==\",\"additionalParameters\":{}}",
+          "createdDate": 1740337641014,
+          "secretData": "{\"value\":\"2jeX1grMmZWZ3fbWmkV6uek6W1zZW4tKFTRuFIlLCkk=\",\"salt\":\"eECCgan7oDIDNNTtfvgQAw==\",\"additionalParameters\":{}}",
           "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
         }
       ],
       "disableableCredentialTypes": [],
       "requiredActions": [],
       "realmRoles": [
-        "default-roles-baeldung-keycloak",
+        "default-roles-urlshortener-keycloak-realm",
         "USER"
       ],
+      "notBefore": 0,
+      "groups": []
+    },
+    {
+      "id": "ad4538e1-fc4f-4448-a825-7671c123ea51",
+      "username": "keycloak-admin-client",
+      "email": "admin@admin.com",
+      "emailVerified": true,
+      "createdTimestamp": 1740337556325,
+      "enabled": true,
+      "totp": false,
+      "credentials": [
+        {
+          "id": "2b63ccb1-ad22-4394-a0cc-19ffa9c8c132",
+          "type": "password",
+          "userLabel": "My password",
+          "createdDate": 1740337606073,
+          "secretData": "{\"value\":\"YsmOg6Lq7CA5Jb2qxNrRoQ0D2LidJE1BOfbuzKhMFXY=\",\"salt\":\"HTnUYMUB2vUkr+BQJoz1mQ==\",\"additionalParameters\":{}}",
+          "credentialData": "{\"hashIterations\":5,\"algorithm\":\"argon2\",\"additionalParameters\":{\"hashLength\":[\"32\"],\"memory\":[\"7168\"],\"type\":[\"id\"],\"version\":[\"1.3\"],\"parallelism\":[\"1\"]}}"
+        }
+      ],
+      "disableableCredentialTypes": [],
+      "requiredActions": [],
+      "realmRoles": [
+        "default-roles-urlshortener-keycloak-realm"
+      ],
+      "clientRoles": {
+        "realm-management": [
+          "realm-admin",
+          "manage-authorization",
+          "query-users",
+          "manage-realm",
+          "view-authorization",
+          "query-groups",
+          "manage-users",
+          "view-identity-providers",
+          "create-client",
+          "view-users",
+          "view-events",
+          "query-clients",
+          "view-realm",
+          "view-clients",
+          "manage-events",
+          "manage-identity-providers",
+          "manage-clients",
+          "impersonation",
+          "query-realms"
+        ],
+        "broker": [
+          "read-token"
+        ],
+        "account": [
+          "view-applications",
+          "manage-consent",
+          "view-consent",
+          "view-groups",
+          "delete-account",
+          "manage-account",
+          "view-profile",
+          "manage-account-links"
+        ]
+      },
       "notBefore": 0,
       "groups": []
     }
@@ -1725,14 +1787,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-user-attribute-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "oidc-full-name-mapper",
+            "saml-user-property-mapper",
             "oidc-sha256-pairwise-sub-mapper",
             "oidc-usermodel-property-mapper",
-            "saml-user-property-mapper",
-            "oidc-usermodel-attribute-mapper",
+            "saml-user-attribute-mapper",
             "oidc-address-mapper",
-            "saml-role-list-mapper",
-            "oidc-full-name-mapper"
+            "saml-role-list-mapper"
           ]
         }
       },
@@ -1756,14 +1818,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "oidc-sha256-pairwise-sub-mapper",
+            "saml-user-attribute-mapper",
+            "saml-role-list-mapper",
             "oidc-usermodel-property-mapper",
             "oidc-full-name-mapper",
             "oidc-address-mapper",
-            "saml-user-attribute-mapper",
             "saml-user-property-mapper",
             "oidc-usermodel-attribute-mapper",
-            "saml-role-list-mapper"
+            "oidc-sha256-pairwise-sub-mapper"
           ]
         }
       }
