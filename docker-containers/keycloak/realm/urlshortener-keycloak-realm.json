@@ -857,14 +857,15 @@
       "description": "",
       "rootUrl": "http://localhost:8081",
       "adminUrl": "http://localhost:8081",
-      "baseUrl": "http://localhost:8081/",
+      "baseUrl": "http://localhost:8081/v1/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "secret",
       "redirectUris": [
-        "http://localhost:8081/login/oauth2/code/keycloak"
+        "http://localhost:8081/login/oauth2/code/keycloak",
+        "http://localhost:8081/v1/"
       ],
       "webOrigins": [
         "+"
@@ -884,7 +885,7 @@
         "client.secret.creation.time": "1721505129",
         "backchannel.logout.session.required": "true",
         "backchannel.logout.url": "http://host.docker.internal:8081/logout/connect/back-channel/keycloak",
-        "post.logout.redirect.uris": "http://localhost:8081/",
+        "post.logout.redirect.uris": "http://localhost:8081/v1/",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
@@ -1724,14 +1725,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-role-list-mapper",
-            "oidc-address-mapper",
             "saml-user-attribute-mapper",
             "oidc-sha256-pairwise-sub-mapper",
             "oidc-usermodel-property-mapper",
-            "oidc-full-name-mapper",
             "saml-user-property-mapper",
-            "oidc-usermodel-attribute-mapper"
+            "oidc-usermodel-attribute-mapper",
+            "oidc-address-mapper",
+            "saml-role-list-mapper",
+            "oidc-full-name-mapper"
           ]
         }
       },
@@ -1755,14 +1756,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-role-list-mapper",
-            "oidc-full-name-mapper",
-            "saml-user-property-mapper",
             "oidc-sha256-pairwise-sub-mapper",
-            "oidc-address-mapper",
-            "oidc-usermodel-attribute-mapper",
             "oidc-usermodel-property-mapper",
-            "saml-user-attribute-mapper"
+            "oidc-full-name-mapper",
+            "oidc-address-mapper",
+            "saml-user-attribute-mapper",
+            "saml-user-property-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "saml-role-list-mapper"
           ]
         }
       }
