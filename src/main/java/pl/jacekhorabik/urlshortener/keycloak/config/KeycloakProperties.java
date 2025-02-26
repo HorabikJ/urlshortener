@@ -7,7 +7,7 @@ import org.springframework.stereotype.Component;
 @Data
 @Component
 @ConfigurationProperties(prefix = "keycloak-admin-client")
-public class KeycloakProperties {
+class KeycloakProperties {
 
   private String realm;
   private String clientId;

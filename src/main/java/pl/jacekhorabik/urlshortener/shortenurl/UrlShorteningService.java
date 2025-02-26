@@ -20,6 +20,7 @@ class UrlShorteningService {
   private final UrlRepository urlRepository;
 
   @Transactional
+  //  todo change parameter of this method to UrlEntity
   UrlEntity shortenUrl(@NotNull final UrlDTO url) throws DecoderException {
     return shortenUrl(url.url(), StringUtils.EMPTY);
   }

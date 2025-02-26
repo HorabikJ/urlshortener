@@ -30,7 +30,7 @@ class MainPageController {
   @AddUserDataToModel
   ModelAndView mainPage(@NotNull final ModelAndView modelAndView) {
     final UrlDTO requestUrlDTO = new UrlDTO();
-    modelAndView.setViewName(ViewName.MAIN_PAGE.viewName());
+    modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
     modelAndView.addObject("requestUrlDTO", requestUrlDTO);
     return modelAndView;
   }
@@ -47,7 +47,7 @@ class MainPageController {
         new UrlDTO(String.format("http://%s:%s/v1/r/%s", hostIP, nodePort, hash));
     modelAndView.addObject("responseUrlDTO", responseUrlDTO);
     modelAndView.addObject("requestUrlDTO", new UrlDTO());
-    modelAndView.setViewName(ViewName.MAIN_PAGE.viewName());
+    modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
     modelAndView.setStatus(HttpStatus.CREATED);
     return modelAndView;
   }
