@@ -19,5 +19,6 @@ ENV KC_METRICS_ENABLED="true"
 ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 
 #todo do not start keycloak dev in production
+#todo encrypt password in line ""password": "yuvncagklxranszg"," in realm file
 CMD ["start-dev", "--import-realm"]
 
