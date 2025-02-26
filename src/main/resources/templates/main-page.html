@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html th:lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <div th:replace="~{fragments/head-metadata :: meta}"></div>
   <div th:replace="~{fragments/head-metadata :: bootstrap-link}"></div>
@@ -7,19 +7,19 @@
 </head>
 <body>
 <div th:replace="~{fragments/navigation :: navigation}"></div>
-<div class="container text-center">
-  <div class="row">
+<div th:class="container text-center">
+  <div th:class="row">
     <h3>Welcome to the url shortener!</h3>
   </div>
-  <div class="row">
-    <form action="#" th:action="@{/v1/}" th:object="${requestUrlDTO}" method="POST">
+  <div th:class="row">
+    <form th:action="@{/v1/}" th:object="${requestUrlDTO}" th:method="POST">
       <fieldset>
-        <input type="text" th:field="*{url}" placeholder="paste your url here">
-        <input type="submit" name="Shorten!">
+        <input th:type="text" th:field="*{url}" th:placeholder="paste your url here">
+        <input th:type="submit" th:name="Shorten!">
       </fieldset>
     </form>
   </div>
-  <div class="row">
+  <div th:class="row">
     <div th:if="${responseUrlDTO}">
       <p>your link is:
         <!--        todo how to do this link clickable?-->

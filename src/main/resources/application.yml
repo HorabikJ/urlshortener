@@ -4,6 +4,7 @@ server:
 keycloak:
   realm: urlshortener-keycloak-realm
   clientId: urlshortener-keycloak-client
+  secret: ${KEYCLOAK_SECRET:secret}
 
 spring:
   application:
@@ -35,7 +36,7 @@ spring:
             provider: urlshortener-keycloak-provider
             authorization-grant-type: authorization_code
             client-id: ${keycloak.clientId}
-            client-secret: secret
+            client-secret: ${keycloak.secret}
             scope: openid
 management:
   endpoint:
