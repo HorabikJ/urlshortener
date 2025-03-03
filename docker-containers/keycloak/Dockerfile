@@ -1,5 +1,5 @@
 # using below version as in newer version exporting realm via docker exec command does not work
-FROM keycloak/keycloak:25.0.1
+FROM quay.io/keycloak/keycloak:25.0.1
 
 EXPOSE 8080/tcp
 
