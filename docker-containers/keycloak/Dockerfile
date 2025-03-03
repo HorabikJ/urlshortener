@@ -21,5 +21,5 @@ ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 #todo do not start keycloak dev in production
 #todo encrypt password in line ""password": "yuvncagklxranszg"," in realm file
 #CMD ["start-dev", "--import-realm"]
-CMD ["start", "--verbose", "--hostname" ,"localhost", "--import-realm", "--db", "mysql", "--db-username", "root", "--db-password", "root", "--db-url-host", "urlshortener-db-service.urlshortener-dev", "--db-url-port", "3306"]
+CMD ["start", "--verbose", "--hostname" ,"localhost", "--import-realm", "--db", "mysql", "--db-username", "keycloak-admin", "--db-password", "password", "--db-url-host", "urlshortener-db-service.urlshortener-dev", "--db-schema", "keycloak", "--db-url-port", "3306"]
 
