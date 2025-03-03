@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: urlshortener-keycloak-deployment
+  labels:
+    apps: urlshortener
+    layer: keycloak
+  namespace: urlshortener-dev
+spec:
+  template:
+    metadata:
+      name: urlshortener-backend-pod
+      labels:
+        apps: urlshortener
+        layer: keycloak
+    spec:
+      containers:
+        - image: urlshortener-keycloak:latest
+          name: urlshortener-keycloak-container
+          resources:
+            requests:
+              memory: "1Gi"
+              cpu: "1"
+            limits:
+              memory: "2Gi"
+              cpu: "2"
+          ports:
+            - containerPort: 8080
+          imagePullPolicy: IfNotPresent
+  replicas: 1
+  selector:
+    matchLabels:
+      apps: urlshortener
+      layer: keycloak
+  strategy:
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 1
+  
