@@ -20,6 +20,5 @@ ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 
 #todo do not start keycloak dev in production
 #todo encrypt password in line ""password": "yuvncagklxranszg"," in realm file
-#todo try one more time to export realm file with email for admin user in master realm set
 CMD ["start-dev", "--import-realm"]
 
