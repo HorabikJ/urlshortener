@@ -10,28 +10,27 @@ ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 
 #todo do not start keycloak dev in production
 #todo encrypt password in line ""password": "yuvncagklxranszg"," in realm file
-CMD [
-"start",
-#"start-dev",
-"--verbose", 
-"--features", "hostname:v2",
-"--http-port", "8080", 
-"--hostname" , "localhost",
+CMD [ "start", \
+#"start-dev", \
+"--verbose", \
+"--features", "hostname:v2", \
+"--http-port", "8080", \
+"--hostname" , "localhost", \
 #"--hostname-admin", "localhost", as per `./kc.sh start --help` command I am not setting this
-"--hostname-debug", "true",
-"--http-relative-path", "/", 
-"--http-enabled", "true",
+"--hostname-debug", "true", \
+"--http-relative-path", "/", \
+"--http-enabled", "true", \
 # If the server should expose health check endpoints. If enabled, health checks are available at the '/health', '/health/ready' and '/health/live' DEPRECATED. If metrics/health endpoints should be exposed on the main HTTP
-"--health-enabled", "true",
+"--health-enabled", "true", \
 # If the server should expose metrics. If enabled, metrics are available at the '/metrics' endpoint. Default: false.
-"--metrics-enabled", "true",
-"--import-realm", 
-"--db", "mysql", 
-"--db-username", "keycloak-admin", 
-"--db-password", "password", 
-"--db-url-host", "urlshortener-db-service.urlshortener-dev", 
-"--db-schema", "keycloak", 
-"--db-url-port", "3306"
+"--metrics-enabled", "true", \
+"--import-realm", \
+"--db", "mysql", \
+"--db-username", "keycloak-admin", \
+"--db-password", "password", \
+"--db-url-host", "urlshortener-db-service.urlshortener-dev", \
+"--db-schema", "keycloak", \
+"--db-url-port", "3306" \
 ]
 
 
