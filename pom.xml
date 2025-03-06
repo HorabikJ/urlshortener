@@ -105,16 +105,6 @@
             <artifactId>base62</artifactId>
             <version>${io.seruco.encoding.base62.version}</version>
         </dependency>
-        <!--    keycloak       -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-web</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.keycloak</groupId>
-            <artifactId>keycloak-admin-client</artifactId>
-            <version>25.0.1</version>
-        </dependency>
         <!--    annotations    -->
         <dependency>
             <groupId>org.projectlombok</groupId>
