@@ -23,7 +23,7 @@ class MainPageControllerTest {
     this.mockMvc
         .perform(get("/v1/"))
         .andExpect(status().isOk())
-        .andExpect(view().name(ViewName.MAIN_PAGE.viewName()))
+        .andExpect(view().name(ViewName.MAIN_PAGE.toString()))
         .andExpect(model().attributeExists("requestUrlDTO"));
   }
 
@@ -37,7 +37,7 @@ class MainPageControllerTest {
     this.mockMvc
         .perform(post("/v1/").param("url", url))
         .andExpect(status().isCreated())
-        .andExpect(view().name(ViewName.MAIN_PAGE.viewName()))
+        .andExpect(view().name(ViewName.MAIN_PAGE.toString()))
         .andExpect(model().attribute("requestUrlDTO", new UrlDTO()))
         .andExpect(
             model().attribute("responseUrlDTO", new UrlDTO("http://localhost:8080/v1/r/hash123")));

@@ -42,6 +42,6 @@ class RedirectControllerTest {
     mockMvc
         .perform(get("/v1/r/" + hash))
         .andExpect(status().is(HttpStatus.NOT_FOUND.value()))
-        .andExpect(view().name(ViewName.NOT_FOUND.viewName()));
+        .andExpect(view().name(ViewName.NOT_FOUND.toString()));
   }
 }
