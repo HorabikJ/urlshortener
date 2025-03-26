@@ -7,7 +7,7 @@ metadata:
     app: urlshortener
     layer: ingress
   annotations:
-    nginx.ingress.kubernetes.io/sll-redirect: "false"
+    nginx.ingress.kubernetes.io/ssl-redirect: "false"
     nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
   ingressClassName: nginx
