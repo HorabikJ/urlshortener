@@ -40,7 +40,7 @@ spec:
               #             todo consider changing the endpoint to /actuator/health/livenessState
               path: /actuator/health
           imagePullPolicy: IfNotPresent
-  replicas: 2
+  replicas: 1
   selector:
     matchLabels:
       app: urlshortener
