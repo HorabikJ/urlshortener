@@ -30,7 +30,8 @@ class SecurityConfig {
           logout.logoutSuccessHandler(logoutSuccessHandler);
         });
 
-//    todo think hot to authorize k8s probes to hit /actuator/health endpoints when they will be secured
+    //    todo think hot to authorize k8s probes to hit /actuator/health endpoints when they will be
+    // secured
     http.authorizeHttpRequests(
         requests -> {
           requests.requestMatchers("/v1/**", "/actuator/health", "/favicon.ico").permitAll();
