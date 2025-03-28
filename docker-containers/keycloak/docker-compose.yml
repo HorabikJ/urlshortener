@@ -1,3 +1,4 @@
+# this file servs only as a example how to create keycloak Dockerfile, I do not use it
 services:
   keycloak:
     container_name: baeldung-keycloak.openid-provider
