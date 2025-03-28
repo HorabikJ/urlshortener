@@ -10,6 +10,6 @@ spring:
       client:
         provider:
           urlshortener-keycloak-provider:
-            issuer-uri: http://urlshortener-db-service.urlshortener-dev:8080/realms/${keycloak.realm}
+            issuer-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}
 
 nodeport: 30008
