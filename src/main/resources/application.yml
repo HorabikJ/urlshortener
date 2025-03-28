@@ -25,7 +25,7 @@ spring:
     change-log: db/changelog/00_changelog-master.xml
     user: urlshortener-admin
     password: password
-  # todo move bwlow props to local profile?
+  # todo move below props to local profile?
   security:
     oauth2:
       client:
