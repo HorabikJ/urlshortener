@@ -5,6 +5,8 @@ EXPOSE 8080/tcp
 
 ENV KEYCLOAK_ADMIN="admin"
 ENV KEYCLOAK_ADMIN_PASSWORD="admin"
+#ENV KEYCLOAK_FRONTEND_URL="http://urlshortener.keycloak.com/auth"
+#ENV PROXY_ADDRESS_FORWARDING="true"
 
 ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 
