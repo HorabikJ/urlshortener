@@ -1,6 +1,7 @@
 package pl.jacekhorabik.urlshortener.security;
 
 import java.util.Collection;
+import java.util.Objects;
 import java.util.stream.Collectors;
 import lombok.RequiredArgsConstructor;
 import org.jetbrains.annotations.NotNull;
@@ -25,7 +26,8 @@ class AuthoritiesMapper implements GrantedAuthoritiesMapper {
         .map(OidcUserAuthority::getIdToken)
         .map(OidcIdToken::getClaims)
         .map(authoritiesConverter::convert)
-        .flatMap(roles -> roles.stream())
+        .filter(Objects::nonNull)
+        .flatMap(Collection::stream)
         .collect(Collectors.toSet());
   }
 }
