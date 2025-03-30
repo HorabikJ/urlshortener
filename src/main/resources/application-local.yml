@@ -9,3 +9,9 @@ spring:
       hibernate:
         show_sql: true
         format_sql: true
+  security:
+    oauth2:
+      client:
+        provider:
+          urlshortener-keycloak-provider:
+            issuer-uri: http://localhost:8080/realms/${keycloak.realm}

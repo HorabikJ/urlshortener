@@ -7,6 +7,18 @@ spring:
       client:
         provider:
           urlshortener-keycloak-provider:
-            issuer-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}
+            # Skip issuer-uri to avoid Keycloak's automatic discovery
+            # For browser redirects, use the external URL
+            authorization-uri: http://localhost:30009/realms/${keycloak.realm}/protocol/openid-connect/auth
+            # For service-to-service, use the internal URL
+            token-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}/protocol/openid-connect/token
+            jwk-set-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}/protocol/openid-connect/certs
+            user-info-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}/protocol/openid-connect/userinfo
+            user-name-attribute: preferred_username
 
 nodeport: 30008
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG

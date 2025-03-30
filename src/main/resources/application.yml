@@ -29,9 +29,6 @@ spring:
   security:
     oauth2:
       client:
-        provider:
-          urlshortener-keycloak-provider:
-            issuer-uri: http://${KEYCLOAK_HOST:localhost}:${KEYCLOAK_PORT:8080}/realms/${keycloak.realm}
         registration:
           keycloak:
             provider: urlshortener-keycloak-provider
@@ -39,6 +36,8 @@ spring:
             client-id: ${keycloak.clientId}
             client-secret: ${keycloak.secret}
             scope: openid
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+
 management:
   endpoint:
     health:
