@@ -5,26 +5,21 @@ EXPOSE 8080/tcp
 
 ENV KEYCLOAK_ADMIN="admin"
 ENV KEYCLOAK_ADMIN_PASSWORD="admin"
-#ENV KEYCLOAK_FRONTEND_URL="http://urlshortener.keycloak.com/auth"
-#ENV PROXY_ADDRESS_FORWARDING="true"
 
 ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
 
-#todo do not start keycloak dev in production
 #todo encrypt password in line ""password": "yuvncagklxranszg"," in realm file
 CMD [ "start", \
-#"start-dev", \
 "--verbose", \
 "--features", "hostname:v2", \
 "--http-port", "8080", \
+# Use proper hostname instead of "localhost", like ip adress when deployed in production/aws
 "--hostname" , "localhost", \
-#"--hostname-admin", "localhost", as per `./kc.sh start --help` command I am not setting this
+# remove below line in production/aws
 "--hostname-debug", "true", \
 "--http-relative-path", "/", \
 "--http-enabled", "true", \
-# If the server should expose health check endpoints. If enabled, health checks are available at the '/health', '/health/ready' and '/health/live' DEPRECATED. If metrics/health endpoints should be exposed on the main HTTP
 "--health-enabled", "true", \
-# If the server should expose metrics. If enabled, metrics are available at the '/metrics' endpoint. Default: false.
 "--metrics-enabled", "true", \
 "--import-realm", \
 "--db", "mysql", \
