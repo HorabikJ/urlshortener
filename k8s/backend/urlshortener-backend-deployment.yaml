@@ -26,20 +26,6 @@ spec:
               cpu: "2"
           ports:
             - containerPort: 8080
-              #              todo investigate why liveness and readiness probes fail
-              #          readinessProbe:
-              #            httpGet:
-              #              port: 8080
-              #             todo consider changing the endpoint to /actuator/health/readinessState
-              #              path: /actuator/health
-              #            initialDelaySeconds: 15
-              #            periodSeconds: 10
-              #            failureThreshold: 3
-              #          livenessProbe:
-              #            httpGet:
-              #              port: 8080
-              #             todo consider changing the endpoint to /actuator/health/livenessState
-          #              path: /actuator/health
           imagePullPolicy: IfNotPresent
   replicas: 1
   selector:
