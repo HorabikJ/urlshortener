@@ -1,6 +1,9 @@
 server:
   port: 8081
 
+app:
+  url: http://localhost:${server.port}
+
 keycloak:
   k8s-external-url: http://localhost:8080
 

@@ -2,6 +2,9 @@ keycloak:
   k8s-external-url: http://localhost:30009
   k8s-internal-url: http://urlshortener-keycloak-service.urlshortener-dev:8080
 
+app:
+  url: http://localhost:30008
+
 spring:
   datasource:
     url: jdbc:mysql://urlshortener-db-service.urlshortener-dev:3306/urlshortener?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -18,5 +21,3 @@ spring:
             jwk-set-uri: ${keycloak.k8s-internal-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
             user-info-uri: ${keycloak.k8s-internal-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
-
-nodeport: 30008

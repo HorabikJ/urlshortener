@@ -1,6 +1,3 @@
-server:
-  port: 8080
-
 keycloak:
   realm: urlshortener-keycloak-realm
   clientId: urlshortener-keycloak-client

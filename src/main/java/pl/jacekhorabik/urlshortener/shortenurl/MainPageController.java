@@ -20,11 +20,8 @@ class MainPageController {
 
   private final UrlShorteningService urlShorteningService;
 
-  @Value("${nodeport:8081}")
-  private String nodePort;
-
-  @Value("${app.host.ip:localhost}")
-  private String hostIP;
+  @Value("${app.url}")
+  private String appUrl;
 
   @GetMapping("/")
   @AddUserDataToModel
@@ -43,8 +40,7 @@ class MainPageController {
     //    todo implement URL validation, url string has to be a valid url and can not be a domain
     // name of the app
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
-    final UrlDTO responseUrlDTO =
-        new UrlDTO(String.format("http://%s:%s/v1/r/%s", hostIP, nodePort, hash));
+    final UrlDTO responseUrlDTO = new UrlDTO(String.format("%s/v1/r/%s", appUrl, hash));
     modelAndView.addObject("responseUrlDTO", responseUrlDTO);
     modelAndView.addObject("requestUrlDTO", new UrlDTO());
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
