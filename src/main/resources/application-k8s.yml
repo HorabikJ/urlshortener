@@ -1,6 +1,6 @@
 keycloak:
-  k8s-external-url: http://urlshortener-keycloak-service.urlshortener-dev:8080
-  k8s-internal-url: http://localhost:30009
+  k8s-external-url: http://localhost:30009
+  k8s-internal-url: http://urlshortener-keycloak-service.urlshortener-dev:8080
 
 spring:
   datasource:

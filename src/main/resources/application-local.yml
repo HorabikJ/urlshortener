@@ -1,6 +1,9 @@
 server:
   port: 8081
 
+keycloak:
+  k8s-external-url: http://localhost:8080
+
 spring:
   datasource:
     url: jdbc:mysql://127.0.0.1:3306/urlshortener?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -9,4 +12,4 @@ spring:
       client:
         provider:
           urlshortener-keycloak-provider:
-            issuer-uri: http://localhost:8080/realms/${keycloak.realm}
+            issuer-uri: ${keycloak.k8s-external-url}/realms/${keycloak.realm}

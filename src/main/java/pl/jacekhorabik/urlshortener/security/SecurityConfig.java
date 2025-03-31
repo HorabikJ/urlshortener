@@ -1,31 +1,33 @@
 package pl.jacekhorabik.urlshortener.security;
 
 import jakarta.servlet.http.HttpServletResponse;
+import lombok.extern.slf4j.Slf4j;
 import org.jetbrains.annotations.NotNull;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.oauth2.client.registration.ClientRegistrationRepository;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.util.UriComponentsBuilder;
 
 @Configuration
 @EnableWebSecurity
+@Slf4j
 class SecurityConfig {
 
-  // todo add csrf if it is not enabled by default
+  @Value("${keycloak.k8s-external-url}")
+  private String keycloakExternalURL;
+
   @Bean
-  SecurityFilterChain clientSecurityFilterChain(
-      @NotNull HttpSecurity http, ClientRegistrationRepository clientRegistrationRepository)
-      throws Exception {
+  SecurityFilterChain clientSecurityFilterChain(@NotNull HttpSecurity http) throws Exception {
     http.oauth2Login(
         login -> {
           login.defaultSuccessUrl("/v1/", true);
           login.failureHandler(
               (request, response, exception) -> {
-                exception.printStackTrace();
+                log.error("Login failed", exception);
                 response.sendError(
                     HttpServletResponse.SC_UNAUTHORIZED,
                     "Authentication failed: " + exception.getMessage());
@@ -35,12 +37,14 @@ class SecurityConfig {
         logout -> {
           // Use external URL for logout redirects
           String logoutUrl =
-              "http://localhost:30009/realms/urlshortener-keycloak-realm/protocol/openid-connect/logout";
+              String.format(
+                  "%s/realms/urlshortener-keycloak-realm/protocol/openid-connect/logout",
+                  keycloakExternalURL);
 
           logout.logoutSuccessHandler(
               (request, response, authentication) -> {
                 // Ensure this matches exactly what's configured in Keycloak
-                String logoutSuccessRedirectUri = "http://localhost:30008/v1/";
+                String logoutSuccessRedirectUri = String.format("%s/v1/", keycloakExternalURL);
 
                 String logoutRedirectUrl =
                     UriComponentsBuilder.fromUriString(logoutUrl)
