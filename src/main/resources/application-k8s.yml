@@ -1,4 +1,7 @@
-#todo parameterize ports and namespaces in the below link, maybe by helm and env vars?
+keycloak:
+  k8s-external-url: http://urlshortener-keycloak-service.urlshortener-dev:8080
+  k8s-internal-url: http://localhost:30009
+
 spring:
   datasource:
     url: jdbc:mysql://urlshortener-db-service.urlshortener-dev:3306/urlshortener?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
@@ -9,16 +12,11 @@ spring:
           urlshortener-keycloak-provider:
             # Skip issuer-uri to avoid Keycloak's automatic discovery
             # For browser redirects, use the external URL
-            authorization-uri: http://localhost:30009/realms/${keycloak.realm}/protocol/openid-connect/auth
+            authorization-uri: ${keycloak.k8s-external-url}/realms/${keycloak.realm}/protocol/openid-connect/auth
             # For service-to-service, use the internal URL
-            token-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}/protocol/openid-connect/token
-            jwk-set-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}/protocol/openid-connect/certs
-            user-info-uri: http://urlshortener-keycloak-service.urlshortener-dev:8080/realms/${keycloak.realm}/protocol/openid-connect/userinfo
+            token-uri: ${keycloak.k8s-internal-url}/realms/${keycloak.realm}/protocol/openid-connect/token
+            jwk-set-uri: ${keycloak.k8s-internal-url}/realms/${keycloak.realm}/protocol/openid-connect/certs
+            user-info-uri: ${keycloak.k8s-internal-url}/realms/${keycloak.realm}/protocol/openid-connect/userinfo
             user-name-attribute: preferred_username
 
 nodeport: 30008
-
-logging:
-  level:
-    org.springframework.security: DEBUG
-    org.springframework.security.oauth2: DEBUG

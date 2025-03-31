@@ -17,6 +17,8 @@ spring:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
+        show_sql: true
+        format_sql: true
     hibernate:
       ddl-auto: validate
     #   https://stackoverflow.com/questions/30549489/what-is-this-spring-jpa-open-in-view-true-property-in-spring-boot   
@@ -25,7 +27,6 @@ spring:
     change-log: db/changelog/00_changelog-master.xml
     user: urlshortener-admin
     password: password
-  # todo move below props to local profile?
   security:
     oauth2:
       client:
@@ -44,3 +45,8 @@ management:
       show-details: always
       # disable default DataSourceHealthIndicator and use custom CustomDataSourceHealthIndicator implementation
       enabled: false
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    org.springframework.security.oauth2: DEBUG
