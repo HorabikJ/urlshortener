@@ -15,7 +15,7 @@ spec:
         layer: keycloak
     spec:
       containers:
-        - image: urlshortener-keycloak:latest
+        - image: urlshortener-keycloak-k8s:latest
           name: urlshortener-keycloak-container
           resources:
             requests:
