@@ -1,0 +1,14 @@
+root url:
+http://localhost:30008
+
+home url:
+http://localhost:30008/v1/
+
+valid redirect uris:
+http://localhost:30008/login/oauth2/code/keycloak
+http://localhost:30008/login/auth2/code/*
+http://localhost:30008/*
+http://urlshortener-backend-service.urlshortener-dev:8080/*
+
+valid post logout redirect uris:
+http://localhost:30008/v1/*
