@@ -2557,8 +2557,7 @@
     "organizationsEnabled": "false",
     "acr.loa.map": "{}",
     "adminEventsExpiration": "3600",
-    "frontendUrl": "http://localhost:30009",
-    "hostname": "urlshortener-keycloak-service.urlshortener-dev"
+    "frontendUrl": "http://localhost:30009"
   },
   "keycloakVersion": "25.0.1",
   "userManagedAccessAllowed": false,
