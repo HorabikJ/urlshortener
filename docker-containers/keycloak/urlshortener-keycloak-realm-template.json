@@ -874,16 +874,19 @@
       "clientId": "urlshortener-keycloak-client",
       "name": "",
       "description": "",
-      "rootUrl": "http://localhost:8081",
+      "rootUrl": "<APP-BASE-URL>",
       "adminUrl": "",
-      "baseUrl": "http://localhost:8081/v1/",
+      "baseUrl": "<APP-BASE-URL>/v1/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
-      "secret": "secret",
+      "secret": "<URL-SHORTENER-CLIENT-SECRET>",
       "redirectUris": [
-        "http://localhost:8081/login/oauth2/code/keycloak"
+        "<APP-BASE-URL>/login/auth2/code/*",
+        "<KEYCLOAK-INTERNAL-BASE-URL>/*",
+        "<APP-BASE-URL>/login/oauth2/code/keycloak",
+        "<APP-BASE-URL>/*"
       ],
       "webOrigins": [
         "+"
@@ -900,10 +903,10 @@
       "protocol": "openid-connect",
       "attributes": {
         "oidc.ciba.grant.enabled": "false",
-        "client.secret.creation.time": "1721505129",
+        "client.secret.creation.time": "1743691238",
         "backchannel.logout.session.required": "true",
         "backchannel.logout.url": "http://host.docker.internal:8081/logout/connect/back-channel/keycloak",
-        "post.logout.redirect.uris": "http://localhost:8081/v1/",
+        "post.logout.redirect.uris": "<APP-BASE-URL>/v1/*",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
@@ -1584,7 +1587,7 @@
     "strictTransportSecurity": "max-age=31536000; includeSubDomains"
   },
   "smtpServer": {
-    "password": "yuvncagklxranszg",
+    "password": "<GMAIL-APP-PASSWORD>",
     "replyToDisplayName": "url shortener",
     "starttls": "true",
     "auth": "true",
@@ -1756,14 +1759,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
+            "oidc-usermodel-attribute-mapper",
             "oidc-address-mapper",
-            "saml-role-list-mapper",
             "saml-user-property-mapper",
-            "saml-user-attribute-mapper",
             "oidc-usermodel-property-mapper",
             "oidc-full-name-mapper",
-            "oidc-usermodel-attribute-mapper",
-            "oidc-sha256-pairwise-sub-mapper"
+            "oidc-sha256-pairwise-sub-mapper",
+            "saml-user-attribute-mapper",
+            "saml-role-list-mapper"
           ]
         }
       },
@@ -1787,14 +1790,14 @@
         "subComponents": {},
         "config": {
           "allowed-protocol-mapper-types": [
-            "saml-user-property-mapper",
             "saml-user-attribute-mapper",
-            "oidc-usermodel-property-mapper",
-            "oidc-full-name-mapper",
-            "oidc-address-mapper",
-            "oidc-sha256-pairwise-sub-mapper",
             "saml-role-list-mapper",
-            "oidc-usermodel-attribute-mapper"
+            "oidc-address-mapper",
+            "oidc-usermodel-attribute-mapper",
+            "saml-user-property-mapper",
+            "oidc-full-name-mapper",
+            "oidc-sha256-pairwise-sub-mapper",
+            "oidc-usermodel-property-mapper"
           ]
         }
       }
@@ -2554,10 +2557,10 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
+    "frontendUrl": "<KEYCLOAK-EXTERNAL-BASE-URL>",
     "organizationsEnabled": "false",
     "acr.loa.map": "{}",
-    "adminEventsExpiration": "3600",
-    "frontendUrl": ""
+    "adminEventsExpiration": "3600"
   },
   "keycloakVersion": "25.0.1",
   "userManagedAccessAllowed": false,
