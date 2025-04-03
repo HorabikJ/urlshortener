@@ -2554,10 +2554,11 @@
     "oauth2DeviceCodeLifespan": "600",
     "parRequestUriLifespan": "60",
     "clientSessionMaxLifespan": "0",
-    "frontendUrl": "",
     "organizationsEnabled": "false",
     "acr.loa.map": "{}",
-    "adminEventsExpiration": "3600"
+    "adminEventsExpiration": "3600",
+    "frontendUrl": "http://localhost:30009",
+    "hostname": "urlshortener-keycloak-service.urlshortener-dev"
   },
   "keycloakVersion": "25.0.1",
   "userManagedAccessAllowed": false,

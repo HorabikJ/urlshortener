@@ -6,7 +6,7 @@ EXPOSE 8080/tcp
 ENV KEYCLOAK_ADMIN="admin"
 ENV KEYCLOAK_ADMIN_PASSWORD="admin"
 
-ADD ./realm/urlshortener-keycloak-realm.json /opt/keycloak/data/import/
+ADD realm/urlshortener-keycloak-realm-k8s.json /opt/keycloak/data/import/
 
 #todo encrypt password in line ""password": "yuvncagklxranszg"," in realm file
 CMD [ "start", \
