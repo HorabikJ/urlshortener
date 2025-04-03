@@ -19,6 +19,9 @@ class SecurityConfig {
 
   @Value("${keycloak.k8s-external-url}")
   private String keycloakExternalURL;
+  
+  @Value("${app.url}")
+  private String appUrl;
 
   @Bean
   SecurityFilterChain clientSecurityFilterChain(@NotNull HttpSecurity http) throws Exception {
@@ -44,7 +47,7 @@ class SecurityConfig {
           logout.logoutSuccessHandler(
               (request, response, authentication) -> {
                 // Ensure this matches exactly what's configured in Keycloak
-                String logoutSuccessRedirectUri = String.format("%s/v1/", keycloakExternalURL);
+                String logoutSuccessRedirectUri = String.format("%s/v1/", appUrl);
 
                 String logoutRedirectUrl =
                     UriComponentsBuilder.fromUriString(logoutUrl)
