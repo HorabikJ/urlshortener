@@ -19,7 +19,7 @@ class SecurityConfig {
 
   @Value("${keycloak.external-base-url}")
   private String keycloakExternalBaseURL;
-  
+
   @Value("${app.external-base-url}")
   private String appExternalBaseUrl;
 
@@ -42,7 +42,7 @@ class SecurityConfig {
           String logoutUrl =
               String.format(
                   "%s/realms/urlshortener-keycloak-realm/protocol/openid-connect/logout",
-                      keycloakExternalBaseURL);
+                  keycloakExternalBaseURL);
 
           logout.logoutSuccessHandler(
               (request, response, authentication) -> {
