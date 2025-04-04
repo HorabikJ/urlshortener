@@ -20,8 +20,8 @@ class MainPageController {
 
   private final UrlShorteningService urlShorteningService;
 
-  @Value("${app.url}")
-  private String appUrl;
+  @Value("${app.external-base-url}")
+  private String appExternalBaseUrl;
 
   @GetMapping("/")
   @AddUserDataToModel
@@ -40,7 +40,7 @@ class MainPageController {
     //    todo implement URL validation, url string has to be a valid url and can not be a domain
     // name of the app
     final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
-    final UrlDTO responseUrlDTO = new UrlDTO(String.format("%s/v1/r/%s", appUrl, hash));
+    final UrlDTO responseUrlDTO = new UrlDTO(String.format("%s/v1/r/%s", appExternalBaseUrl, hash));
     modelAndView.addObject("responseUrlDTO", responseUrlDTO);
     modelAndView.addObject("requestUrlDTO", new UrlDTO());
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
