@@ -874,19 +874,19 @@
       "clientId": "urlshortener-keycloak-client",
       "name": "",
       "description": "",
-      "rootUrl": "<APP-BASE-URL>",
+      "rootUrl": "<APP-EXTERNAL-BASE-URL>",
       "adminUrl": "",
-      "baseUrl": "<APP-BASE-URL>/v1/",
+      "baseUrl": "<APP-EXTERNAL-BASE-URL>/v1/",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
       "clientAuthenticatorType": "client-secret",
       "secret": "<URL-SHORTENER-CLIENT-SECRET>",
       "redirectUris": [
-        "<APP-BASE-URL>/login/auth2/code/*",
+        "<APP-EXTERNAL-BASE-URL>/login/auth2/code/*",
         "<KEYCLOAK-INTERNAL-BASE-URL>/*",
-        "<APP-BASE-URL>/login/oauth2/code/keycloak",
-        "<APP-BASE-URL>/*"
+        "<APP-EXTERNAL-BASE-URL>/login/oauth2/code/keycloak",
+        "<APP-EXTERNAL-BASE-URL>/*"
       ],
       "webOrigins": [
         "+"
@@ -905,8 +905,8 @@
         "oidc.ciba.grant.enabled": "false",
         "client.secret.creation.time": "1743691238",
         "backchannel.logout.session.required": "true",
-        "backchannel.logout.url": "http://host.docker.internal:8081/logout/connect/back-channel/keycloak",
-        "post.logout.redirect.uris": "<APP-BASE-URL>/v1/*",
+        "backchannel.logout.url": "<APP-INTERNAL-BASE-URL>/logout/connect/back-channel/keycloak",
+        "post.logout.redirect.uris": "<APP-EXTERNAL-BASE-URL>/v1/*",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
