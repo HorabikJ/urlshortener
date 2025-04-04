@@ -17,11 +17,11 @@ import org.springframework.web.util.UriComponentsBuilder;
 @Slf4j
 class SecurityConfig {
 
-  @Value("${keycloak.k8s-external-url}")
-  private String keycloakExternalURL;
+  @Value("${keycloak.external-base-url}")
+  private String keycloakExternalBaseURL;
   
-  @Value("${app.url}")
-  private String appUrl;
+  @Value("${app.external-base-url}")
+  private String appExternalBaseUrl;
 
   @Bean
   SecurityFilterChain clientSecurityFilterChain(@NotNull HttpSecurity http) throws Exception {
@@ -42,12 +42,12 @@ class SecurityConfig {
           String logoutUrl =
               String.format(
                   "%s/realms/urlshortener-keycloak-realm/protocol/openid-connect/logout",
-                  keycloakExternalURL);
+                      keycloakExternalBaseURL);
 
           logout.logoutSuccessHandler(
               (request, response, authentication) -> {
                 // Ensure this matches exactly what's configured in Keycloak
-                String logoutSuccessRedirectUri = String.format("%s/v1/", appUrl);
+                String logoutSuccessRedirectUri = String.format("%s/v1/", appExternalBaseUrl);
 
                 String logoutRedirectUrl =
                     UriComponentsBuilder.fromUriString(logoutUrl)

@@ -2,10 +2,10 @@ server:
   port: 8081
 
 app:
-  url: http://localhost:${server.port}
+  external-base-url: http://localhost:${server.port}
 
 keycloak:
-  k8s-external-url: http://localhost:8080
+  external-base-url: http://localhost:8080
 
 spring:
   datasource:
@@ -15,4 +15,4 @@ spring:
       client:
         provider:
           urlshortener-keycloak-provider:
-            issuer-uri: ${keycloak.k8s-external-url}/realms/${keycloak.realm}
+            issuer-uri: ${keycloak.external-base-url}/realms/${keycloak.realm}
