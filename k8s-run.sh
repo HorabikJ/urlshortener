@@ -3,7 +3,7 @@
 kubectl delete namespace urlshortener-dev
 
 docker image rm urlshortener-keycloak-k8s
-docker build -t urlshortener-keycloak-k8s:latest ./docker-containers/keycloak
+docker build -t urlshortener-keycloak-k8s:latest ./docker-containers/keycloak/k8s/
 
 docker image rm urlshortener-backend
 docker build -t urlshortener-backend:latest .
