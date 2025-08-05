@@ -1,7 +1,7 @@
 version: '3.8'
 
 services:
-  mysql:
+  db-local:
     build: ./docker-containers/mysql/  # Path MySQL Dockerfile directory
     container_name: urlshortener-db-local
     environment:
@@ -15,7 +15,7 @@ services:
       timeout: 20s
       retries: 10
 
-  keycloak:
+  keycloak-local:
     build: ./docker-containers/keycloak/local/  # Path local Keycloak Dockerfile directory
     container_name: urlshortener-keycloak-local
     ports:
@@ -23,10 +23,10 @@ services:
     networks:
       - urlshortener-network
     depends_on:
-      mysql:
+      db-local:
         condition: service_healthy
     environment:
-      - DB_HOST=mysql  # This will override the hardcoded localhost
+      - DB_HOST=db-local  # This will override the hardcoded localhost
 
 networks:
   urlshortener-network:
