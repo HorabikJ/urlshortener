@@ -11,7 +11,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import pl.jacekhorabik.urlshortener.common.viewname.ViewName;
-import pl.jacekhorabik.urlshortener.security.aspects.AddUserDataToModel;
 
 @RequestMapping("/v1")
 @Controller
@@ -24,7 +23,6 @@ class MainPageController {
   private String appExternalBaseUrl;
 
   @GetMapping("/")
-  @AddUserDataToModel
   ModelAndView mainPage(@NotNull final ModelAndView modelAndView) {
     final UrlDTO requestUrlDTO = new UrlDTO();
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
@@ -33,7 +31,6 @@ class MainPageController {
   }
 
   @PostMapping("/")
-  @AddUserDataToModel
   // todo add exception handler
   ModelAndView shortenUrl(final UrlDTO urlDTO, @NotNull final ModelAndView modelAndView)
       throws DecoderException {

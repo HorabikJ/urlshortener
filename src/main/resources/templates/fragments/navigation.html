@@ -7,15 +7,15 @@
 <body>
 <nav th:fragment="navigation">
   <div class="container text-center">
-    <div th:if="${!isAuthenticated}">
+    <div th:unless="${#authentication}">
       <a href="/oauth2/authorization/keycloak">
         <button type="button"
                 class="btn btn-lg btn-primary btn-block">Login
         </button>
       </a>
     </div>
-    <div th:if="${isAuthenticated}">
-      <p>Hi <span th:text="${username}"></span>!</p>
+    <div th:if="${#authentication}">
+      <p>Hi <span th:text="${#authentication.name}"></span>!</p>
       <a href="/logout">
         <button type="button" class="btn btn-lg btn-primary">Logout</button>
       </a>
