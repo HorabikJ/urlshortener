@@ -67,16 +67,12 @@ public class SecurityConfig {
       //    todo think how to authorize k8s probes to hit /actuator/health endpoints when they will be secured
       http.authorizeHttpRequests(
         requests -> {
-          // Role-specific endpoints
           requests.requestMatchers("/admin").hasAuthority("ADMIN");
           requests.requestMatchers("/user").hasAuthority("USER");
-            // Permit access to logout for authenticated users
             requests.requestMatchers("/logout", "/logout/**").authenticated();
-            // Permit access to these endpoints for everyone
             requests
                     .requestMatchers("/v1/**", "/actuator/health", "/favicon.ico", "/login/**")
                     .permitAll();
-          // Deny all other requests
           requests.anyRequest().denyAll();
         });
 
