@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+mkdir -p realm
+
 ./../realm-template/replace-realm-vars.sh \
 --app-external-base-url "http://localhost:8081" \
 --app-internal-base-url "http://localhost:8081" \

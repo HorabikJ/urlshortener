@@ -1,5 +1,7 @@
 #!/bin/bash
 
+mkdir -p realm
+
 ./../realm-template/replace-realm-vars.sh \
 --app-external-base-url "http://56.228.16.205" \
 --app-internal-base-url "http://172.31.21.177" \

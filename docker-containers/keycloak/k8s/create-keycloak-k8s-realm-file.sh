@@ -1,5 +1,7 @@
 #!/bin/zsh
 
+mkdir -p realm
+
 ./../realm-template/replace-realm-vars.sh \
 --app-external-base-url "http://localhost:30008" \
 --app-internal-base-url "http://urlshortener-backend-service.urlshortener-dev:8080" \
