@@ -15,7 +15,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @WebMvcTest(TestController.class)
 @Import({SecurityConfig.class})
-@ActiveProfiles({"local"})
+@ActiveProfiles({"test"})
 class TestControllerTest {
 
     @Autowired

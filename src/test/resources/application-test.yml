@@ -1,0 +1,74 @@
+# Test configuration that overrides main application.yml
+keycloak:
+  realm: test-realm
+  clientId: test-client
+  clientSecret: test-secret
+  external-base-url: http://localhost:8080
+
+app:
+  external-base-url: http://localhost:3000
+
+spring:
+  application:
+    name: urlshortener
+  
+  # Disable database for unit tests
+  datasource:
+    url: jdbc:h2:mem:testdb
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: ""
+  
+  jpa:
+    database: h2
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        show_sql: true
+        format_sql: true
+    hibernate:
+      ddl-auto: create-drop
+    open-in-view: false
+  
+  # Disable Liquibase for unit tests
+  liquibase:
+    enabled: false
+  
+  security:
+    oauth2:
+      client:
+        registration:
+          keycloak:
+            provider: urlshortener-keycloak-provider
+            authorization-grant-type: authorization_code
+            client-id: ${keycloak.clientId}
+            client-secret: ${keycloak.clientSecret}
+            scope: openid
+            redirect-uri: "{baseUrl}/login/oauth2/code/{registrationId}"
+        provider:
+          urlshortener-keycloak-provider:
+            # Remove issuer-uri and provide all endpoints explicitly
+            authorization-uri: http://localhost:8080/realms/test-realm/protocol/openid-connect/auth
+            token-uri: http://localhost:8080/realms/test-realm/protocol/openid-connect/token
+            user-info-uri: http://localhost:8080/realms/test-realm/protocol/openid-connect/userinfo
+            jwk-set-uri: http://localhost:8080/realms/test-realm/protocol/openid-connect/certs
+            user-name-attribute: preferred_username
+            # These are the minimal required endpoints - no issuer-uri needed
+
+# Disable health endpoint for tests
+management:
+  endpoint:
+    health:
+      show-details: never
+      enabled: false
+  endpoints:
+    enabled-by-default: false
+
+# Reduce logging noise in tests
+logging:
+  level:
+    org.springframework.security: WARN
+    org.springframework.security.oauth2: WARN
+    org.liquibase: WARN
+    org.hibernate: WARN
+    com.zaxxer.hikari: WARN
