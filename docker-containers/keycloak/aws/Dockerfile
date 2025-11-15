@@ -20,6 +20,7 @@ CMD [ "start", \
 "--http-enabled", "true", \
 "--health-enabled", "true", \
 "--metrics-enabled", "true", \
+"--log-level", "debug", \
 "--import-realm", \
 "--db", "mysql", \
 "--db-username", "keycloak-admin", \
