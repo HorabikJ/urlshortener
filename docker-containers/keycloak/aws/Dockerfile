@@ -24,7 +24,7 @@ CMD [ "start", \
 "--db", "mysql", \
 "--db-username", "keycloak-admin", \
 "--db-password", "password", \
-"--db-url-host", "<configure>", \
+"--db-url-host", "172.31.23.21", \
 "--db-schema", "keycloak", \
 "--db-url-port", "3306" \
 ]
