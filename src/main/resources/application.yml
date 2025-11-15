@@ -3,6 +3,9 @@ keycloak:
   clientId: urlshortener-keycloak-client
   clientSecret: qQUimZxrmnop3ug6UqctmCKgkqPVIhV9
 
+db:
+  schema-name: urlshortener
+
 spring:
   application:
     name: urlshortener

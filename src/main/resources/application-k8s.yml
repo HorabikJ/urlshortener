@@ -1,13 +1,25 @@
+namespace-name: urlshortener-dev
+
 keycloak:
-  external-base-url: http://localhost:30009
-  internal-base-url: http://urlshortener-keycloak-service.urlshortener-dev:8080
+  service-name: urlshortener-keycloak-service
+  external-port: 30009
+  external-base-url: http://localhost:${keycloak.external-port}
+  internal-port: 8080
+  internal-base-url: http://${keycloak.service-name}.${namespace-name}:${keycloak.internal-port}
 
 app:
-  external-base-url: http://localhost:30008
+  service-name: urlshortener-app-service
+  external-port: 30008
+  external-base-url: http://localhost:${app.external-port}
+
+db:
+  service-name: urlshortener-db-service
+  internal-port: 3306
+  internal-base-url: jdbc:mysql://${db.service-name}.${namespace-name}:${db.internal-port}
 
 spring:
   datasource:
-    url: jdbc:mysql://urlshortener-db-service.urlshortener-dev:3306/urlshortener?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
+    url: ${db.internal-base-url}/${db.schema-name}?useUnicode=true&characterEncoding=UTF-8&serverTimezone=UTC
   security:
     oauth2:
       client:
