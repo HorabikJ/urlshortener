@@ -15,8 +15,9 @@ spring:
   jpa:
     database: mysql
     properties:
-      hibernate:
-        dialect: org.hibernate.dialect.MySQLDialect
+      #   application logs tell that setting this property explicite is deprecated   
+      #      hibernate:
+      #        dialect: org.hibernate.dialect.MySQLDialect
         show_sql: true
         format_sql: true
     hibernate:
