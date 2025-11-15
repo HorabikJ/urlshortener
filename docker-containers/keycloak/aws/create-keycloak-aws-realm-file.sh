@@ -1,4 +1,4 @@
-#!/bin/zsh
+#!/bin/bash
 
 ./../realm-template/replace-realm-vars.sh \
 --app-external-base-url "http://56.228.16.205" \
