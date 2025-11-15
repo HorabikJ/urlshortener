@@ -71,12 +71,23 @@ rm -f ./realm/*.json
 cp ./../realm-template/urlshortener-keycloak-realm-template.json ./realm/urlshortener-keycloak-realm.json
 
 # this empty '' in below sed commands is applicable only for macOS, remove it in linux
-sed -i '' "s|<APP-EXTERNAL-BASE-URL>|$appExternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
-sed -i '' "s|<APP-INTERNAL-BASE-URL>|$appInternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
-sed -i '' "s|<KEYCLOAK-INTERNAL-BASE-URL>|$keycloakInternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
-sed -i '' "s|<KEYCLOAK-EXTERNAL-BASE-URL>|$keycloakExternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
-sed -i '' "s|<URL-SHORTENER-CLIENT-SECRET>|$urlshortenerClientSecret|g" ./realm/urlshortener-keycloak-realm.json
-sed -i '' "s|<GMAIL-APP-PASSWORD>|$gmailAppPassword|g" ./realm/urlshortener-keycloak-realm.json
+if [[ $(uname) = "Linux" ]]; then
+  # sed linux version
+  sed -i "s|<APP-EXTERNAL-BASE-URL>|$appExternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i "s|<APP-INTERNAL-BASE-URL>|$appInternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i "s|<KEYCLOAK-INTERNAL-BASE-URL>|$keycloakInternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i "s|<KEYCLOAK-EXTERNAL-BASE-URL>|$keycloakExternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i "s|<URL-SHORTENER-CLIENT-SECRET>|$urlshortenerClientSecret|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i "s|<GMAIL-APP-PASSWORD>|$gmailAppPassword|g" ./realm/urlshortener-keycloak-realm.json
+else 
+  # sed macOS version with empty ''
+  sed -i '' "s|<APP-EXTERNAL-BASE-URL>|$appExternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i '' "s|<APP-INTERNAL-BASE-URL>|$appInternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i '' "s|<KEYCLOAK-INTERNAL-BASE-URL>|$keycloakInternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i '' "s|<KEYCLOAK-EXTERNAL-BASE-URL>|$keycloakExternalBaseUrl|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i '' "s|<URL-SHORTENER-CLIENT-SECRET>|$urlshortenerClientSecret|g" ./realm/urlshortener-keycloak-realm.json
+  sed -i '' "s|<GMAIL-APP-PASSWORD>|$gmailAppPassword|g" ./realm/urlshortener-keycloak-realm.json
+fi
 
 echo "Configuration completed successfully"
 exit 0
