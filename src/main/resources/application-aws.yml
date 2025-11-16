@@ -3,17 +3,17 @@ server:
 
 keycloak:
   external-port: 80
-  external-base-url: http://16.16.65.83:${keycloak.external-port}
+  external-base-url: http://16.16.255.34:${keycloak.external-port}
   internal-port: 80
-  internal-base-url: http://172.31.19.242:${keycloak.internal-port}
+  internal-base-url: http://172.31.14.104:${keycloak.internal-port}
 
 app:
   external-port: ${server.port}
-  external-base-url: http://56.228.16.205:${app.external-port}
+  external-base-url: http://13.51.249.172:${app.external-port}
 
 db:
   internal-port: 3306
-  internal-base-url: jdbc:mysql://172.31.23.21:${db.internal-port}
+  internal-base-url: jdbc:mysql://172.31.2.136:${db.internal-port}
 
 spring:
   datasource:
