@@ -38,5 +38,6 @@ sudo -u ec2-user sed -i 's/^plugins=(.*)$/plugins=(git zsh-autosuggestions zsh-s
 # apply all the changes made in /home/ec2-user/.zshrc 
 source /home/ec2-user/.zshrc
 
+# do need below 2 lines if we are using Docker to ru the app
 # cd ~/code/urlshortener/ || exit
 # mvn dependency:resolve
