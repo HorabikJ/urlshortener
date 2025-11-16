@@ -1,4 +1,4 @@
-# this file is for the purpose of local development. Start keycloak & db services by running 'docker compose up -d'
+# This file is for the purpose of local development. Start keycloak & db services by running 'docker compose up -d'
 # and the urlshortener app from intellij.
 
 version: '3.8'

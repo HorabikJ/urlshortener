@@ -12,8 +12,8 @@ CMD [ "start", \
 "--verbose", \
 "--features", "hostname:v2", \
 "--http-port", "80", \
-# Use proper hostname instead of `localhost`, like public ip adress when deployed in production/aws
-"--hostname" , "16.16.65.83", \
+# Use proper hostname instead of `localhost`. Public ip adress when deployed in production/aws.
+"--hostname" , "16.16.255.34", \
 # With the below set to true, Keycloak will only accept requests where the Host header matches `hostname` value from 
 # above. When it is false, Keycloak will not check the Host header in the request.
 "--hostname-strict", "false", \
@@ -27,7 +27,7 @@ CMD [ "start", \
 "--db", "mysql", \
 "--db-username", "keycloak-admin", \
 "--db-password", "password", \
-"--db-url-host", "172.31.23.21", \
+"--db-url-host", "172.31.2.136", \
 "--db-schema", "keycloak", \
 "--db-url-port", "3306" \
 ]
