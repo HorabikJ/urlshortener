@@ -13,7 +13,8 @@ CMD [ "start", \
 "--features", "hostname:v2", \
 "--http-port", "80", \
 # Use proper hostname instead of "localhost", like ip adress when deployed in production/aws
-"--hostname" , "13.61.1.70", \
+#"--hostname" , "13.61.1.70", \
+"--hostname" , "localhost", \
 # remove below line in production/aws
 "--hostname-debug", "true", \
 "--http-relative-path", "/", \
