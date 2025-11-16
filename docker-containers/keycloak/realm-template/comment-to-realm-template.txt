@@ -1,0 +1,5 @@
+For the purpose of keycloak running on aws over http, the below line in realm:
+`"sslRequired": "external",`
+needs to be changed to:
+`"sslRequired": "none",`
+When enabling https in aws, please change it back.

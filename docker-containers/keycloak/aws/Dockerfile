@@ -17,8 +17,6 @@ CMD [ "start", \
 # With the below set to true, Keycloak will only accept requests where the Host header matches `hostname` value from 
 # above. When it is false, Keycloak will not check the Host header in the request.
 "--hostname-strict", "false", \
-# Disables the HTTPS requirement
-"--hostname-strict-https", "false", \
 # remove below line in production/aws
 "--hostname-debug", "true", \
 "--http-relative-path", "/", \
