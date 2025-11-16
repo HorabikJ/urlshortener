@@ -2,14 +2,14 @@ server:
   port: 80
 
 keycloak:
-  external-port: 80
-  external-base-url: http://16.16.255.34:${keycloak.external-port}
-  internal-port: 80
-  internal-base-url: http://172.31.14.104:${keycloak.internal-port}
+  external-port: 80 # do not need this in aws as HTTP IP addresses works without port part 
+  external-base-url: http://16.16.255.34
+  internal-port: 80 # do not need this in aws as HTTP IP addresses works without port part
+  internal-base-url: http://172.31.14.104
 
 app:
-  external-port: ${server.port}
-  external-base-url: http://13.51.249.172:${app.external-port}
+  external-port: ${server.port} # do not need this in aws as HTTP IP addresses works without port part
+  external-base-url: http://13.51.249.172
 
 db:
   internal-port: 3306
