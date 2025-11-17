@@ -1,6 +1,7 @@
 package pl.jacekhorabik.urlshortener.shortenurl;
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
@@ -10,8 +11,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import pl.jacekhorabik.urlshortener.common.security.UserData;
 import pl.jacekhorabik.urlshortener.common.viewname.ViewName;
+import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 
+@Slf4j
 @RequestMapping("/v1")
 @Controller
 @RequiredArgsConstructor
@@ -23,7 +27,8 @@ class MainPageController {
   private String appExternalBaseUrl;
 
   @GetMapping("/")
-  ModelAndView mainPage(@NotNull final ModelAndView modelAndView) {
+  @PopulateUserData
+  ModelAndView mainPage(@NotNull final ModelAndView modelAndView, final UserData userData) {
     final UrlDTO requestUrlDTO = new UrlDTO();
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
     modelAndView.addObject("requestUrlDTO", requestUrlDTO);

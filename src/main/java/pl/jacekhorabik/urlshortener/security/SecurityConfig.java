@@ -16,7 +16,7 @@ import pl.jacekhorabik.urlshortener.common.security.UserRole;
 @Configuration
 @EnableWebSecurity
 @Slf4j
-public class SecurityConfig {
+class SecurityConfig {
 
   @Value("${keycloak.external-base-url}")
   private String keycloakExternalBaseURL;
