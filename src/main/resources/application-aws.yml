@@ -23,7 +23,7 @@ spring:
       client:
         provider:
           urlshortener-keycloak-provider:
-            # Skip issuer-uri to avoid Keycloak's automatic discovery
+            # Skip `issuer-uri` to avoid Keycloak's automatic discovery
             # For browser redirects, use the external URL
             authorization-uri: ${keycloak.external-base-url}/realms/${keycloak.realm}/protocol/openid-connect/auth
             # For service-to-service, use the internal URL
