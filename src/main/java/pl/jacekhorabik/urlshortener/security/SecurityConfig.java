@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.util.UriComponentsBuilder;
+import pl.jacekhorabik.urlshortener.common.security.UserRole;
 
 @Configuration
 @EnableWebSecurity
@@ -67,8 +68,8 @@ public class SecurityConfig {
       //    todo think how to authorize k8s probes to hit /actuator/health endpoints when they will be secured
       http.authorizeHttpRequests(
         requests -> {
-          requests.requestMatchers("/admin").hasAuthority("ADMIN");
-          requests.requestMatchers("/user").hasAuthority("USER");
+            requests.requestMatchers("/admin").hasAuthority(UserRole.ADMIN.toString());
+            requests.requestMatchers("/user").hasAuthority(UserRole.USER.toString());
             requests.requestMatchers("/logout", "/logout/**").authenticated();
             requests
                     .requestMatchers("/v1/**", "/actuator/health", "/favicon.ico", "/login/**")

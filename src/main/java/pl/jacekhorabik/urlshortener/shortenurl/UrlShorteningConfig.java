@@ -11,4 +11,5 @@ class UrlShorteningConfig {
   Base62 base62() {
     return Base62.createInstance();
   }
+  
 }
