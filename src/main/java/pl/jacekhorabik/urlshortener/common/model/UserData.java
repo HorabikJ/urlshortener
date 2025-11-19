@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.common.security;
+package pl.jacekhorabik.urlshortener.common.model;
 
 import lombok.Data;
 

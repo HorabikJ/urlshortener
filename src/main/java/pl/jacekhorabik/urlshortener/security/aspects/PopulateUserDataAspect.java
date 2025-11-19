@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
-import pl.jacekhorabik.urlshortener.common.security.UserData;
+import pl.jacekhorabik.urlshortener.common.model.UserData;
 
 @Aspect
 @Component
@@ -25,7 +25,7 @@ class PopulateUserDataAspect {
    */
   @Around(
       "execution(@pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData "
-          + "* *.*(..,pl.jacekhorabik.urlshortener.common.security.UserData,..))")
+          + "* *.*(..,pl.jacekhorabik.urlshortener.common.model.UserData,..))")
   Object populateUserDataFromAuthentication(ProceedingJoinPoint joinPoint) throws Throwable {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
