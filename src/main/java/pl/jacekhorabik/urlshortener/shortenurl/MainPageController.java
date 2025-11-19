@@ -32,9 +32,15 @@ class MainPageController {
   @GetMapping("/")
   @PopulateUserData
   ModelAndView mainPage(final ModelAndView modelAndView, final UserData userData) {
+    final HashMap<String, Object> models = new HashMap<>();
     final UrlDTO requestUrlDTO = new UrlDTO();
+
+    addUserUrlsToModel(userData, models);
+    models.put(AttributeName.REQUEST_URL_DTO.toString(), requestUrlDTO);
+
+    modelAndView.addAllObjects(models);
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
-    modelAndView.addObject(AttributeName.REQUEST_URL_DTO.toString(), requestUrlDTO);
+    
     return modelAndView;
   }
 
@@ -46,17 +52,11 @@ class MainPageController {
       throws DecoderException {
     //    todo implement URL validation, url string has to be a valid url and can not be a domain
     // name of the app
+    final Map<String, Object> models = new HashMap<>();
     final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
     final UrlDTO responseUrlDTO = new UrlDTO(constructRedirectUrl(hash));
-    final Map<String, Object> models = new HashMap<>();
 
-    if (userData.isAuthenticated()) {
-      final List<UserUrlDTO> userUrls =
-          urlShorteningService.findUrlsByUserId(userData.getUserId()).stream()
-              .map(entity -> new UserUrlDTO(entity.getUrl(), constructRedirectUrl(hash)))
-              .toList();
-      models.put(AttributeName.USER_URL_DTO.toString(), userUrls);
-    }
+    addUserUrlsToModel(userData, models);
     models.put(AttributeName.RESPONSE_URL_DTO.toString(), responseUrlDTO);
     models.put(AttributeName.REQUEST_URL_DTO.toString(), new UrlDTO());
 
@@ -67,7 +67,19 @@ class MainPageController {
     return modelAndView;
   }
 
+  private void addUserUrlsToModel(final UserData userData, final Map<String, Object> models) {
+    if (userData.isAuthenticated()) {
+      final List<UserUrlDTO> userUrls =
+          urlShorteningService.findUrlsByUserId(userData.getUserId()).stream()
+              .map(
+                  entity -> new UserUrlDTO(constructRedirectUrl(entity.getHash()), entity.getUrl()))
+              .toList();
+      models.put(AttributeName.USER_URLS_DTO.toString(), userUrls);
+    }
+  }
+
   private String constructRedirectUrl(String hash) {
     return appExternalBaseUrl + "/v1/r/" + hash;
   }
+  
 }

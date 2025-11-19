@@ -29,6 +29,27 @@
       </p>
     </div>
   </div>
+  <div class="row">
+    <div th:if="${userUrlsDTO}">
+      <table>
+        <thead>
+        <tr>
+          <th> shorten</th>
+          <th> original</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:if="${userUrlsDTO.empty}">
+          <td colspan="2"> No links available</td>
+        </tr>
+        <tr th:each="url : ${userUrlsDTO}">
+          <td><span th:text="${url.shorten}"> shorten </span></td>
+          <td><span th:text="${url.original}"> original </span></td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
 <div th:replace="~{fragments/bootstrap-script :: bootstrap-script}"></div>
 </body>

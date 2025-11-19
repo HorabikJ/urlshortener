@@ -1,3 +1,3 @@
 package pl.jacekhorabik.urlshortener.shortenurl;
 
-record UserUrlDTO(String genuineUrl, String shortenUrl) {}
+record UserUrlDTO(String shorten, String original) {}
