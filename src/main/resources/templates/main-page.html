@@ -43,8 +43,8 @@
           <td colspan="2"> No links available</td>
         </tr>
         <tr th:each="url : ${userUrlsDTO}">
-          <td><span th:text="${url.shorten}"> shorten </span></td>
-          <td><span th:text="${url.original}"> original </span></td>
+          <td><a th:href="${url.shorten}" th:text="${url.shorten}"></a></td>
+          <td><a th:href="${url.original}" th:text="${url.original}"></a></td>
         </tr>
         </tbody>
       </table>
