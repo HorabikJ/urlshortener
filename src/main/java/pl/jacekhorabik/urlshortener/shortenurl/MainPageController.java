@@ -28,20 +28,25 @@ class MainPageController {
 
   @GetMapping("/")
   @PopulateUserData
-  ModelAndView mainPage(@NotNull final ModelAndView modelAndView, final UserData userData) {
+  ModelAndView mainPage(
+      @NotNull final ModelAndView modelAndView, @NotNull final UserData userData) {
     final UrlDTO requestUrlDTO = new UrlDTO();
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
     modelAndView.addObject("requestUrlDTO", requestUrlDTO);
     return modelAndView;
   }
 
-  @PostMapping("/")
   // todo add exception handler
-  ModelAndView shortenUrl(final UrlDTO urlDTO, @NotNull final ModelAndView modelAndView)
+  @PostMapping("/")
+  @PopulateUserData
+  ModelAndView shortenUrl(
+      @NotNull final UrlDTO urlDTO,
+      @NotNull final ModelAndView modelAndView,
+      @NotNull final UserData userData)
       throws DecoderException {
     //    todo implement URL validation, url string has to be a valid url and can not be a domain
     // name of the app
-    final String hash = urlShorteningService.shortenUrl(urlDTO).getHash();
+    final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
     final UrlDTO responseUrlDTO = new UrlDTO(String.format("%s/v1/r/%s", appExternalBaseUrl, hash));
     modelAndView.addObject("responseUrlDTO", responseUrlDTO);
     modelAndView.addObject("requestUrlDTO", new UrlDTO());
@@ -49,4 +54,5 @@ class MainPageController {
     modelAndView.setStatus(HttpStatus.CREATED);
     return modelAndView;
   }
+  
 }

@@ -11,32 +11,41 @@ import org.apache.commons.lang3.StringUtils;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import pl.jacekhorabik.urlshortener.common.model.UserData;
 
 @RequiredArgsConstructor
 @Service
 class UrlShorteningService {
+
+  private static final int HASH_LENGTH = 7;
 
   private final Base62 base62;
   private final UrlRepository urlRepository;
 
   @Transactional
   //  todo change parameter of this method to UrlEntity
-  UrlEntity shortenUrl(@NotNull final UrlDTO url) throws DecoderException {
-    return shortenUrl(url.url(), StringUtils.EMPTY);
+  UrlEntity shortenUrl(@NotNull final UrlDTO url, @NotNull final UserData userData)
+      throws DecoderException {
+    return shortenUrl(url.url(), StringUtils.EMPTY, userData);
   }
 
-  private UrlEntity shortenUrl(@NotNull final String url, final String hashCollisionProtector)
+  private UrlEntity shortenUrl(
+      @NotNull final String url,
+      @NotNull final String hashCollisionProtector,
+      @NotNull final UserData userData)
       throws DecoderException {
     final String urlForHashing = url.concat(hashCollisionProtector);
     final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);
     final byte[] urlHexadecimalBytes = Hex.decodeHex(urlSha1Hash);
     final String urlBase62Encoded = new String(base62.encode(urlHexadecimalBytes));
-    final String urlBase62Substring = urlBase62Encoded.substring(0, 7);
+    final String urlBase62Substring = urlBase62Encoded.substring(0, HASH_LENGTH);
     final Optional<UrlEntity> urlEntity = urlRepository.findUrlEntityByHash(urlBase62Substring);
     if (urlEntity.isPresent()) {
-      return shortenUrl(url, UUID.randomUUID().toString());
+      return shortenUrl(url, UUID.randomUUID().toString(), userData);
     } else {
-      return urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url));
+      return userData.isAuthenticated()
+          ? urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url, userData.getUserId()))
+          : urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url));
     }
   }
 

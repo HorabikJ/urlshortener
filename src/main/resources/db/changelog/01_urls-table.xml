@@ -12,6 +12,9 @@
             <column name="url" type="varchar(10000)">
                 <constraints nullable="false"/>
             </column>
+            <column name="user_id" type="varchar(100)">
+                <constraints nullable="true"/>
+            </column>
             <column name="created_at" type="timestamp(3)" defaultValueComputed="CURRENT_TIMESTAMP(3)">
                 <constraints nullable="false"/>
             </column>
