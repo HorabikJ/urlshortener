@@ -1,8 +1,9 @@
-package pl.jacekhorabik.urlshortener.common.viewname;
+package pl.jacekhorabik.urlshortener.common.view;
 
 public enum ViewName {
   MAIN_PAGE("main-page"),
-  NOT_FOUND("not-found");
+  NOT_FOUND("not-found"),
+  REDIRECT("redirect:");
 
   private final String viewName;
 

@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.jacekhorabik.urlshortener.common.viewname.ViewName;
+import pl.jacekhorabik.urlshortener.common.view.ViewName;
 
 @Controller
 @RequestMapping("/v1")
@@ -24,7 +24,7 @@ class RedirectController {
         .map(
             url -> {
               modelAndView.setStatus(HttpStatus.FOUND);
-              modelAndView.setViewName("redirect:" + url);
+              modelAndView.setViewName(ViewName.REDIRECT.toString() + url);
               return modelAndView;
             })
         .orElseGet(

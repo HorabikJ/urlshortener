@@ -2,7 +2,6 @@ package pl.jacekhorabik.urlshortener.security;
 
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.extern.slf4j.Slf4j;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -25,7 +24,7 @@ class SecurityConfig {
   private String appExternalBaseUrl;
 
   @Bean
-  SecurityFilterChain clientSecurityFilterChain(@NotNull HttpSecurity http) throws Exception {
+  SecurityFilterChain clientSecurityFilterChain(HttpSecurity http) throws Exception {
     http.oauth2Login(
         login -> {
           login.defaultSuccessUrl("/v1/", true);

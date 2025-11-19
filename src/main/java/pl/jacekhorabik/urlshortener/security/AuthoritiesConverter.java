@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.core.convert.converter.Converter;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
@@ -14,7 +13,7 @@ import org.springframework.stereotype.Component;
 class AuthoritiesConverter implements Converter<Map<String, Object>, Collection<GrantedAuthority>> {
 
   @Override
-  public Collection<GrantedAuthority> convert(@NotNull final Map<String, Object> claims) {
+  public Collection<GrantedAuthority> convert(final Map<String, Object> claims) {
     final Optional<Map<String, Object>> realmAccess =
         Optional.ofNullable((Map<String, Object>) claims.get("realm_access"));
     final Optional<List<String>> roles =

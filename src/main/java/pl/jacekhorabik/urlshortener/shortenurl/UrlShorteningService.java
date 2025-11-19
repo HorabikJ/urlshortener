@@ -1,6 +1,7 @@
 package pl.jacekhorabik.urlshortener.shortenurl;
 
 import io.seruco.encoding.base62.Base62;
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -8,7 +9,6 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.NotNull;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jacekhorabik.urlshortener.common.model.UserData;
@@ -24,15 +24,12 @@ class UrlShorteningService {
 
   @Transactional
   //  todo change parameter of this method to UrlEntity
-  UrlEntity shortenUrl(@NotNull final UrlDTO url, @NotNull final UserData userData)
-      throws DecoderException {
+  UrlEntity shortenUrl(final UrlDTO url, final UserData userData) throws DecoderException {
     return shortenUrl(url.url(), StringUtils.EMPTY, userData);
   }
 
   private UrlEntity shortenUrl(
-      @NotNull final String url,
-      @NotNull final String hashCollisionProtector,
-      @NotNull final UserData userData)
+      final String url, final String hashCollisionProtector, final UserData userData)
       throws DecoderException {
     final String urlForHashing = url.concat(hashCollisionProtector);
     final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);
@@ -51,5 +48,9 @@ class UrlShorteningService {
 
   Optional<UrlEntity> findUrlByHash(final String hash) {
     return urlRepository.findUrlEntityByHash(hash);
+  }
+
+  List<UrlEntity> findUrlsByUserId(final String userId) {
+    return urlRepository.findUrlEntityByUserId(userId);
   }
 }

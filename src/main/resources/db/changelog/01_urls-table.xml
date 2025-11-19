@@ -12,6 +12,7 @@
             <column name="url" type="varchar(10000)">
                 <constraints nullable="false"/>
             </column>
+            <!--            add index on this column-->
             <column name="user_id" type="varchar(100)">
                 <constraints nullable="true"/>
             </column>
