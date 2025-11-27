@@ -15,5 +15,4 @@ public enum ViewName {
   public String toString() {
     return viewName;
   }
-  
 }
