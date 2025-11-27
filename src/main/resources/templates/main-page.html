@@ -51,7 +51,7 @@
             <a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a>
           </td>
           <td>
-            <form th:action="@{/v1/deleteUrl}" method="post">
+            <form th:action="@{/v1/url/delete}" method="post">
               <input type="hidden" name="hash" th:value="${url.hash}"/>
               <input type="submit" value="Delete" class="btn btn-danger"/>
             </form>

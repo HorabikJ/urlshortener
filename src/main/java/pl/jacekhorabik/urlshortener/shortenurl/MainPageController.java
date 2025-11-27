@@ -67,22 +67,19 @@ class MainPageController {
     return modelAndView;
   }
 
-  @PostMapping("/deleteUrl")
+  @PostMapping("/url/delete")
   @PopulateUserData
   ModelAndView deleteUrl(
       @RequestParam final String hash, final ModelAndView modelAndView, final UserData userData) {
     final Map<String, Object> models = new HashMap<>();
 
-    if (userData.isAuthenticated()) {
-      System.out.println(hash);
-    }
+    urlShorteningService.deleteUserUrlByHash(hash, userData);
 
     addUserUrlsToModel(userData, models);
     models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
 
     modelAndView.addAllObjects(models);
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
-    modelAndView.setStatus(HttpStatus.NO_CONTENT);
 
     return modelAndView;
   }

@@ -28,6 +28,22 @@ class UrlShorteningService {
     return shortenUrl(url.url(), StringUtils.EMPTY, userData);
   }
 
+  @Transactional
+  void deleteUserUrlByHash(final String hash, final UserData userData) {
+    if (userData.isAuthenticated()
+        && urlRepository.existsByHashAndUserId(hash, userData.getUserId())) {
+      urlRepository.deleteUrlEntityByHash(hash);
+    }
+  }
+
+  Optional<UrlEntity> findUrlByHash(final String hash) {
+    return urlRepository.findUrlEntityByHash(hash);
+  }
+
+  List<UrlEntity> findUrlsByUserId(final String userId) {
+    return urlRepository.findUrlEntityByUserId(userId);
+  }
+
   private UrlEntity shortenUrl(
       final String url, final String hashCollisionProtector, final UserData userData)
       throws DecoderException {
@@ -44,13 +60,5 @@ class UrlShorteningService {
           ? urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url, userData.getUserId()))
           : urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url));
     }
-  }
-
-  Optional<UrlEntity> findUrlByHash(final String hash) {
-    return urlRepository.findUrlEntityByHash(hash);
-  }
-
-  List<UrlEntity> findUrlsByUserId(final String userId) {
-    return urlRepository.findUrlEntityByUserId(userId);
   }
 }

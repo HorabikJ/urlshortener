@@ -9,4 +9,8 @@ interface UrlRepository extends JpaRepository<UrlEntity, String> {
   Optional<UrlEntity> findUrlEntityByHash(String hash);
 
   List<UrlEntity> findUrlEntityByUserId(String userId);
+
+  void deleteUrlEntityByHash(String hash);
+
+  boolean existsByHashAndUserId(String hash, String userId);
 }
