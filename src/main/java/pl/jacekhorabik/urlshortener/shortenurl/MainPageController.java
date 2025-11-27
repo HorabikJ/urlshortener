@@ -1,5 +1,7 @@
 package pl.jacekhorabik.urlshortener.shortenurl;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -52,8 +54,16 @@ class MainPageController {
       final ModelAndView modelAndView,
       final UserData userData,
       final RedirectAttributes redirectAttributes)
-      throws DecoderException {
-    // todo implement URL validation, url string has to be a valid url and can not be a domain name of the app
+      throws DecoderException, URISyntaxException {
+    
+    URI redirectUrl = new URI(urlDTO.url());
+    URI appUrl = new URI(appExternalBaseUrl);
+    if (redirectUrl.getHost().equals(appUrl.getHost())) {
+      // todo implement URL validation, url string has to be a valid url and can not be a domain
+      // name of the app
+      System.out.println("Do not redirect.");
+    }
+
     final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
 
     redirectAttributes.addFlashAttribute(
