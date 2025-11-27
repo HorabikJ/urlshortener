@@ -7,13 +7,13 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import pl.jacekhorabik.urlshortener.common.model.UserData;
 import pl.jacekhorabik.urlshortener.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.common.view.ViewName;
@@ -48,21 +48,18 @@ class MainPageController {
   @PostMapping("/url/create")
   @PopulateUserData
   ModelAndView shortenUrl(
-      final RequestUrlDTO urlDTO, final ModelAndView modelAndView, final UserData userData)
+      final RequestUrlDTO urlDTO,
+      final ModelAndView modelAndView,
+      final UserData userData,
+      final RedirectAttributes redirectAttributes)
       throws DecoderException {
-    //    todo implement URL validation, url string has to be a valid url and can not be a domain
-    // name of the app
-    final Map<String, Object> models = new HashMap<>();
+    // todo implement URL validation, url string has to be a valid url and can not be a domain name of the app
     final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
 
-    addUserUrlsToModel(userData, models);
-    models.put(
+    redirectAttributes.addFlashAttribute(
         AttributeName.RESPONSE_URL_DTO.toString(), new ResponseUrlDTO(constructRedirectUrl(hash)));
-    models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
 
-    modelAndView.addAllObjects(models);
-    modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
-    modelAndView.setStatus(HttpStatus.CREATED);
+    modelAndView.setViewName(ViewName.REDIRECT + "/v1/");
 
     return modelAndView;
   }
@@ -71,16 +68,8 @@ class MainPageController {
   @PopulateUserData
   ModelAndView deleteUrl(
       @RequestParam final String hash, final ModelAndView modelAndView, final UserData userData) {
-    final Map<String, Object> models = new HashMap<>();
-
     urlShorteningService.deleteUserUrlByHash(hash, userData);
-
-    addUserUrlsToModel(userData, models);
-    models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
-
-    modelAndView.addAllObjects(models);
-    modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
-
+    modelAndView.setViewName(ViewName.REDIRECT + "/v1/");
     return modelAndView;
   }
 
