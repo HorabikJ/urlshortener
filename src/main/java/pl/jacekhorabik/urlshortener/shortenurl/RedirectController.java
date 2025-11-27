@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.view.RedirectView;
 import pl.jacekhorabik.urlshortener.common.view.ViewName;
 
 @Controller
@@ -17,21 +18,16 @@ class RedirectController {
   private final UrlShorteningService urlShorteningService;
 
   @GetMapping("/r/{hash}")
-  ModelAndView redirect(final @PathVariable String hash, final ModelAndView modelAndView) {
+  ModelAndView redirect(final @PathVariable String hash) {
     return urlShorteningService
         .findUrlByHash(hash)
         .map(UrlEntity::getUrl)
         .map(
             url -> {
-              modelAndView.setStatus(HttpStatus.FOUND);
-              modelAndView.setViewName(ViewName.REDIRECT.toString() + url);
-              return modelAndView;
+              RedirectView redirectView = new RedirectView(url);
+              redirectView.setStatusCode(HttpStatus.FOUND);
+              return new ModelAndView(redirectView);
             })
-        .orElseGet(
-            () -> {
-              modelAndView.setViewName(ViewName.NOT_FOUND.toString());
-              modelAndView.setStatus(HttpStatus.NOT_FOUND);
-              return modelAndView;
-            });
+        .orElseGet(() -> new ModelAndView(ViewName.NOT_FOUND.toString(), HttpStatus.NOT_FOUND));
   }
 }
