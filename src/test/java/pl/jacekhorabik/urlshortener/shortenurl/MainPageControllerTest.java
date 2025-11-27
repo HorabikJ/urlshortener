@@ -34,15 +34,17 @@ class MainPageControllerTest {
   void shouldReturnMainPageWithShortenedUrl() throws Exception {
     final String url = "http://example.com";
 
-    when(urlShorteningService.shortenUrl(new UrlDTO(url)))
+    when(urlShorteningService.shortenUrl(new ResponseUrlDTO(url)))
         .thenReturn(new UrlEntity("hash123", url));
 
     this.mockMvc
         .perform(post("/v1/").param("url", url))
         .andExpect(status().isCreated())
         .andExpect(view().name(ViewName.MAIN_PAGE.toString()))
-        .andExpect(model().attribute("requestUrlDTO", new UrlDTO()))
+        .andExpect(model().attribute("requestUrlDTO", new ResponseUrlDTO()))
         .andExpect(
-            model().attribute("responseUrlDTO", new UrlDTO("http://localhost:8080/v1/r/hash123")));
+            model()
+                .attribute(
+                    "responseUrlDTO", new ResponseUrlDTO("http://localhost:8080/v1/r/hash123")));
   }
 }

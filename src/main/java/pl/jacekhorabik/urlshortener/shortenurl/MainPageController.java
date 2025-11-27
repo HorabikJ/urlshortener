@@ -33,10 +33,9 @@ class MainPageController {
   @PopulateUserData
   ModelAndView mainPage(final ModelAndView modelAndView, final UserData userData) {
     final HashMap<String, Object> models = new HashMap<>();
-    final UrlDTO requestUrlDTO = new UrlDTO();
 
     addUserUrlsToModel(userData, models);
-    models.put(AttributeName.REQUEST_URL_DTO.toString(), requestUrlDTO);
+    models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
 
     modelAndView.addAllObjects(models);
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
@@ -48,17 +47,17 @@ class MainPageController {
   @PostMapping("/")
   @PopulateUserData
   ModelAndView shortenUrl(
-      final UrlDTO urlDTO, final ModelAndView modelAndView, final UserData userData)
+      final RequestUrlDTO urlDTO, final ModelAndView modelAndView, final UserData userData)
       throws DecoderException {
     //    todo implement URL validation, url string has to be a valid url and can not be a domain
     // name of the app
     final Map<String, Object> models = new HashMap<>();
     final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
-    final UrlDTO responseUrlDTO = new UrlDTO(constructRedirectUrl(hash));
 
     addUserUrlsToModel(userData, models);
-    models.put(AttributeName.RESPONSE_URL_DTO.toString(), responseUrlDTO);
-    models.put(AttributeName.REQUEST_URL_DTO.toString(), new UrlDTO());
+    models.put(
+        AttributeName.RESPONSE_URL_DTO.toString(), new ResponseUrlDTO(constructRedirectUrl(hash)));
+    models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
 
     modelAndView.addAllObjects(models);
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
@@ -69,10 +68,14 @@ class MainPageController {
 
   private void addUserUrlsToModel(final UserData userData, final Map<String, Object> models) {
     if (userData.isAuthenticated()) {
-      final List<UserUrlDTO> userUrls =
+      final List<ResponseUrlDTO> userUrls =
           urlShorteningService.findUrlsByUserId(userData.getUserId()).stream()
               .map(
-                  entity -> new UserUrlDTO(constructRedirectUrl(entity.getHash()), entity.getUrl()))
+                  entity ->
+                      new ResponseUrlDTO(
+                          constructRedirectUrl(entity.getHash()),
+                          entity.getUrl(),
+                          entity.getHash()))
               .toList();
       models.put(AttributeName.USER_URLS_DTO.toString(), userUrls);
     }

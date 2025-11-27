@@ -1,9 +1,8 @@
 package pl.jacekhorabik.urlshortener.shortenurl;
 
-record UrlDTO(String url) {
+record RequestUrlDTO(String url) {
 
-  UrlDTO() {
+  RequestUrlDTO() {
     this(null);
   }
-  
 }

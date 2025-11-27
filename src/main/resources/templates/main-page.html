@@ -23,8 +23,8 @@
     <div th:if="${responseUrlDTO}">
       <p>your link is:
         <!--        todo how to do this link clickable?-->
-        <a th:href="${responseUrlDTO.url}"
-           th:text="${responseUrlDTO.url}">
+        <a th:href="${responseUrlDTO.shortUrl}"
+           th:text="${responseUrlDTO.shortUrl}">
         </a>
       </p>
     </div>
@@ -43,8 +43,8 @@
           <td colspan="2"> No links available</td>
         </tr>
         <tr th:each="url : ${userUrlsDTO}">
-          <td><a th:href="${url.shorten}" th:text="${url.shorten}"></a></td>
-          <td><a th:href="${url.original}" th:text="${url.original}"></a></td>
+          <td><a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a></td>
+          <td><a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a></td>
         </tr>
         </tbody>
       </table>
