@@ -45,7 +45,7 @@ class MainPageController {
   }
 
   // todo add exception handler
-  @PostMapping("/")
+  @PostMapping("/url/create")
   @PopulateUserData
   ModelAndView shortenUrl(
       final RequestUrlDTO urlDTO, final ModelAndView modelAndView, final UserData userData)

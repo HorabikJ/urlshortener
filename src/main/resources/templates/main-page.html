@@ -12,7 +12,7 @@
     <h3>Welcome to the url shortener!</h3>
   </div>
   <div class="row">
-    <form th:action="@{/v1/}" th:object="${requestUrlDTO}" method="POST">
+    <form th:action="@{/v1/url/create}" th:object="${requestUrlDTO}" method="POST">
       <fieldset>
         <input type="text" th:field="*{url}" placeholder="paste your url here">
         <input type="submit" name="Shorten!">
