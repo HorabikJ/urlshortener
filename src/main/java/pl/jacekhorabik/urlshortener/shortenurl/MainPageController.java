@@ -12,6 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import pl.jacekhorabik.urlshortener.common.model.UserData;
 import pl.jacekhorabik.urlshortener.common.view.AttributeName;
@@ -64,6 +65,27 @@ class MainPageController {
     modelAndView.setStatus(HttpStatus.CREATED);
 
     return modelAndView;
+  }
+  
+  @PostMapping("/deleteUrl")
+  @PopulateUserData
+  ModelAndView deleteUrl(@RequestParam final String hash,
+                         final ModelAndView modelAndView,
+                         final UserData userData) {
+    final Map<String, Object> models = new HashMap<>();
+    
+    if (userData.isAuthenticated()) {
+      System.out.println(hash);
+    }
+
+    addUserUrlsToModel(userData, models);
+    models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
+    
+    modelAndView.addAllObjects(models);
+    modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
+    modelAndView.setStatus(HttpStatus.NO_CONTENT);
+
+    return  modelAndView;
   }
 
   private void addUserUrlsToModel(final UserData userData, final Map<String, Object> models) {

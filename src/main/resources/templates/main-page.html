@@ -34,17 +34,28 @@
       <table>
         <thead>
         <tr>
-          <th> shorten</th>
-          <th> original</th>
+          <th>shorten</th>
+          <th>original</th>
+          <th>action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${userUrlsDTO.empty}">
-          <td colspan="2"> No links available</td>
+          <td colspan="3">No links available</td>
         </tr>
         <tr th:each="url : ${userUrlsDTO}">
-          <td><a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a></td>
-          <td><a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a></td>
+          <td>
+            <a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a>
+          </td>
+          <td>
+            <a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a>
+          </td>
+          <td>
+            <form th:action="@{/v1/deleteUrl}" method="post">
+              <input type="hidden" name="hash" th:value="${url.hash}"/>
+              <input type="submit" value="Delete" class="btn btn-danger"/>
+            </form>
+          </td>
         </tr>
         </tbody>
       </table>
