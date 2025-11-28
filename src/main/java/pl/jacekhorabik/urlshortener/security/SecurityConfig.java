@@ -27,7 +27,7 @@ class SecurityConfig {
   SecurityFilterChain clientSecurityFilterChain(HttpSecurity http) throws Exception {
     http.oauth2Login(
         login -> {
-          login.defaultSuccessUrl("/v1/", true);
+          login.defaultSuccessUrl("/v1", true);
           login.failureHandler(
               (request, response, exception) -> {
                 log.error("Login failed", exception);
@@ -47,7 +47,7 @@ class SecurityConfig {
           logout.logoutSuccessHandler(
               (request, response, authentication) -> {
                 // Ensure this matches exactly what's configured in Keycloak
-                String logoutSuccessRedirectUri = String.format("%s/v1/", appExternalBaseUrl);
+                String logoutSuccessRedirectUri = String.format("%s/v1", appExternalBaseUrl);
 
                 String logoutRedirectUrl =
                     UriComponentsBuilder.fromUriString(logoutUrl)

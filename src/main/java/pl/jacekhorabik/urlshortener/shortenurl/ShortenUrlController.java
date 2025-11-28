@@ -21,9 +21,10 @@ import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 @RequestMapping("/v1/url")
 @Controller
 @RequiredArgsConstructor
-class UrlController {
+class ShortenUrlController {
 
-  private final UrlShorteningService urlShorteningService;
+  private final ShortenUrlService urlShorteningService;
+  private final RedirectUrlBuilder redirectUrlBuilder;
 
   @Value("${app.external-base-url}")
   private String appExternalBaseUrl;
@@ -49,7 +50,8 @@ class UrlController {
     final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
 
     redirectAttributes.addFlashAttribute(
-        AttributeName.RESPONSE_URL_DTO.toString(), new ResponseUrlDTO(constructRedirectUrl(hash)));
+        AttributeName.RESPONSE_URL_DTO.toString(),
+        new ResponseUrlDTO(redirectUrlBuilder.buildRedirectUrl(hash).toString()));
 
     modelAndView.setViewName(ViewName.REDIRECT + "/v1");
 
@@ -65,9 +67,5 @@ class UrlController {
     urlShorteningService.deleteUserUrlByHash(hash, userData);
     modelAndView.setViewName(ViewName.REDIRECT + "/v1");
     return modelAndView;
-  }
-
-  private String constructRedirectUrl(String hash) {
-    return appExternalBaseUrl + "/v1/r/" + hash;
   }
 }

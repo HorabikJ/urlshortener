@@ -21,7 +21,7 @@ class RedirectControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
-  @MockitoBean private UrlShorteningService urlShorteningService;
+  @MockitoBean private ShortenUrlService urlShorteningService;
 
   @Test
   void shouldRedirectToCorrectShortenedUrl() throws Exception {

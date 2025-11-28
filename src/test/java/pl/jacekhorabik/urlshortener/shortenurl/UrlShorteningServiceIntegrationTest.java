@@ -16,7 +16,7 @@ import org.springframework.transaction.annotation.Transactional;
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class UrlShorteningServiceIntegrationTest {
 
-  @Autowired private UrlShorteningService urlShorteningService;
+  @Autowired private ShortenUrlService urlShorteningService;
 
   @Test
   @Transactional

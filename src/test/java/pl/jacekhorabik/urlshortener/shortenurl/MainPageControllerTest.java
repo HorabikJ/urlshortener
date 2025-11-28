@@ -19,7 +19,7 @@ class MainPageControllerTest {
 
   @Autowired private MockMvc mockMvc;
 
-  @MockitoBean private UrlShorteningService urlShorteningService;
+  @MockitoBean private ShortenUrlService urlShorteningService;
 
   @Test
   void shouldReturnMainPage() throws Exception {

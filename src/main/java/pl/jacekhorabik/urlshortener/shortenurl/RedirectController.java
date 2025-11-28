@@ -15,7 +15,7 @@ import pl.jacekhorabik.urlshortener.common.view.ViewName;
 @RequiredArgsConstructor
 class RedirectController {
 
-  private final UrlShorteningService urlShorteningService;
+  private final ShortenUrlService urlShorteningService;
 
   @GetMapping("/r/{hash}")
   ModelAndView redirect(final @PathVariable String hash) {

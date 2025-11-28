@@ -15,7 +15,7 @@ import pl.jacekhorabik.urlshortener.common.model.UserDataDTO;
 
 @RequiredArgsConstructor
 @Service
-class UrlShorteningService {
+class ShortenUrlService {
 
   private static final int HASH_LENGTH = 7;
 

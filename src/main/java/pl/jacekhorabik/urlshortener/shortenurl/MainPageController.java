@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,12 +20,10 @@ import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 @RequiredArgsConstructor
 class MainPageController {
 
-  private final UrlShorteningService urlShorteningService;
+  private final ShortenUrlService urlShorteningService;
+  private final RedirectUrlBuilder redirectUrlBuilder;
 
-  @Value("${app.external-base-url}")
-  private String appExternalBaseUrl;
-
-  @GetMapping()
+  @GetMapping
   @PopulateUserData
   ModelAndView mainPage(final ModelAndView modelAndView, final UserDataDTO userData) {
     final HashMap<String, Object> models = new HashMap<>();
@@ -48,7 +45,7 @@ class MainPageController {
               .map(
                   entity ->
                       new ResponseUrlDTO(
-                          constructRedirectUrl(entity.getHash()),
+                          redirectUrlBuilder.buildRedirectUrl(entity.getHash()).toString(),
                           entity.getUrl(),
                           entity.getHash()))
               .toList();
@@ -56,7 +53,4 @@ class MainPageController {
     }
   }
 
-  private String constructRedirectUrl(String hash) {
-    return appExternalBaseUrl + "/v1/r/" + hash;
-  }
 }
