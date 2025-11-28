@@ -70,6 +70,7 @@ class SecurityConfig {
         requests -> {
           requests.requestMatchers("/admin").hasAuthority(UserRole.ADMIN.toString());
           requests.requestMatchers("/user").hasAuthority(UserRole.USER.toString());
+          requests.requestMatchers("/v1/user/**").hasAuthority(UserRole.USER.toString());
           requests.requestMatchers("/logout", "/logout/**").authenticated();
           requests
               .requestMatchers("/v1/**", "/actuator/health", "/favicon.ico", "/login/**")

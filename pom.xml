@@ -71,6 +71,11 @@
             <artifactId>keycloak-spring-boot-starter</artifactId>
             <version>${org.keycloak.keycloak-spring-boot-starter.version}</version>
         </dependency>
+        <dependency>
+            <groupId>org.keycloak</groupId>
+            <artifactId>keycloak-admin-client</artifactId>
+            <version>${org.keycloak.keycloak-spring-boot-starter.version}</version>
+        </dependency>
         <!--    spring-addons   -->
         <dependency>
             <groupId>com.c4-soft.springaddons</groupId>

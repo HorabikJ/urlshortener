@@ -2,6 +2,8 @@ keycloak:
   realm: urlshortener-keycloak-realm
   clientId: urlshortener-keycloak-client
   clientSecret: qQUimZxrmnop3ug6UqctmCKgkqPVIhV9
+  admin-username: admin
+  admin-password: admin
 
 db:
   schema-name: urlshortener
