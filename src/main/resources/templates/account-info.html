@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <div th:replace="~{fragments/head-metadata :: meta}"></div>
+  <div th:replace="~{fragments/head-metadata :: bootstrap-link}"></div>
+  <title>main page</title>
+</head>
+<body>
+<div th:replace="~{fragments/navigation :: navigation}"></div>
+<div class="container text-center">
+  <div class="row">
+    <h3>Account info</h3>
+  </div>
+  <div class="row">
+    <table>
+      <tbody>
+      <tr>
+        <td>username:</td>
+        <td th:text="${userDataDTO.preferredUsername}"></td>
+      </tr>
+      <tr>
+        <td>email:</td>
+        <td th:text="${userDataDTO.email}"></td>
+      </tr>
+      <tr>
+        <td>delete account</td>
+        <td>
+          <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
+            <button type="submit" class="btn btn-lg btn-danger"
+                    onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
+              Delete Account
+            </button>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div th:replace="~{fragments/bootstrap-script :: bootstrap-script}"></div>
+</body>
+</html>

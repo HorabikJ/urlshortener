@@ -21,12 +21,6 @@
       <a href="/logout">
         <button type="button" class="btn btn-lg btn-primary">Logout</button>
       </a>
-      <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
-        <button type="submit" class="btn btn-lg btn-danger"
-                onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
-          Delete Account
-        </button>
-      </form>
     </div>
   </div>
 </nav>
