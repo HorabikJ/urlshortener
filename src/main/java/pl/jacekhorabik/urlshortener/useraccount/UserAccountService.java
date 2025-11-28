@@ -16,9 +16,9 @@ class UserAccountService {
     UserResource userResource = urlShortenerRealm.users().get(userData.getUserId());
 
     // todo think about below methods, are they needed?
-    // Verify user exists before deletion
+    // Verify user exists before deletion, throws new jakarta.ws.rs.NotFoundException
     userResource.toRepresentation();
-      // Delete the user
-      userResource.remove();
+
+    userResource.remove();
   }
 }
