@@ -6,6 +6,7 @@ app:
 
 keycloak:
   external-base-url: http://localhost:8080
+  internal-base-url: http://localhost:8080
 
 spring:
   datasource:

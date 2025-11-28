@@ -2,6 +2,7 @@ package pl.jacekhorabik.urlshortener.useraccount;
 
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;
+import org.keycloak.admin.client.resource.RealmResource;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -9,11 +10,11 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 class KeycloakAdminConfig {
 
-  @Value("${keycloak.external-base-url}")
-  private String keycloakServerUrl;
-
   @Value("${keycloak.realm}")
   private String realm;
+
+  @Value("${keycloak.internal-base-url}")
+  private String keycloakServerUrl;
 
   @Value("${keycloak.admin-username}")
   private String adminUsername;
@@ -22,7 +23,7 @@ class KeycloakAdminConfig {
   private String adminPassword;
 
   @Bean
-  public Keycloak keycloakAdminClient() {
+  Keycloak keycloakAdminClient() {
     return KeycloakBuilder.builder()
         .serverUrl(keycloakServerUrl)
         .realm("master") // Admin client authenticates against master realm
@@ -30,5 +31,10 @@ class KeycloakAdminConfig {
         .password(adminPassword)
         .clientId("admin-cli")
         .build();
+  }
+
+  @Bean
+  RealmResource urlShortenerRealm(Keycloak keycloakAdminClient) {
+    return keycloakAdminClient.realm(realm);
   }
 }
