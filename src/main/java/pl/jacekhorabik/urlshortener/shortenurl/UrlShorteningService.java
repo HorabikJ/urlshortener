@@ -11,7 +11,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jacekhorabik.urlshortener.common.model.UserData;
+import pl.jacekhorabik.urlshortener.common.model.UserDataDTO;
 
 @RequiredArgsConstructor
 @Service
@@ -24,12 +24,13 @@ class UrlShorteningService {
 
   @Transactional
   //  todo change parameter of this method to UrlEntity or just URL
-  UrlEntity shortenUrl(final RequestUrlDTO url, final UserData userData) throws DecoderException {
+  UrlEntity shortenUrl(final RequestUrlDTO url, final UserDataDTO userData)
+      throws DecoderException {
     return shortenUrl(url.url(), StringUtils.EMPTY, userData);
   }
 
   @Transactional
-  void deleteUserUrlByHash(final String hash, final UserData userData) {
+  void deleteUserUrlByHash(final String hash, final UserDataDTO userData) {
     if (userData.isAuthenticated()
         && urlRepository.existsByHashAndUserId(hash, userData.getUserId())) {
       urlRepository.deleteUrlEntityByHash(hash);
@@ -45,7 +46,7 @@ class UrlShorteningService {
   }
 
   private UrlEntity shortenUrl(
-      final String url, final String hashCollisionProtector, final UserData userData)
+      final String url, final String hashCollisionProtector, final UserDataDTO userData)
       throws DecoderException {
     final String urlForHashing = url.concat(hashCollisionProtector);
     final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);

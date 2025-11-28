@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+>
 <head>
   <meta charset="UTF-8">
   <title>navigation bar</title>
@@ -9,15 +9,15 @@
 <body>
 <nav th:fragment="navigation">
   <div class="container text-center">
-    <div sec:authorize="isAnonymous()">
+    <div th:if="${!userDataDTO.authenticated}">
       <a href="/oauth2/authorization/keycloak">
         <button type="button"
                 class="btn btn-lg btn-primary btn-block">Login
         </button>
       </a>
     </div>
-    <div sec:authorize="isAuthenticated()">
-      <p>Hi <span sec:authentication="principal.preferredUsername">user</span>!</p>
+    <div th:if="${userDataDTO.authenticated}">
+      <p>Hi <span th:text="${userDataDTO.preferredUsername}"></span>!</p>
       <a href="/logout">
         <button type="button" class="btn btn-lg btn-primary">Logout</button>
       </a>

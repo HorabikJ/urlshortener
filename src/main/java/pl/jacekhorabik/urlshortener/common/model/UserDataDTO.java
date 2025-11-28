@@ -3,7 +3,7 @@ package pl.jacekhorabik.urlshortener.common.model;
 import lombok.Data;
 
 @Data
-public class UserData {
+public class UserDataDTO {
   private String userId;
   private String email;
   private String preferredUsername;

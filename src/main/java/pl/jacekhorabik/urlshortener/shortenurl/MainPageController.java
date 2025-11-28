@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.jacekhorabik.urlshortener.common.model.UserData;
+import pl.jacekhorabik.urlshortener.common.model.UserDataDTO;
 import pl.jacekhorabik.urlshortener.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.common.view.ViewName;
 import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
@@ -34,11 +34,12 @@ class MainPageController {
 
   @GetMapping("/")
   @PopulateUserData
-  ModelAndView mainPage(final ModelAndView modelAndView, final UserData userData) {
+  ModelAndView mainPage(final ModelAndView modelAndView, final UserDataDTO userData) {
     final HashMap<String, Object> models = new HashMap<>();
 
     addUserUrlsToModel(userData, models);
     models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
+    models.put(AttributeName.USER_DATA_DTO.toString(), userData);
 
     modelAndView.addAllObjects(models);
     modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
@@ -52,10 +53,10 @@ class MainPageController {
   ModelAndView shortenUrl(
       final RequestUrlDTO urlDTO,
       final ModelAndView modelAndView,
-      final UserData userData,
+      final UserDataDTO userData,
       final RedirectAttributes redirectAttributes)
       throws DecoderException, URISyntaxException {
-    
+
     URI redirectUrl = new URI(urlDTO.url());
     URI appUrl = new URI(appExternalBaseUrl);
     if (redirectUrl.getHost().equals(appUrl.getHost())) {
@@ -77,13 +78,15 @@ class MainPageController {
   @PostMapping("/url/delete")
   @PopulateUserData
   ModelAndView deleteUrl(
-      @RequestParam final String hash, final ModelAndView modelAndView, final UserData userData) {
+      @RequestParam final String hash,
+      final ModelAndView modelAndView,
+      final UserDataDTO userData) {
     urlShorteningService.deleteUserUrlByHash(hash, userData);
     modelAndView.setViewName(ViewName.REDIRECT + "/v1/");
     return modelAndView;
   }
 
-  private void addUserUrlsToModel(final UserData userData, final Map<String, Object> models) {
+  private void addUserUrlsToModel(final UserDataDTO userData, final Map<String, Object> models) {
     if (userData.isAuthenticated()) {
       final List<ResponseUrlDTO> userUrls =
           urlShorteningService.findUrlsByUserId(userData.getUserId()).stream()
