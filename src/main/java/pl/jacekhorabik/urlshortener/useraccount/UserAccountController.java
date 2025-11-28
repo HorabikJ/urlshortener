@@ -46,7 +46,7 @@ class UserAccountController {
     // Logout the user and clear the session
     new SecurityContextLogoutHandler().logout(request, response, authentication);
 
-    modelAndView.setViewName(ViewName.REDIRECT + "/v1/");
+    modelAndView.setViewName(ViewName.REDIRECT + "/v1");
     return modelAndView;
   }
 }
