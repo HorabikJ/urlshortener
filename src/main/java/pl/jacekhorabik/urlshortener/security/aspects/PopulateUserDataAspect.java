@@ -25,7 +25,7 @@ class PopulateUserDataAspect {
    */
   @Around(
       "execution(@pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData "
-          + "* *.*(..,pl.jacekhorabik.urlshortener.common.model.UserDataDTO,..))")
+          + "* *.*(..,pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO,..))")
   Object populateUserDataFromAuthentication(ProceedingJoinPoint joinPoint) throws Throwable {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
