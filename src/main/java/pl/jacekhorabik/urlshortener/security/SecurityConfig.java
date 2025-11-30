@@ -72,7 +72,7 @@ class SecurityConfig {
           requests.requestMatchers("/v1/account/**").hasAuthority(UserRole.USER.toString());
           requests.requestMatchers("/logout", "/logout/**").authenticated();
           requests
-              .requestMatchers("/v1/**", "/actuator/health", "/favicon.ico", "/login/**")
+              .requestMatchers("/v1","/v1/**", "/actuator/health", "/favicon.ico", "/login/**")
               .permitAll();
           requests.anyRequest().denyAll();
         });
