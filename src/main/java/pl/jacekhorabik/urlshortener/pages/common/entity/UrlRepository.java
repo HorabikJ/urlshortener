@@ -9,8 +9,11 @@ public interface UrlRepository extends JpaRepository<UrlEntity, String> {
   Optional<UrlEntity> findUrlEntityByHash(String hash);
 
   List<UrlEntity> findUrlEntityByUserId(String userId);
-
+  
   void deleteUrlEntityByHash(String hash);
 
+  void deleteUrlEntityByUserId(String userId);
+
   boolean existsByHashAndUserId(String hash, String userId);
+
 }
