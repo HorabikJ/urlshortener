@@ -1,5 +1,8 @@
 package pl.jacekhorabik.urlshortener.pages.mainpage;
 
+import static pl.jacekhorabik.urlshortener.pages.common.view.RedirectView.REDIRECT;
+import static pl.jacekhorabik.urlshortener.pages.common.view.View.MAIN_PAGE;
+
 import java.net.URI;
 import java.net.URISyntaxException;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
-import pl.jacekhorabik.urlshortener.common.view.AttributeName;
-import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 
 @Slf4j
@@ -53,7 +55,7 @@ class ShortenUrlController {
         AttributeName.RESPONSE_URL_DTO.toString(),
         new ResponseUrlDTO(redirectUrlBuilder.buildRedirectUrl(hash).toString()));
 
-    modelAndView.setViewName(ViewName.REDIRECT + "/v1");
+    modelAndView.setViewName(REDIRECT.to(MAIN_PAGE));
 
     return modelAndView;
   }
@@ -65,7 +67,7 @@ class ShortenUrlController {
       final ModelAndView modelAndView,
       final UserDataDTO userData) {
     urlShorteningService.deleteUserUrlByHash(hash, userData);
-    modelAndView.setViewName(ViewName.REDIRECT + "/v1");
+    modelAndView.setViewName(REDIRECT.to(MAIN_PAGE));
     return modelAndView;
   }
 }

@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.pages.common;
+package pl.jacekhorabik.urlshortener.pages.common.entity;
 
 import java.util.List;
 import java.util.Optional;

@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
-import pl.jacekhorabik.urlshortener.common.view.ViewName;
-import pl.jacekhorabik.urlshortener.pages.common.UrlEntity;
+import pl.jacekhorabik.urlshortener.pages.common.entity.UrlEntity;
+import pl.jacekhorabik.urlshortener.pages.common.view.View;
 
 @Controller
 @RequestMapping("/v1")
@@ -29,6 +29,6 @@ class RedirectController {
               redirectView.setStatusCode(HttpStatus.FOUND);
               return new ModelAndView(redirectView);
             })
-        .orElseGet(() -> new ModelAndView(ViewName.NOT_FOUND.toString(), HttpStatus.NOT_FOUND));
+        .orElseGet(() -> new ModelAndView(View.NOT_FOUND.toString(), HttpStatus.NOT_FOUND));
   }
 }

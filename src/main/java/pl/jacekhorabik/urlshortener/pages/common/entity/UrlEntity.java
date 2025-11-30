@@ -1,10 +1,9 @@
-package pl.jacekhorabik.urlshortener.pages.common;
+package pl.jacekhorabik.urlshortener.pages.common.entity;
 
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import pl.jacekhorabik.urlshortener.common.entity.BaseEntity;
 
 @Entity
 @Table(name = "urls")

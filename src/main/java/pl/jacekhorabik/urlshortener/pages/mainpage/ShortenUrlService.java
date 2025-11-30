@@ -11,9 +11,9 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
-import pl.jacekhorabik.urlshortener.pages.common.UrlEntity;
-import pl.jacekhorabik.urlshortener.pages.common.UrlRepository;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.entity.UrlEntity;
+import pl.jacekhorabik.urlshortener.pages.common.entity.UrlRepository;
 
 @RequiredArgsConstructor
 @Service

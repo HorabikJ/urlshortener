@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.common.view;
+package pl.jacekhorabik.urlshortener.pages.common.view;
 
 public enum AttributeName {
   RESPONSE_URL_DTO("responseUrlDTO"),

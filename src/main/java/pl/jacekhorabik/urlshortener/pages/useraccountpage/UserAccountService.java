@@ -4,7 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.resource.RealmResource;
 import org.keycloak.admin.client.resource.UserResource;
 import org.springframework.stereotype.Service;
-import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
 
 @Service
 @RequiredArgsConstructor

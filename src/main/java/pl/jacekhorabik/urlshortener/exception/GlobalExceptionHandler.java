@@ -5,14 +5,14 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.resource.NoResourceFoundException;
-import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.common.view.View;
 
 @ControllerAdvice
 class GlobalExceptionHandler {
 
   @ExceptionHandler(value = NoResourceFoundException.class)
   public ModelAndView handleNoStaticResourceFound(HttpServletRequest req, Exception e) {
-    return new ModelAndView(ViewName.NOT_FOUND.toString());
+    return new ModelAndView(View.NOT_FOUND.toString());
   }
   // todo implement handling different types of exceptions, like 500 server error
 

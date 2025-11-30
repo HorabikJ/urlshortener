@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.common.entity;
+package pl.jacekhorabik.urlshortener.pages.common.entity;
 
 import jakarta.persistence.MappedSuperclass;
 import java.time.Instant;

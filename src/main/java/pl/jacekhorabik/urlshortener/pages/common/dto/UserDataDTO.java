@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.common.dto;
+package pl.jacekhorabik.urlshortener.pages.common.dto;
 
 import lombok.Data;
 

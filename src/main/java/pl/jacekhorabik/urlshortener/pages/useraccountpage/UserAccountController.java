@@ -1,5 +1,9 @@
 package pl.jacekhorabik.urlshortener.pages.useraccountpage;
 
+import static pl.jacekhorabik.urlshortener.pages.common.view.RedirectView.REDIRECT;
+import static pl.jacekhorabik.urlshortener.pages.common.view.View.ACCOUNT_INFO;
+import static pl.jacekhorabik.urlshortener.pages.common.view.View.MAIN_PAGE;
+
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -11,9 +15,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
-import pl.jacekhorabik.urlshortener.common.view.AttributeName;
-import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 
 @Controller
@@ -28,7 +31,7 @@ class UserAccountController {
   @PopulateUserData
   public ModelAndView accountInfo(final ModelAndView modelAndView, final UserDataDTO userData) {
     modelAndView.addObject(AttributeName.USER_DATA_DTO.toString(), userData);
-    modelAndView.setViewName(ViewName.ACCOUNT_INFO.toString());
+    modelAndView.setViewName(ACCOUNT_INFO.toString());
     return modelAndView;
   }
 
@@ -46,7 +49,7 @@ class UserAccountController {
     // Logout the user and clear the session
     new SecurityContextLogoutHandler().logout(request, response, authentication);
 
-    modelAndView.setViewName(ViewName.REDIRECT + "/v1");
+    modelAndView.setViewName(REDIRECT.to(MAIN_PAGE));
     return modelAndView;
   }
 }

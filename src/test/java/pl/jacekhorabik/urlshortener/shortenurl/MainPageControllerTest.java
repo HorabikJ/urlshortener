@@ -11,7 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
-import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.common.view.View;
 import pl.jacekhorabik.urlshortener.pages.mainpage.MainPageController;
 import pl.jacekhorabik.urlshortener.pages.mainpage.ResponseUrlDTO;
 import pl.jacekhorabik.urlshortener.pages.mainpage.ShortenUrlService;
@@ -30,7 +30,7 @@ class MainPageControllerTest {
     this.mockMvc
         .perform(get("/v1/"))
         .andExpect(status().isOk())
-        .andExpect(view().name(ViewName.MAIN_PAGE.toString()))
+        .andExpect(view().name(View.MAIN_PAGE.toString()))
         .andExpect(model().attributeExists("requestUrlDTO"));
   }
 
@@ -44,7 +44,7 @@ class MainPageControllerTest {
     this.mockMvc
         .perform(post("/v1/").param("url", url))
         .andExpect(status().isCreated())
-        .andExpect(view().name(ViewName.MAIN_PAGE.toString()))
+        .andExpect(view().name(View.MAIN_PAGE.toString()))
         .andExpect(model().attribute("requestUrlDTO", new ResponseUrlDTO()))
         .andExpect(
             model()

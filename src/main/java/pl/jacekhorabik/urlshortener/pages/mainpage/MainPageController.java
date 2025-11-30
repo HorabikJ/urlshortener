@@ -9,9 +9,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
-import pl.jacekhorabik.urlshortener.common.view.AttributeName;
-import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
+import pl.jacekhorabik.urlshortener.pages.common.view.View;
 import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 
 @Slf4j
@@ -33,7 +33,7 @@ class MainPageController {
     models.put(AttributeName.USER_DATA_DTO.toString(), userData);
 
     modelAndView.addAllObjects(models);
-    modelAndView.setViewName(ViewName.MAIN_PAGE.toString());
+    modelAndView.setViewName(View.MAIN_PAGE.toString());
 
     return modelAndView;
   }
