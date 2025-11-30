@@ -39,11 +39,11 @@ class MainPageController {
   ModelAndView mainPage(
       final ModelAndView modelAndView,
       final UserAuthentication userAuthentication,
-      final @RequestParam Optional<Integer> pageNumber,
+      final @RequestParam Optional<Integer> pageIndex,
       final @RequestParam Optional<Integer> pageSize) {
     final HashMap<String, Object> models = new HashMap<>();
 
-    addUserUrlsToModel(userAuthentication, models, pageNumber, pageSize);
+    addUserUrlsToModel(userAuthentication, models, pageIndex, pageSize);
     models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
     models.put(AttributeName.USER_AUTHENTICATION.toString(), userAuthentication);
     models.put(AttributeName.VIEW_NAME.toString(), MAIN_PAGE.toString());
@@ -57,12 +57,12 @@ class MainPageController {
   private void addUserUrlsToModel(
       final UserAuthentication userData,
       final Map<String, Object> models,
-      final Optional<Integer> pageNumber,
+      final Optional<Integer> pageIndex,
       final Optional<Integer> pageSize) {
     if (userData.isAuthenticated()) {
       final PageRequest pageRequest =
           PageRequest.of(
-              pageNumber.orElse(FIRST_PAGE_INDEX),
+              pageIndex.orElse(FIRST_PAGE_INDEX),
               pageSize.orElse(DEFAULT_PAGE_SIZE),
               Sort.by(Sort.Direction.DESC, "createdAt"));
 
@@ -79,9 +79,9 @@ class MainPageController {
 
       final int totalPages = userUrls.getTotalPages();
       if (totalPages > 0) {
-        final List<Integer> pageNumbers =
+        final List<Integer> pageIndexes =
             IntStream.range(FIRST_PAGE_INDEX, totalPages).boxed().toList();
-        models.put(AttributeName.PAGE_NUMBERS.toString(), pageNumbers);
+        models.put(AttributeName.PAGE_INDEXES.toString(), pageIndexes);
       }
 
       models.put(AttributeName.USER_URLS_PAGES_DTO.toString(), userUrls);

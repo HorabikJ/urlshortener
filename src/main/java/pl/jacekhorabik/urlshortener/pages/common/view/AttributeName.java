@@ -5,7 +5,7 @@ public enum AttributeName {
   REQUEST_URL_DTO("requestUrlDTO"),
   USER_URLS_PAGES_DTO("userUrlsPagesDTO"),
   USER_ACCOUNT_DTO("userAccountDTO"),
-  PAGE_NUMBERS("pageNumbers"),
+  PAGE_INDEXES("pageIndexes"),
   USER_AUTHENTICATION("userAuthentication"),
   VIEW_NAME("viewName");
 

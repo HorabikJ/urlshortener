@@ -67,10 +67,10 @@
         </tbody>
       </table>
       <div th:if="${userUrlsPagesDTO.totalPages > 0}" class="pagination"
-           th:each="pNum : ${pageNumbers}">
-        <a th:href="@{/v1(pageNumber=${pNum}, pageSize=${userUrlsPagesDTO.size})}"
-           th:text="${pNum + 1}"
-           th:class="${pNum == userUrlsPagesDTO.number} ? active"></a>
+           th:each="pIdx : ${pageIndexes}">
+        <a th:href="@{/v1(pageIndex=${pIdx}, pageSize=${userUrlsPagesDTO.size})}"
+           th:text="${pIdx + 1}"
+           th:class="${pIdx == userUrlsPagesDTO.number} ? active"></a>
         <!-- todo the above class="active" does not work, fix it -->
       </div>
     </div>
