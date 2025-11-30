@@ -11,7 +11,7 @@ import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.entity.UrlEntity;
 import pl.jacekhorabik.urlshortener.pages.common.entity.UrlRepository;
 
@@ -26,15 +26,15 @@ class ShortenUrlService {
 
   @Transactional
   //  todo change parameter of this method to UrlEntity or just URL
-  UrlEntity shortenUrl(final RequestUrlDTO url, final UserDataDTO userData)
+  UrlEntity shortenUrl(final RequestUrlDTO url, final UserAuthentication userAuthentication)
       throws DecoderException {
-    return shortenUrl(url.url(), StringUtils.EMPTY, userData);
+    return shortenUrl(url.url(), StringUtils.EMPTY, userAuthentication);
   }
 
   @Transactional
-  void deleteUserUrlByHash(final String hash, final UserDataDTO userData) {
-    if (userData.isAuthenticated()
-        && urlRepository.existsByHashAndUserId(hash, userData.getUserId())) {
+  void deleteUserUrlByHash(final String hash, final UserAuthentication userAuthentication) {
+    if (userAuthentication.isAuthenticated()
+        && urlRepository.existsByHashAndUserId(hash, userAuthentication.getUserId())) {
       urlRepository.deleteUrlEntityByHash(hash);
     }
   }
@@ -48,7 +48,9 @@ class ShortenUrlService {
   }
 
   private UrlEntity shortenUrl(
-      final String url, final String hashCollisionProtector, final UserDataDTO userData)
+      final String url,
+      final String hashCollisionProtector,
+      final UserAuthentication userAuthentication)
       throws DecoderException {
     final String urlForHashing = url.concat(hashCollisionProtector);
     final String urlSha1Hash = DigestUtils.sha1Hex(urlForHashing);
@@ -57,10 +59,11 @@ class ShortenUrlService {
     final String urlBase62Substring = urlBase62Encoded.substring(0, HASH_LENGTH);
     final Optional<UrlEntity> urlEntity = urlRepository.findUrlEntityByHash(urlBase62Substring);
     if (urlEntity.isPresent()) {
-      return shortenUrl(url, UUID.randomUUID().toString(), userData);
+      return shortenUrl(url, UUID.randomUUID().toString(), userAuthentication);
     } else {
-      return userData.isAuthenticated()
-          ? urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url, userData.getUserId()))
+      return userAuthentication.isAuthenticated()
+          ? urlRepository.saveAndFlush(
+              new UrlEntity(urlBase62Substring, url, userAuthentication.getUserId()))
           : urlRepository.saveAndFlush(new UrlEntity(urlBase62Substring, url));
     }
   }

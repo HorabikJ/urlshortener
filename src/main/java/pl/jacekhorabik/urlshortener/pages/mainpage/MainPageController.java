@@ -11,10 +11,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.pages.common.view.View;
-import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
+import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication;
 
 @Slf4j
 @RequestMapping("/v1")
@@ -26,13 +26,14 @@ class MainPageController {
   private final RedirectUrlBuilder redirectUrlBuilder;
 
   @GetMapping
-  @PopulateUserData
-  ModelAndView mainPage(final ModelAndView modelAndView, final UserDataDTO userData) {
+  @PopulateUserAuthentication
+  ModelAndView mainPage(
+      final ModelAndView modelAndView, final UserAuthentication userAuthentication) {
     final HashMap<String, Object> models = new HashMap<>();
 
-    addUserUrlsToModel(userData, models);
+    addUserUrlsToModel(userAuthentication, models);
     models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
-    models.put(AttributeName.USER_DATA_DTO.toString(), userData);
+    models.put(AttributeName.USER_AUTHENTICATION.toString(), userAuthentication);
     models.put(AttributeName.VIEW_NAME.toString(), MAIN_PAGE.toString());
 
     modelAndView.addAllObjects(models);
@@ -41,7 +42,8 @@ class MainPageController {
     return modelAndView;
   }
 
-  private void addUserUrlsToModel(final UserDataDTO userData, final Map<String, Object> models) {
+  private void addUserUrlsToModel(
+      final UserAuthentication userData, final Map<String, Object> models) {
     if (userData.isAuthenticated()) {
       final List<ResponseUrlDTO> userUrls =
           urlShorteningService.findUrlsByUserId(userData.getUserId()).stream()

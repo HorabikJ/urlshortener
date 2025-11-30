@@ -8,36 +8,35 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
-import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 
 @Aspect
 @Component
-class PopulateUserDataAspect {
+class PopulateUserAuthenticationAspect {
 
   /**
-   * Uses {@link PopulateUserData annotation} and {@link UserDataDTO}.
+   * Uses {@link PopulateUserAuthentication annotation} and {@link UserAuthentication}.
    *
    * @param joinPoint
    * @return
    * @throws Throwable
    */
   @Around(
-      "execution(@pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData "
-          + "* *.*(..,pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO,..))")
+      "execution(@pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication "
+          + "* *.*(..,pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication,..))")
   Object populateUserDataFromAuthentication(ProceedingJoinPoint joinPoint) throws Throwable {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
 
     Object[] args = joinPoint.getArgs();
     for (Object arg : args) {
-      if (arg instanceof UserDataDTO userData) {
+      if (arg instanceof UserAuthentication userAuthentication) {
         if (authentication instanceof OAuth2AuthenticationToken oAuth2Token) {
           OAuth2User oAuth2User = oAuth2Token.getPrincipal();
-          userData.setUserId(oAuth2User.getAttribute("sub"));
-          userData.setPreferredUsername(oAuth2User.getAttribute("preferred_username"));
-          userData.setEmail(oAuth2User.getAttribute("email"));
-          userData.setAuthenticated(oAuth2Token.isAuthenticated());
+          userAuthentication.setUserId(oAuth2User.getAttribute("sub"));
+          userAuthentication.setPreferredUsername(oAuth2User.getAttribute("preferred_username"));
+          userAuthentication.setAuthenticated(oAuth2Token.isAuthenticated());
         } else {
-          userData.setAuthenticated(false);
+          userAuthentication.setAuthenticated(false);
         }
       }
     }

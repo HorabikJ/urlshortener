@@ -9,16 +9,16 @@
 <body>
 <nav th:fragment="navigation">
   <div class="container text-center">
-    <div th:if="${!userDataDTO.authenticated}">
+    <div th:if="${!userAuthentication.authenticated}">
       <a href="/oauth2/authorization/keycloak">
         <button type="button"
                 class="btn btn-lg btn-primary btn-block">login
         </button>
       </a>
     </div>
-    <div th:if="${userDataDTO.authenticated}">
+    <div th:if="${userAuthentication.authenticated}">
       <div>
-        <p>Logged in as: '<span th:text="${userDataDTO.preferredUsername}"/>'.</p>
+        <p>Logged in as: '<span th:text="${userAuthentication.preferredUsername}"/>'.</p>
       </div>
       <div>
         <a href="/logout">

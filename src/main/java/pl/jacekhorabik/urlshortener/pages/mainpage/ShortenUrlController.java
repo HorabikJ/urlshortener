@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
-import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
+import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication;
 
 @Slf4j
 @RequestMapping("/v1/url")
@@ -33,11 +33,11 @@ class ShortenUrlController {
 
   // todo add exception handler
   @PostMapping("/create")
-  @PopulateUserData
+  @PopulateUserAuthentication
   ModelAndView shortenUrl(
       final RequestUrlDTO urlDTO,
       final ModelAndView modelAndView,
-      final UserDataDTO userData,
+      final UserAuthentication userAuthentication,
       final RedirectAttributes redirectAttributes)
       throws DecoderException, URISyntaxException {
 
@@ -49,7 +49,7 @@ class ShortenUrlController {
       System.out.println("Do not redirect.");
     }
 
-    final String hash = urlShorteningService.shortenUrl(urlDTO, userData).getHash();
+    final String hash = urlShorteningService.shortenUrl(urlDTO, userAuthentication).getHash();
 
     redirectAttributes.addFlashAttribute(
         AttributeName.RESPONSE_URL_DTO.toString(),
@@ -61,11 +61,11 @@ class ShortenUrlController {
   }
 
   @PostMapping("/delete")
-  @PopulateUserData
+  @PopulateUserAuthentication
   ModelAndView deleteUrl(
       @RequestParam final String hash,
       final ModelAndView modelAndView,
-      final UserDataDTO userData) {
+      final UserAuthentication userData) {
     urlShorteningService.deleteUserUrlByHash(hash, userData);
     modelAndView.setViewName(REDIRECT.to(MAIN_PAGE));
     return modelAndView;

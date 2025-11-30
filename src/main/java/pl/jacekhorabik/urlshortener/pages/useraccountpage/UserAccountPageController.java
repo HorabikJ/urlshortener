@@ -17,9 +17,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
-import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
+import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication;
 
 @Controller
 @RequiredArgsConstructor
@@ -30,11 +30,12 @@ class UserAccountPageController {
   private final UserAccountService userAccountService;
 
   @GetMapping("/info")
-  @PopulateUserData
-  public ModelAndView accountInfo(final ModelAndView modelAndView, final UserDataDTO userData) {
+  @PopulateUserAuthentication
+  public ModelAndView accountInfo(
+      final ModelAndView modelAndView, final UserAuthentication userAuthentication) {
     final Map<String, Object> model = new HashMap<>();
 
-    model.put(AttributeName.USER_DATA_DTO.toString(), userData);
+    model.put(AttributeName.USER_AUTHENTICATION.toString(), userAuthentication);
     model.put(AttributeName.VIEW_NAME.toString(), ACCOUNT_INFO.toString());
 
     modelAndView.addAllObjects(model);
@@ -43,16 +44,16 @@ class UserAccountPageController {
   }
 
   @PostMapping("/delete")
-  @PopulateUserData
+  @PopulateUserAuthentication
   public ModelAndView deleteAccount(
       final ModelAndView modelAndView,
       final HttpServletRequest request,
       final HttpServletResponse response,
-      final UserDataDTO userData,
+      final UserAuthentication userAuthentication,
       final Authentication authentication) {
 
     // Delete user from Keycloak
-    userAccountService.deleteUserAccount(userData);
+    userAccountService.deleteUserAccount(userAuthentication);
     // Logout the user and clear the session
     new SecurityContextLogoutHandler().logout(request, response, authentication);
 
