@@ -8,11 +8,11 @@ public enum View {
   NOT_FOUND("not-found", "/v1/not-found");
 
   private final String viewName;
-  @Getter private final String viewUrl;
+  @Getter private final String viewPath;
 
   View(final String viewName, final String viewURL) {
     this.viewName = viewName;
-    this.viewUrl = viewURL;
+    this.viewPath = viewURL;
   }
 
   @Override

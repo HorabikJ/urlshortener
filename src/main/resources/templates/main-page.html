@@ -29,8 +29,8 @@
     </div>
   </div>
   <div class="row">
-    <div th:if="${userUrlsDTO}">
-      <table>
+    <div th:if="${userUrlsPagesDTO}">
+      <table border="1">
         <thead>
         <tr>
           <th>shorten</th>
@@ -39,10 +39,10 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:if="${userUrlsDTO.empty}">
+        <tr th:if="${userUrlsPagesDTO.empty}">
           <td colspan="3">No links available</td>
         </tr>
-        <tr th:each="url : ${userUrlsDTO}">
+        <tr th:if="${!userUrlsPagesDTO.empty}" th:each="url : ${userUrlsPagesDTO.content}">
           <td>
             <a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a>
           </td>
@@ -58,6 +58,13 @@
         </tr>
         </tbody>
       </table>
+      <div th:if="${userUrlsPagesDTO.totalPages > 0}" class="pagination"
+           th:each="pNum : ${pageNumbers}">
+        <a th:href="@{/v1(pageNumber=${pNum})}"
+           th:text="${pNum + 1}"
+           th:class="${pNum == userUrlsPagesDTO.number} ? active"></a>
+        <!-- todo the above class="active" does not work, fix it -->
+      </div>
     </div>
   </div>
 </div>

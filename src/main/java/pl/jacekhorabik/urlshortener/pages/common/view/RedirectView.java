@@ -10,6 +10,6 @@ public enum RedirectView {
   }
 
   public String to(final View view) {
-    return redirectAction + view.getViewUrl();
+    return redirectAction + view.getViewPath();
   }
 }

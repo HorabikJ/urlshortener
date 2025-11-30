@@ -1,7 +1,6 @@
 package pl.jacekhorabik.urlshortener.pages.mainpage;
 
 import io.seruco.encoding.base62.Base62;
-import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.RequiredArgsConstructor;
@@ -9,6 +8,8 @@ import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.binary.Hex;
 import org.apache.commons.codec.digest.DigestUtils;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
@@ -43,8 +44,8 @@ class ShortenUrlService {
     return urlRepository.findUrlEntityByHash(hash);
   }
 
-  List<UrlEntity> findUrlsByUserId(final String userId) {
-    return urlRepository.findUrlEntityByUserId(userId);
+  Page<UrlEntity> findUrlsByUserId(final String userId, final PageRequest pageRequest) {
+    return urlRepository.findUrlEntityByUserId(userId, pageRequest);
   }
 
   private UrlEntity shortenUrl(
