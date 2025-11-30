@@ -876,7 +876,7 @@
       "description": "",
       "rootUrl": "<APP-EXTERNAL-BASE-URL>",
       "adminUrl": "",
-      "baseUrl": "<APP-EXTERNAL-BASE-URL>/v1/",
+      "baseUrl": "<APP-EXTERNAL-BASE-URL>/v1",
       "surrogateAuthRequired": false,
       "enabled": true,
       "alwaysDisplayInConsole": false,
@@ -906,7 +906,7 @@
         "client.secret.creation.time": "1743691238",
         "backchannel.logout.session.required": "true",
         "backchannel.logout.url": "<APP-INTERNAL-BASE-URL>/logout/connect/back-channel/keycloak",
-        "post.logout.redirect.uris": "<APP-EXTERNAL-BASE-URL>/v1/*",
+        "post.logout.redirect.uris": "<APP-EXTERNAL-BASE-URL>/v1",
         "oauth2.device.authorization.grant.enabled": "false",
         "display.on.consent.screen": "false",
         "backchannel.logout.revoke.offline.tokens": "false"
