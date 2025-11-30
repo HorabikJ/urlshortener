@@ -4,6 +4,7 @@ public enum AttributeName {
   RESPONSE_URL_DTO("responseUrlDTO"),
   REQUEST_URL_DTO("requestUrlDTO"),
   USER_URLS_DTO("userUrlsDTO"),
+  USER_ACCOUNT_DTO("userAccountDTO"),
   USER_AUTHENTICATION("userAuthentication"),
   VIEW_NAME("viewName");
 

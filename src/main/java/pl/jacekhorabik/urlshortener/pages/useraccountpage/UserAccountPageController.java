@@ -35,6 +35,9 @@ class UserAccountPageController {
       final ModelAndView modelAndView, final UserAuthentication userAuthentication) {
     final Map<String, Object> model = new HashMap<>();
 
+    model.put(
+        AttributeName.USER_ACCOUNT_DTO.toString(),
+        userAccountService.fetchUserAccountInfo(userAuthentication));
     model.put(AttributeName.USER_AUTHENTICATION.toString(), userAuthentication);
     model.put(AttributeName.VIEW_NAME.toString(), ACCOUNT_INFO.toString());
 

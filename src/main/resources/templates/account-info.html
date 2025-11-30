@@ -16,16 +16,23 @@
       <tbody>
       <tr>
         <td>username:</td>
-        <td th:text="${userDataDTO.preferredUsername}"></td>
+        <td th:text="${userAccountDTO.username}"></td>
       </tr>
       <tr>
         <td>email:</td>
-        <td th:text="${userDataDTO.email}"></td>
+        <td th:text="${userAccountDTO.email}"></td>
       </tr>
       <tr>
-        <td>delete account</td>
-        <td>
-          <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
+        <td>number of links:</td>
+        <td th:text="${userAccountDTO.numberOfLinks}"></td>
+      </tr>
+      <tr>
+        <td>account created at:</td>
+        <td th:text="${userAccountDTO.accountCreatedAt}"></td>
+      </tr>
+      <tr>
+        <td colspan="2">
+        <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
             <button type="submit" class="btn btn-lg btn-danger"
                     onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
               delete account

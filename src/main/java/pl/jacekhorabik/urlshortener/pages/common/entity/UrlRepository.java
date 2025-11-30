@@ -16,4 +16,5 @@ public interface UrlRepository extends JpaRepository<UrlEntity, String> {
 
   boolean existsByHashAndUserId(String hash, String userId);
 
+  long countUrlEntitiesByUserId(String userId);
 }
