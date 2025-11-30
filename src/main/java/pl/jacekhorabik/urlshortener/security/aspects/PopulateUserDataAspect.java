@@ -1,6 +1,5 @@
 package pl.jacekhorabik.urlshortener.security.aspects;
 
-import lombok.extern.slf4j.Slf4j;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -13,11 +12,10 @@ import pl.jacekhorabik.urlshortener.pages.common.dto.UserDataDTO;
 
 @Aspect
 @Component
-@Slf4j
 class PopulateUserDataAspect {
 
   /**
-   * Uses {@link PopulateUserData annotation}
+   * Uses {@link PopulateUserData annotation} and {@link UserDataDTO}.
    *
    * @param joinPoint
    * @return
