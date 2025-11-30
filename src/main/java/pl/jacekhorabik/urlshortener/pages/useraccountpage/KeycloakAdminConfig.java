@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.useraccount;
+package pl.jacekhorabik.urlshortener.pages.useraccountpage;
 
 import org.keycloak.admin.client.Keycloak;
 import org.keycloak.admin.client.KeycloakBuilder;

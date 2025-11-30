@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.shortenurl;
+package pl.jacekhorabik.urlshortener.pages.mainpage;
 
 import io.seruco.encoding.base62.Base62;
 import java.util.List;
@@ -12,6 +12,8 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
+import pl.jacekhorabik.urlshortener.pages.common.UrlEntity;
+import pl.jacekhorabik.urlshortener.pages.common.UrlRepository;
 
 @RequiredArgsConstructor
 @Service

@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.useraccount;
+package pl.jacekhorabik.urlshortener.pages.useraccountpage;
 
 import lombok.RequiredArgsConstructor;
 import org.keycloak.admin.client.resource.RealmResource;

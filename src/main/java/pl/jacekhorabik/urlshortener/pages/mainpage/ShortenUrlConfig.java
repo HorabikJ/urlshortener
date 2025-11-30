@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.shortenurl;
+package pl.jacekhorabik.urlshortener.pages.mainpage;
 
 import io.seruco.encoding.base62.Base62;
 import org.springframework.context.annotation.Bean;

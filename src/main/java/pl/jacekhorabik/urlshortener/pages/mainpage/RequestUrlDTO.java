@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.shortenurl;
+package pl.jacekhorabik.urlshortener.pages.mainpage;
 
 record RequestUrlDTO(String url) {
 

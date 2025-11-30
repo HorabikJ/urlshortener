@@ -14,6 +14,9 @@ import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
 import org.springframework.test.web.servlet.MockMvc;
 import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.mainpage.RedirectController;
+import pl.jacekhorabik.urlshortener.pages.mainpage.ShortenUrlService;
+import pl.jacekhorabik.urlshortener.pages.mainpage.UrlEntity;
 
 @WebMvcTest(controllers = RedirectController.class)
 @ActiveProfiles({"local"})

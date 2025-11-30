@@ -1,10 +1,10 @@
-package pl.jacekhorabik.urlshortener.shortenurl;
+package pl.jacekhorabik.urlshortener.pages.common;
 
 import java.util.List;
 import java.util.Optional;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-interface UrlRepository extends JpaRepository<UrlEntity, String> {
+public interface UrlRepository extends JpaRepository<UrlEntity, String> {
 
   Optional<UrlEntity> findUrlEntityByHash(String hash);
 

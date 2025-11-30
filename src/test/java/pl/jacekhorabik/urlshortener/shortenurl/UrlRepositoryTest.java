@@ -6,6 +6,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.test.context.ActiveProfiles;
+import pl.jacekhorabik.urlshortener.pages.mainpage.UrlEntity;
+import pl.jacekhorabik.urlshortener.pages.mainpage.UrlRepository;
 
 @DataJpaTest
 @ActiveProfiles("h2")

@@ -1,20 +1,20 @@
-package pl.jacekhorabik.urlshortener.test;
+package pl.jacekhorabik.urlshortener.pages.testpage;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
-public class TestController {
+class TestController {
 
   @GetMapping("/admin")
-  public ModelAndView getAdminView(ModelAndView modelAndView) {
+  ModelAndView getAdminView(ModelAndView modelAndView) {
     modelAndView.setViewName("_admin");
     return modelAndView;
   }
 
   @GetMapping("/user")
-  public ModelAndView getUserView(ModelAndView modelAndView) {
+  ModelAndView getUserView(ModelAndView modelAndView) {
     modelAndView.setViewName("_user");
     return modelAndView;
   }

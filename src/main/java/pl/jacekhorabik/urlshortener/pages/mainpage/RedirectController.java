@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.shortenurl;
+package pl.jacekhorabik.urlshortener.pages.mainpage;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.view.RedirectView;
 import pl.jacekhorabik.urlshortener.common.view.ViewName;
+import pl.jacekhorabik.urlshortener.pages.common.UrlEntity;
 
 @Controller
 @RequestMapping("/v1")

@@ -10,6 +10,9 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.jdbc.Sql;
 import org.springframework.transaction.annotation.Transactional;
+import pl.jacekhorabik.urlshortener.pages.mainpage.ResponseUrlDTO;
+import pl.jacekhorabik.urlshortener.pages.mainpage.ShortenUrlService;
+import pl.jacekhorabik.urlshortener.pages.mainpage.UrlEntity;
 
 @SpringBootTest
 @ActiveProfiles("local")

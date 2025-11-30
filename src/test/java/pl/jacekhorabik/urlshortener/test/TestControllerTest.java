@@ -11,6 +11,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.context.annotation.Import;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.web.servlet.MockMvc;
+import pl.jacekhorabik.urlshortener.pages.testpage.TestController;
 import pl.jacekhorabik.urlshortener.security.SecurityConfig;
 
 @WebMvcTest(TestController.class)

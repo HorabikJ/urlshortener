@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.useraccount;
+package pl.jacekhorabik.urlshortener.pages.useraccountpage;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
