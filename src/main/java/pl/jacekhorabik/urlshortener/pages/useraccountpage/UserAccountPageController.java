@@ -6,6 +6,8 @@ import static pl.jacekhorabik.urlshortener.pages.common.view.View.MAIN_PAGE;
 
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import java.util.HashMap;
+import java.util.Map;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.Authentication;
@@ -23,14 +25,19 @@ import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
 @RequiredArgsConstructor
 @RequestMapping("/v1/account")
 @Slf4j
-class UserAccountController {
+class UserAccountPageController {
 
   private final UserAccountService userAccountService;
 
   @GetMapping("/info")
   @PopulateUserData
   public ModelAndView accountInfo(final ModelAndView modelAndView, final UserDataDTO userData) {
-    modelAndView.addObject(AttributeName.USER_DATA_DTO.toString(), userData);
+    final Map<String, Object> model = new HashMap<>();
+
+    model.put(AttributeName.USER_DATA_DTO.toString(), userData);
+    model.put(AttributeName.VIEW_NAME.toString(), ACCOUNT_INFO.toString());
+
+    modelAndView.addAllObjects(model);
     modelAndView.setViewName(ACCOUNT_INFO.toString());
     return modelAndView;
   }

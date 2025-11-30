@@ -12,15 +12,29 @@
     <div th:if="${!userDataDTO.authenticated}">
       <a href="/oauth2/authorization/keycloak">
         <button type="button"
-                class="btn btn-lg btn-primary btn-block">Login
+                class="btn btn-lg btn-primary btn-block">login
         </button>
       </a>
     </div>
     <div th:if="${userDataDTO.authenticated}">
-      <p>Hi <span th:text="${userDataDTO.preferredUsername}"></span>!</p>
-      <a href="/logout">
-        <button type="button" class="btn btn-lg btn-primary">Logout</button>
-      </a>
+      <div>
+        <p>Logged in as: '<span th:text="${userDataDTO.preferredUsername}"/>'.</p>
+      </div>
+      <div>
+        <a href="/logout">
+          <button type="button" class="btn btn-lg btn-primary">logout</button>
+        </a>
+      </div>
+      <div th:if="${viewName == 'main-page'}">
+        <a href="/v1/account/info">
+          <button type="button" class="btn btn-lg btn-primary">account info</button>
+        </a>
+      </div>
+      <div th:if="${viewName == 'account-info'}">
+        <a href="/v1">
+          <button type="button" class="btn btn-lg btn-primary">main page</button>
+        </a>
+      </div>
     </div>
   </div>
 </nav>

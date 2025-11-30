@@ -1,5 +1,7 @@
 package pl.jacekhorabik.urlshortener.pages.mainpage;
 
+import static pl.jacekhorabik.urlshortener.pages.common.view.View.MAIN_PAGE;
+
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,6 +33,7 @@ class MainPageController {
     addUserUrlsToModel(userData, models);
     models.put(AttributeName.REQUEST_URL_DTO.toString(), new RequestUrlDTO());
     models.put(AttributeName.USER_DATA_DTO.toString(), userData);
+    models.put(AttributeName.VIEW_NAME.toString(), MAIN_PAGE.toString());
 
     modelAndView.addAllObjects(models);
     modelAndView.setViewName(View.MAIN_PAGE.toString());
