@@ -33,21 +33,29 @@
       <table border="1">
         <thead>
         <tr>
+          <th>#</th>
           <th>shorten</th>
           <th>original</th>
+          <th>created at</th>
           <th>action</th>
         </tr>
         </thead>
         <tbody>
         <tr th:if="${userUrlsPagesDTO.empty}">
-          <td colspan="3">No links available</td>
+          <td colspan="5">No links available</td>
         </tr>
-        <tr th:if="${!userUrlsPagesDTO.empty}" th:each="url : ${userUrlsPagesDTO.content}">
+        <tr th:if="${!userUrlsPagesDTO.empty}" th:each="url, iStat: ${userUrlsPagesDTO.content}">
+          <td>
+            <span th:text="${iStat.index + 1 + '.'}"/>
+          </td>
           <td>
             <a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a>
           </td>
           <td>
             <a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a>
+          </td>
+          <td>
+            <span th:text="${url.createdAt}"/>
           </td>
           <td>
             <form th:action="@{/v1/url/delete}" method="post">

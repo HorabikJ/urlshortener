@@ -74,7 +74,8 @@ class MainPageController {
                       new ResponseUrlDTO(
                           redirectUrlBuilder.buildRedirectUrl(entity.getHash()).toString(),
                           entity.getUrl(),
-                          entity.getHash()));
+                          entity.getHash(),
+                          entity.getCreatedAt()));
 
       final int totalPages = userUrls.getTotalPages();
       if (totalPages > 0) {
