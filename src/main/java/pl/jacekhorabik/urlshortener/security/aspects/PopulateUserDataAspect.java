@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.authentication.OAuth2AuthenticationToken;
 import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
-import pl.jacekhorabik.urlshortener.common.model.UserDataDTO;
+import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
 
 @Aspect
 @Component

@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
-import pl.jacekhorabik.urlshortener.common.model.UserDataDTO;
+import pl.jacekhorabik.urlshortener.common.dto.UserDataDTO;
 import pl.jacekhorabik.urlshortener.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.common.view.ViewName;
 import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserData;
