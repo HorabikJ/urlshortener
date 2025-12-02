@@ -10,9 +10,9 @@ public enum View {
   private final String viewName;
   @Getter private final String viewPath;
 
-  View(final String viewName, final String viewURL) {
+  View(final String viewName, final String viewPath) {
     this.viewName = viewName;
-    this.viewPath = viewURL;
+    this.viewPath = viewPath;
   }
 
   @Override
