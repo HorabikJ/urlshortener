@@ -7,33 +7,38 @@
   <title>navigation bar</title>
 </head>
 <body>
-<nav th:fragment="navigation">
-  <div class="container text-center">
-    <div th:if="${!userAuthentication.authenticated}">
-      <a href="/oauth2/authorization/keycloak">
-        <button type="button"
-                class="btn btn-lg btn-primary btn-block">login
-        </button>
-      </a>
-    </div>
-    <div th:if="${userAuthentication.authenticated}">
-      <div>
-        <p>Logged in as: '<span th:text="${userAuthentication.preferredUsername}"/>'.</p>
+<nav th:fragment="navigation" class="navbar">
+  <div class="container">
+    <div class="navbar-content">
+      <div class="navbar-left"></div>
+      <div class="navbar-center">
+        <h1 class="navbar-title">Your favourite URL shortener!</h1>
       </div>
-      <div>
-        <a href="/logout">
-          <button type="button" class="btn btn-lg btn-primary">logout</button>
-        </a>
-      </div>
-      <div th:if="${viewName == 'main-page'}">
-        <a href="/v1/account/info">
-          <button type="button" class="btn btn-lg btn-primary">account info</button>
-        </a>
-      </div>
-      <div th:if="${viewName == 'account-info'}">
-        <a href="/v1">
-          <button type="button" class="btn btn-lg btn-primary">main page</button>
-        </a>
+      <div class="navbar-right">
+        <div th:if="${!userAuthentication.authenticated}" class="auth-section">
+          <a href="/oauth2/authorization/keycloak">
+            <button type="button" class="btn btn-lg btn-primary">Login</button>
+          </a>
+        </div>
+        <div th:if="${userAuthentication.authenticated}" class="auth-section authenticated">
+          <span class="user-greeting">Logged in as: <span class="username"
+                                                          th:text="${userAuthentication.preferredUsername}"></span></span>
+          <div th:if="${viewName == 'account-info'}">
+            <a href="/v1">
+              <button type="button" class="btn btn-lg btn-primary">Main Page</button>
+            </a>
+          </div>
+          <div th:if="${viewName == 'main-page'}">
+            <a href="/v1/account/info">
+              <button type="button" class="btn btn-lg btn-primary">Account Info</button>
+            </a>
+          </div>
+          <div>
+            <a href="/logout">
+              <button type="button" class="btn btn-lg btn-primary">Logout</button>
+            </a>
+          </div>
+        </div>
       </div>
     </div>
   </div>

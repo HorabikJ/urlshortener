@@ -73,7 +73,8 @@ class SecurityConfig {
           requests.requestMatchers("/logout", "/logout/**").authenticated();
           requests
               // todo rethink those paths
-              .requestMatchers("/v1", "/v1/**", "/actuator/health", "/favicon.ico", "/login/**")
+              .requestMatchers(
+                  "/v1", "/v1/**", "/actuator/health", "/favicon.ico", "/login/**", "/css/**")
               .permitAll();
           requests.anyRequest().denyAll();
         });

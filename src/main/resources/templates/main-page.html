@@ -3,79 +3,108 @@
 <head>
   <div th:replace="~{fragments/head-metadata :: meta}"></div>
   <div th:replace="~{fragments/head-metadata :: bootstrap-link}"></div>
-  <title>main page</title>
+  <div th:replace="~{fragments/head-metadata :: custom-css}"></div>
+  <title>URL Shortener - Main Page</title>
 </head>
 <body>
 <div th:replace="~{fragments/navigation :: navigation}"></div>
-<div class="container text-center">
-  <div class="row">
-    <h3>Welcome to your favourite url shortener!</h3>
-  </div>
-  <div class="row">
+
+<div class="main-container">
+  <div class="url-form">
     <form th:action="@{/v1/url/create}" th:object="${requestUrlDTO}" method="POST">
       <fieldset>
-        <input type="text" th:field="*{url}" placeholder="paste your url here">
-        <input type="submit" name="Shorten!">
+        <input type="text" th:field="*{url}" placeholder="Paste your URL here" required>
+        <input type="submit" value="Shorten URL">
       </fieldset>
     </form>
   </div>
-  <div class="row">
-    <div th:if="${responseUrlDTO}">
-      <p>your link is:
-        <a th:href="${responseUrlDTO.shortUrl}"
-           th:text="${responseUrlDTO.shortUrl}">
-        </a>
-      </p>
+
+  <div th:if="${responseUrlDTO}" class="result-card">
+    <p>Your shortened link is ready:</p>
+    <div class="url-copy-container">
+      <a th:href="${responseUrlDTO.shortUrl}"
+         th:text="${responseUrlDTO.shortUrl}"
+         id="shortenedUrl">
+      </a>
+      <button type="button" class="btn btn-copy" onclick="copyToClipboard()">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+          <path d="M4 1.5H3a2 2 0 0 0-2 2V14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V3.5a2 2 0 0 0-2-2h-1v1h1a1 1 0 0 1 1 1V14a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1V3.5a1 1 0 0 1 1-1h1v-1z"/>
+          <path d="M9.5 1a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-3a.5.5 0 0 1-.5-.5v-1a.5.5 0 0 1 .5-.5h3zm-3-1A1.5 1.5 0 0 0 5 1.5v1A1.5 1.5 0 0 0 6.5 4h3A1.5 1.5 0 0 0 11 2.5v-1A1.5 1.5 0 0 0 9.5 0h-3z"/>
+        </svg>
+        Copy
+      </button>
+      <span id="copyFeedback" class="copy-feedback">Copied!</span>
     </div>
   </div>
-  <div class="row">
-    <div th:if="${userUrlsPagesDTO}">
-      <table border="1">
-        <thead>
-        <tr>
-          <th>#</th>
-          <th>shorten</th>
-          <th>original</th>
-          <th>created at</th>
-          <th>action</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:if="${userUrlsPagesDTO.empty}">
-          <td colspan="5">No links available</td>
-        </tr>
-        <tr th:if="${!userUrlsPagesDTO.empty}" th:each="url, iStat: ${userUrlsPagesDTO.content}">
-          <td>
-            <span th:text="${iStat.index + 1 + '.'}"/>
-          </td>
-          <td>
-            <a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a>
-          </td>
-          <td>
-            <a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a>
-          </td>
-          <td>
-            <span th:text="${url.createdAt}"/>
-          </td>
-          <td>
-            <form th:action="@{/v1/url/delete}" method="post">
-              <input type="hidden" name="hash" th:value="${url.hash}"/>
-              <input type="submit" value="delete" class="btn btn-danger"/>
-            </form>
-          </td>
-        </tr>
-        </tbody>
-      </table>
-      <div th:if="${userUrlsPagesDTO.totalPages > 0}" class="pagination"
-           th:each="pIdx : ${pageIndexes}">
-        <a th:href="@{/v1(pageIndex=${pIdx}, pageSize=${userUrlsPagesDTO.size})}"
-           th:text="${pIdx + 1}"
-           th:class="${pIdx == userUrlsPagesDTO.number} ? active"></a>
-        <!-- todo the above class="active" does not work, fix it -->
-      </div>
+
+  <div th:if="${userUrlsPagesDTO}" class="table-container">
+    <h4>Your Shortened URLs</h4>
+    <table>
+      <thead>
+      <tr>
+        <th>#</th>
+        <th>Short URL</th>
+        <th>Original URL</th>
+        <th>Created At</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:if="${userUrlsPagesDTO.empty}">
+        <td colspan="5" style="text-align: center; padding: 2rem;">No links available yet</td>
+      </tr>
+      <tr th:if="${!userUrlsPagesDTO.empty}" th:each="url, iStat: ${userUrlsPagesDTO.content}">
+        <td>
+          <span th:text="${iStat.index + 1 + userUrlsPagesDTO.number * userUrlsPagesDTO.size + '.'}"/>
+        </td>
+        <td>
+          <a th:href="${url.shortUrl}" th:text="${url.shortUrl}"></a>
+        </td>
+        <td>
+          <a th:href="${url.originalUrl}" th:text="${url.originalUrl}"></a>
+        </td>
+        <td>
+          <span th:text="${url.createdAt}"/>
+        </td>
+        <td>
+          <form th:action="@{/v1/url/delete}" method="post">
+            <input type="hidden" name="hash" th:value="${url.hash}"/>
+            <input type="submit" value="Delete" class="btn btn-danger"/>
+          </form>
+        </td>
+      </tr>
+      </tbody>
+    </table>
+    <div th:if="${userUrlsPagesDTO.totalPages > 1}" class="pagination">
+      <a th:each="pIdx : ${pageIndexes}"
+         th:href="@{/v1(pageIndex=${pIdx}, pageSize=${userUrlsPagesDTO.size})}"
+         th:text="${pIdx + 1}"
+         th:classappend="${pIdx == userUrlsPagesDTO.number} ? 'active' : ''"></a>
     </div>
   </div>
 </div>
+
 <div th:replace="~{fragments/bootstrap-script :: bootstrap-script}"></div>
+<script>
+    function copyToClipboard() {
+        const urlElement = document.getElementById('shortenedUrl');
+        const feedbackElement = document.getElementById('copyFeedback');
+        const urlText = urlElement.textContent;
+
+        // Use modern clipboard API
+        navigator.clipboard.writeText(urlText).then(function () {
+            // Show feedback
+            feedbackElement.classList.add('show');
+
+            // Hide feedback after 2 seconds
+            setTimeout(function () {
+                feedbackElement.classList.remove('show');
+            }, 2000);
+        }).catch(function (err) {
+            console.error('Failed to copy: ', err);
+            alert('Failed to copy to clipboard');
+        });
+    }
+</script>
 </body>
 </html>

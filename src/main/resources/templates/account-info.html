@@ -3,39 +3,39 @@
 <head>
   <div th:replace="~{fragments/head-metadata :: meta}"></div>
   <div th:replace="~{fragments/head-metadata :: bootstrap-link}"></div>
-  <title>main page</title>
+  <div th:replace="~{fragments/head-metadata :: custom-css}"></div>
+  <title>URL Shortener - Account Info</title>
 </head>
 <body>
 <div th:replace="~{fragments/navigation :: navigation}"></div>
-<div class="container text-center">
-  <div class="row">
-    <h3>Account info</h3>
-  </div>
-  <div class="row">
+
+<div class="main-container">
+  <div class="account-card">
+    <h3>Account Information</h3>
     <table>
       <tbody>
       <tr>
-        <td>username:</td>
+        <td>Username:</td>
         <td th:text="${userAccountDTO.username}"></td>
       </tr>
       <tr>
-        <td>email:</td>
+        <td>Email:</td>
         <td th:text="${userAccountDTO.email}"></td>
       </tr>
       <tr>
-        <td>number of links:</td>
+        <td>Number of Links:</td>
         <td th:text="${userAccountDTO.numberOfLinks}"></td>
       </tr>
       <tr>
-        <td>account created at:</td>
+        <td>Account Created:</td>
         <td th:text="${userAccountDTO.createdAt}"></td>
       </tr>
       <tr>
-        <td colspan="2">
-        <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
+        <td colspan="2" style="text-align: center; padding-top: 2rem;">
+          <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
             <button type="submit" class="btn btn-lg btn-danger"
                     onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
-              delete account
+              Delete Account
             </button>
           </form>
         </td>
@@ -44,6 +44,7 @@
     </table>
   </div>
 </div>
+
 <div th:replace="~{fragments/bootstrap-script :: bootstrap-script}"></div>
 </body>
 </html>
