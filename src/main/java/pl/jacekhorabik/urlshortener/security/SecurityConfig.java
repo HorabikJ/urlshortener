@@ -69,13 +69,12 @@ class SecurityConfig {
     http.authorizeHttpRequests(
         requests -> {
           requests.requestMatchers("/admin").hasAuthority(UserRole.ADMIN.toString());
-          requests.requestMatchers("/user").hasAuthority(UserRole.USER.toString());
-          requests.requestMatchers("/v1/account/**").hasAuthority(UserRole.USER.toString());
+          requests
+              .requestMatchers("/user", "/v1/account/**", "/v1/url/delete")
+              .hasAuthority(UserRole.USER.toString());
           requests.requestMatchers("/logout", "/logout/**").authenticated();
           requests
-              // todo rethink those paths
-              .requestMatchers(
-                  "/v1", "/v1/**", "/actuator/health", "/favicon.ico", "/login/**", "/css/**")
+              .requestMatchers("/v1", "/v1/r/**", "/v1/url/create", "/login/**", "/css/**")
               .permitAll();
           requests.anyRequest().denyAll();
         });
