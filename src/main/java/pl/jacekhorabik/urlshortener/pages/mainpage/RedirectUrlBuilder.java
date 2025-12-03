@@ -1,6 +1,6 @@
 package pl.jacekhorabik.urlshortener.pages.mainpage;
 
-import java.net.URI;
+import java.net.URL;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
@@ -8,10 +8,9 @@ import org.springframework.stereotype.Component;
 class RedirectUrlBuilder {
 
   @Value("${app.external-base-url}")
-  private String appExternalBaseUrl;
+  private URL appExternalBaseUrl;
 
-  URI buildRedirectUrl(final String hash) {
-    final String redirectUrl = appExternalBaseUrl + "/v1/r/" + hash;
-    return URI.create(redirectUrl);
+  String buildRedirectUrl(final String hash) {
+    return appExternalBaseUrl.toString() + "/v1/r/" + hash;
   }
 }

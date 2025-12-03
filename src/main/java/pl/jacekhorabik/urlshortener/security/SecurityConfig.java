@@ -1,6 +1,7 @@
 package pl.jacekhorabik.urlshortener.security;
 
 import jakarta.servlet.http.HttpServletResponse;
+import java.net.URL;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -17,10 +18,10 @@ import org.springframework.web.util.UriComponentsBuilder;
 class SecurityConfig {
 
   @Value("${keycloak.external-base-url}")
-  private String keycloakExternalBaseURL;
+  private URL keycloakExternalBaseURL;
 
   @Value("${app.external-base-url}")
-  private String appExternalBaseUrl;
+  private URL appExternalBaseUrl;
 
   @Bean
   SecurityFilterChain clientSecurityFilterChain(HttpSecurity http) throws Exception {

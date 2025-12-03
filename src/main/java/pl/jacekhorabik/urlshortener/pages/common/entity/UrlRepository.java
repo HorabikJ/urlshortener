@@ -2,14 +2,14 @@ package pl.jacekhorabik.urlshortener.pages.common.entity;
 
 import java.util.Optional;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface UrlRepository extends JpaRepository<UrlEntity, String> {
 
   Optional<UrlEntity> findUrlEntityByHash(String hash);
 
-  Page<UrlEntity> findUrlEntityByUserId(String userId, PageRequest pageRequest);
+  Page<UrlEntity> findUrlEntityByUserId(String userId, Pageable pageable);
 
   void deleteUrlEntityByHash(String hash);
 

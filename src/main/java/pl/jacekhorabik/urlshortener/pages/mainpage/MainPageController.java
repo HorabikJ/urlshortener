@@ -72,7 +72,7 @@ class MainPageController {
               .map(
                   entity ->
                       new ResponseUrlDTO(
-                          redirectUrlBuilder.buildRedirectUrl(entity.getHash()).toString(),
+                          redirectUrlBuilder.buildRedirectUrl(entity.getHash()),
                           entity.getUrl(),
                           entity.getHash(),
                           entity.getCreatedAt()));

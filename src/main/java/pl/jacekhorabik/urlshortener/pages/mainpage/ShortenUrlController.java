@@ -3,12 +3,9 @@ package pl.jacekhorabik.urlshortener.pages.mainpage;
 import static pl.jacekhorabik.urlshortener.pages.common.view.RedirectView.REDIRECT;
 import static pl.jacekhorabik.urlshortener.pages.common.view.View.MAIN_PAGE;
 
-import java.net.URI;
-import java.net.URISyntaxException;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.codec.DecoderException;
-import org.springframework.beans.factory.annotation.Value;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,7 +16,6 @@ import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication;
 
-@Slf4j
 @RequestMapping("/v1/url")
 @Controller
 @RequiredArgsConstructor
@@ -27,9 +23,7 @@ class ShortenUrlController {
 
   private final ShortenUrlService urlShorteningService;
   private final RedirectUrlBuilder redirectUrlBuilder;
-
-  @Value("${app.external-base-url}")
-  private String appExternalBaseUrl;
+  private final ShortenUrlValidator urlValidator;
 
   // todo add exception handler
   @PostMapping("/create")
@@ -39,22 +33,17 @@ class ShortenUrlController {
       final ModelAndView modelAndView,
       final UserAuthentication userAuthentication,
       final RedirectAttributes redirectAttributes)
-      throws DecoderException, URISyntaxException {
+      throws DecoderException {
 
-    URI redirectUrl = new URI(urlDTO.url());
-    URI appUrl = new URI(appExternalBaseUrl);
-    if (redirectUrl.getHost().equals(appUrl.getHost())) {
-      // todo implement URL validation, url string has to be a valid url and can not be a domain
-      // name of the app
-      System.out.println("Do not redirect.");
+    if (!urlValidator.isValidUrl(urlDTO.url())) {
+      redirectAttributes.addFlashAttribute(AttributeName.INVALID_URL.toString(), StringUtils.EMPTY);
+    } else {
+      final String hash =
+          urlShorteningService.shortenUrl(urlDTO.url(), userAuthentication).getHash();
+      final String redirectURL = redirectUrlBuilder.buildRedirectUrl(hash);
+      redirectAttributes.addFlashAttribute(
+          AttributeName.RESPONSE_URL_DTO.toString(), new ResponseUrlDTO(redirectURL));
     }
-
-    final String hash = urlShorteningService.shortenUrl(urlDTO, userAuthentication).getHash();
-
-    redirectAttributes.addFlashAttribute(
-        AttributeName.RESPONSE_URL_DTO.toString(),
-        new ResponseUrlDTO(redirectUrlBuilder.buildRedirectUrl(hash).toString()));
-
     modelAndView.setViewName(REDIRECT.to(MAIN_PAGE));
 
     return modelAndView;

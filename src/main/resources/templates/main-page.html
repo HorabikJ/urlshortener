@@ -19,6 +19,11 @@
     </form>
   </div>
 
+  <div th:if="${invalidURL}" class="alert alert-danger" role="alert"
+       style="text-align: center; max-width: 700px; margin-left: auto; margin-right: auto; margin-bottom: 2rem;">
+    <strong>Invalid URL!</strong> Please enter a valid HTTP or HTTPS URL.
+  </div>
+
   <div th:if="${responseUrlDTO}" class="result-card">
     <p>Your shortened link is ready:</p>
     <div class="url-copy-container">

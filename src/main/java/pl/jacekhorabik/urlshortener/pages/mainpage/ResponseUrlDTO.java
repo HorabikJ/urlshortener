@@ -12,7 +12,7 @@ record ResponseUrlDTO(String shortUrl, String originalUrl, String hash, String c
       DateTimeFormatter.ofPattern(DATE_TIME_FORMAT_STRING);
 
   ResponseUrlDTO(String shortUrl) {
-    this(shortUrl, "", "", "");
+    this(shortUrl, (String) null, (String) null, (String) null);
   }
 
   ResponseUrlDTO(String shortUrl, String originalUrl, String hash, Instant createdAt) {
