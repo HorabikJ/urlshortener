@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.security;
+package pl.jacekhorabik.urlshortener.config.security;
 
 import jakarta.servlet.http.HttpServletResponse;
 import java.net.URL;
@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 import org.springframework.web.util.UriComponentsBuilder;
+import pl.jacekhorabik.urlshortener.pages.common.view.View;
 
 @Configuration
 @EnableWebSecurity
@@ -64,8 +65,15 @@ class SecurityConfig {
           logout.logoutRequestMatcher(new AntPathRequestMatcher("/logout"));
         });
 
-    //    todo think how to authorize k8s probes to hit /actuator/health endpoints when they will be
-    // secured
+    http.exceptionHandling(
+        exceptionHandlingConfigurer ->
+            exceptionHandlingConfigurer.accessDeniedHandler(
+                (request, response, accessDeniedException) -> {
+                  log.warn(
+                      "Access denied for path: {}", request.getRequestURI(), accessDeniedException);
+                  response.sendRedirect(View.NOT_FOUND.getViewPath());
+                }));
+
     http.authorizeHttpRequests(
         requests -> {
           requests.requestMatchers("/admin").hasAuthority(UserRole.ADMIN.toString());
@@ -74,7 +82,15 @@ class SecurityConfig {
               .hasAuthority(UserRole.USER.toString());
           requests.requestMatchers("/logout", "/logout/**").authenticated();
           requests
-              .requestMatchers("/v1", "/v1/r/**", "/v1/url/create", "/login/**", "/css/**")
+              .requestMatchers(
+                  "/v1",
+                  "/v1/r/**",
+                  "/v1/url/create",
+                  "/v1/not-found",
+                  "/login/**",
+                  "/css/**",
+                  "/favicon.ico",
+                  "/favicon.svg")
               .permitAll();
           requests.anyRequest().denyAll();
         });

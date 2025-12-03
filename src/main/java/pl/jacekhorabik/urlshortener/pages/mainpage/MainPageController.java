@@ -17,10 +17,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import pl.jacekhorabik.urlshortener.config.security.aspects.PopulateUserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
 import pl.jacekhorabik.urlshortener.pages.common.view.View;
-import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication;
 
 @Slf4j
 @RequestMapping("/v1")

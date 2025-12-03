@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.security;
+package pl.jacekhorabik.urlshortener.config.security;
 
 public enum UserRole {
   ADMIN("ADMIN"),

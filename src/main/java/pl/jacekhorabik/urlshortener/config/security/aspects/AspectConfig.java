@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.security.aspects;
+package pl.jacekhorabik.urlshortener.config.security.aspects;
 
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.EnableAspectJAutoProxy;

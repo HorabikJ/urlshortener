@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.security.aspects;
+package pl.jacekhorabik.urlshortener.config.security.aspects;
 
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
@@ -14,15 +14,9 @@ import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 @Component
 class PopulateUserAuthenticationAspect {
 
-  /**
-   * Uses {@link PopulateUserAuthentication annotation} and {@link UserAuthentication}.
-   *
-   * @param joinPoint
-   * @return
-   * @throws Throwable
-   */
+  // todo Maybe use @ControllerAdvice with @ModelAttribute instead of aspect?
   @Around(
-      "execution(@pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication "
+      "execution(@pl.jacekhorabik.urlshortener.config.security.aspects.PopulateUserAuthentication "
           + "* *.*(..,pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication,..))")
   Object populateUserDataFromAuthentication(ProceedingJoinPoint joinPoint) throws Throwable {
     Authentication authentication = SecurityContextHolder.getContext().getAuthentication();

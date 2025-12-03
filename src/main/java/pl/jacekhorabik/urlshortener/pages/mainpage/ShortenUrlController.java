@@ -12,9 +12,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import pl.jacekhorabik.urlshortener.config.security.aspects.PopulateUserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.dto.UserAuthentication;
 import pl.jacekhorabik.urlshortener.pages.common.view.AttributeName;
-import pl.jacekhorabik.urlshortener.security.aspects.PopulateUserAuthentication;
 
 @RequestMapping("/v1/url")
 @Controller

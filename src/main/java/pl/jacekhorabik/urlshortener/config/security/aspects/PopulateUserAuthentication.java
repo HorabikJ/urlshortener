@@ -1,4 +1,4 @@
-package pl.jacekhorabik.urlshortener.security.aspects;
+package pl.jacekhorabik.urlshortener.config.security.aspects;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
