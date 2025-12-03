@@ -8,7 +8,7 @@ metadata:
     layer: backend
 spec:
   ports:
-# todo parameterize ports and namespaces in the below link, maybe by helm and env vars?
+    # todo parameterize ports and namespaces, maybe by helm and env vars?
   - port: 8080
     protocol: TCP
     targetPort: 8080

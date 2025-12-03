@@ -24,8 +24,7 @@ class ShortenUrlController {
   private final ShortenUrlService urlShorteningService;
   private final RedirectUrlBuilder redirectUrlBuilder;
   private final ShortenUrlValidator urlValidator;
-
-  // todo add exception handler
+  
   @PostMapping("/create")
   @PopulateUserAuthentication
   ModelAndView shortenUrl(

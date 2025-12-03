@@ -26,7 +26,6 @@ class ShortenUrlService {
   private final UrlRepository urlRepository;
 
   @Transactional
-  //  todo change parameter of this method to UrlEntity or just URL
   UrlEntity shortenUrl(final String url, final UserAuthentication userAuthentication)
       throws DecoderException {
     return shortenUrl(url, StringUtils.EMPTY, userAuthentication);
