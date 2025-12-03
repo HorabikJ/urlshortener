@@ -31,8 +31,8 @@
         <td th:text="${userAccountDTO.createdAt}"></td>
       </tr>
       <tr>
-        <td colspan="2" style="text-align: center; padding-top: 2rem;">
-          <form th:action="@{/v1/account/delete}" method="post" style="display: inline;">
+        <td colspan="2" class="delete-account-row">
+          <form th:action="@{/v1/account/delete}" method="post" class="delete-account-form">
             <button type="submit" class="btn btn-lg btn-danger"
                     onclick="return confirm('Are you sure you want to delete your account? This action cannot be undone.')">
               Delete Account
