@@ -71,7 +71,9 @@ class SecurityConfig {
             exceptionHandlingConfigurer.accessDeniedHandler(
                 (request, response, accessDeniedException) -> {
                   log.warn(
-                      "Access denied exception for path: {}", request.getRequestURI(), accessDeniedException);
+                      "Access denied exception for path: {}",
+                      request.getRequestURI(),
+                      accessDeniedException);
                   response.sendRedirect(View.NOT_FOUND.getViewPath());
                 }));
 
