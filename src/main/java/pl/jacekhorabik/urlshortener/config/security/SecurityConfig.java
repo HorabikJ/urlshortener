@@ -21,14 +21,17 @@ class SecurityConfig {
   @Value("${keycloak.external-base-url}")
   private URL keycloakExternalBaseURL;
 
+  @Value("${keycloak.clientId}")
+  private String urlshortenerKeycloakClientId;
+
   @Value("${app.external-base-url}")
   private URL appExternalBaseUrl;
 
   @Bean
-  SecurityFilterChain clientSecurityFilterChain(HttpSecurity http) throws Exception {
+  SecurityFilterChain clientSecurityFilterChain(final HttpSecurity http) throws Exception {
     http.oauth2Login(
         login -> {
-          login.defaultSuccessUrl("/v1", true);
+          login.defaultSuccessUrl(View.MAIN_PAGE.getViewPath(), true);
           login.failureHandler(
               (request, response, exception) -> {
                 log.error("Login failed", exception);
@@ -40,24 +43,22 @@ class SecurityConfig {
     http.logout(
         logout -> {
           // Use external URL for logout redirects
-          String logoutUrl =
+          final String logoutUrl =
               String.format(
                   "%s/realms/urlshortener-keycloak-realm/protocol/openid-connect/logout",
                   keycloakExternalBaseURL);
+          // Ensure this matches exactly what's configured in Keycloak
+          final String logoutSuccessRedirectUri =
+              appExternalBaseUrl.toString() + View.MAIN_PAGE.getViewPath();
 
           logout.logoutSuccessHandler(
               (request, response, authentication) -> {
-                // Ensure this matches exactly what's configured in Keycloak
-                String logoutSuccessRedirectUri = String.format("%s/v1", appExternalBaseUrl);
-
-                String logoutRedirectUrl =
+                response.sendRedirect(
                     UriComponentsBuilder.fromUriString(logoutUrl)
                         .queryParam("post_logout_redirect_uri", logoutSuccessRedirectUri)
-                        .queryParam("client_id", "urlshortener-keycloak-client")
+                        .queryParam("client_id", urlshortenerKeycloakClientId)
                         .build()
-                        .toUriString();
-
-                response.sendRedirect(logoutRedirectUrl);
+                        .toUriString());
               });
           // Configure logout URL
           logout.logoutUrl("/logout");
@@ -70,7 +71,7 @@ class SecurityConfig {
             exceptionHandlingConfigurer.accessDeniedHandler(
                 (request, response, accessDeniedException) -> {
                   log.warn(
-                      "Access denied for path: {}", request.getRequestURI(), accessDeniedException);
+                      "Access denied exception for path: {}", request.getRequestURI(), accessDeniedException);
                   response.sendRedirect(View.NOT_FOUND.getViewPath());
                 }));
 
