@@ -56,16 +56,13 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-thymeleaf</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-oauth2-client</artifactId>
         </dependency>
+        <!--    keycloak    -->
         <dependency>
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-spring-boot-starter</artifactId>
@@ -75,24 +72,6 @@
             <groupId>org.keycloak</groupId>
             <artifactId>keycloak-admin-client</artifactId>
             <version>${org.keycloak.keycloak-spring-boot-starter.version}</version>
-        </dependency>
-        <!--    spring-addons   -->
-        <dependency>
-            <groupId>com.c4-soft.springaddons</groupId>
-            <artifactId>spring-addons-oauth2-test</artifactId>
-            <version>${com.c4-soft.springaddons.spring-addons-oauth2-test.version}</version>
-            <scope>test</scope>
-        </dependency>
-        <!--    spring-boot-starter-test    -->
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.security</groupId>
-            <artifactId>spring-security-test</artifactId>
-            <scope>test</scope>
         </dependency>
         <!--    database    -->
         <dependency>
@@ -113,6 +92,10 @@
         <dependency>
             <groupId>org.thymeleaf.extras</groupId>
             <artifactId>thymeleaf-extras-springsecurity6</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-thymeleaf</artifactId>
         </dependency>
         <!--    encoding    -->
         <dependency>
@@ -135,6 +118,24 @@
             <artifactId>annotations</artifactId>
             <version>${org.jetbrains.annotations.version}</version>
             <scope>compile</scope>
+        </dependency>
+        <!--    spring-addons   -->
+        <dependency>
+            <groupId>com.c4-soft.springaddons</groupId>
+            <artifactId>spring-addons-oauth2-test</artifactId>
+            <version>${com.c4-soft.springaddons.spring-addons-oauth2-test.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <!--    spring-boot-starter-test    -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-test</artifactId>
+            <scope>test</scope>
         </dependency>
     </dependencies>
 
