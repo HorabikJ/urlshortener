@@ -49,6 +49,6 @@ management:
       # disable default DataSourceHealthIndicator and use custom CustomDataSourceHealthIndicator implementation
       enabled: false
 
-logging:
-  level:
-    org.springframework: DEBUG
+#logging:
+#  level:
+#    org.springframework: DEBUG
