@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: urlshortener-backend-service
+  name: urlshortener-app-service
   namespace: urlshortener-dev
   labels:
     app: urlshortener

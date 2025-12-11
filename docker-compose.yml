@@ -5,7 +5,7 @@ version: '3.8'
 
 services:
   db-local:
-    build: ./docker-containers/mysql/  # Path MySQL Dockerfile directory
+    build: ./docker-containers/mysql/  # Path to MySQL Dockerfile directory
     container_name: urlshortener-db-local
     environment:
       MYSQL_ROOT_PASSWORD: root
@@ -19,7 +19,7 @@ services:
       retries: 10
 
   keycloak-local:
-    build: ./docker-containers/keycloak/local/  # Path local Keycloak Dockerfile directory
+    build: ./docker-containers/keycloak/local/  # Path to local Keycloak Dockerfile directory
     container_name: urlshortener-keycloak-local
     ports:
       - "8080:8080"

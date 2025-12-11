@@ -15,7 +15,7 @@ spec:
         layer: db
     spec:
       containers:
-        - image: urlshortener-db:latest
+        - image: urlshortener-db:k8s
           name: urlshortener-db-container
           resources:
             requests:

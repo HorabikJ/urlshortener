@@ -9,13 +9,13 @@ metadata:
 spec:
   template:
     metadata:
-      name: urlshortener-backend-pod
+      name: urlshortener-keycloak-pod
       labels:
         apps: urlshortener
         layer: keycloak
     spec:
       containers:
-        - image: urlshortener-keycloak-k8s:latest
+        - image: urlshortener-keycloak:k8s
           name: urlshortener-keycloak-container
           resources:
             requests:

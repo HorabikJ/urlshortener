@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: urlshortener-backend-deployment
+  name: urlshortener-app-deployment
   labels:
     app: urlshortener
     layer: backend
@@ -9,14 +9,14 @@ metadata:
 spec:
   template:
     metadata:
-      name: urlshortener-backend-pod
+      name: urlshortener-app-pod
       labels:
         app: urlshortener
         layer: backend
     spec:
       containers:
-        - image: urlshortener-backend:latest
-          name: urlshortener-backend-container
+        - image: urlshortener-app:k8s
+          name: urlshortener-app-container
           resources:
             requests:
               memory: "1Gi"
