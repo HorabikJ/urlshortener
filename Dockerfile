@@ -1,12 +1,10 @@
-FROM maven:3.9.9-amazoncorretto-21-alpine
+FROM amazoncorretto:21-alpine
 
-WORKDIR /code
+WORKDIR /app
 
-ADD pom.xml /code/pom.xml
-ADD src/main /code/src/main
-RUN ["mvn", "dependency:resolve"]
+COPY target/urlshortener-app-1.0.0.jar urlshortener-app-1.0.0.jar
 
 EXPOSE 8080/tcp
 
-CMD ["mvn", "spring-boot:run", "-Dspring-boot.run.profiles=k8s"]
+CMD ["java", "-jar", "urlshortener-app-1.0.0.jar", "--spring.profiles.active=k8s"]
 

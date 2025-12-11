@@ -10,7 +10,7 @@
     </parent>
     <groupId>pl.jacekhorabik</groupId>
     <artifactId>urlshortener</artifactId>
-    <version>0.0.1-SNAPSHOT</version>
+    <version>1.0.0</version>
     <name>urlshortener</name>
     <description>urlshortener</description>
 
@@ -112,12 +112,13 @@
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>org.jetbrains</groupId>
             <artifactId>annotations</artifactId>
             <version>${org.jetbrains.annotations.version}</version>
-            <scope>compile</scope>
+            <scope>provided</scope>
         </dependency>
         <!--    spring-addons   -->
         <dependency>
@@ -140,6 +141,7 @@
     </dependencies>
 
     <build>
+        <finalName>${project.artifactId}-app-${project.version}</finalName>
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -156,14 +158,15 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <excludes>
-                        <exclude>
-                            <groupId>org.projectlombok</groupId>
-                            <artifactId>lombok</artifactId>
-                        </exclude>
-                    </excludes>
-                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <!-- goal that creates executable fat jar, packages only dependencies with 
+                            runtime and compile scope-->
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.liquibase</groupId>
