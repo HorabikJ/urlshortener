@@ -37,3 +37,6 @@ aws/keys/*
 docker-containers/keycloak/k8s/realm/*
 docker-containers/keycloak/aws/realm/*
 docker-containers/keycloak/local/realm/*
+
+## Claude
+.claude
